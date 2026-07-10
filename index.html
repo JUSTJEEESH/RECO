@@ -1031,6 +1031,25 @@
     <p class="muted small" data-en="The shadow-bill idea: before you switch, we compute every plan against your actual meter history — the way ConEd and Octopus do — so nobody switches blind." data-es="La idea de la factura sombra: antes de cambiarse, calculamos cada plan contra su historial real del medidor — como lo hacen ConEd y Octopus — para que nadie cambie a ciegas.">The shadow-bill idea: before you switch, we compute every plan against your actual meter history — the way ConEd and Octopus do — so nobody switches blind.</p>
   </div>
 
+  <div class="section section-alt" id="whatif">
+    <h2 class="section-title" data-en="What would actually save you money?" data-es="¿Qué le ahorraría dinero de verdad?">What would actually save you money?</h2>
+    <p class="section-lede" data-en="Flip the switches and watch a real 1,011 kWh bill shrink. These are the five levers that matter in an island home — computed on the real tariff." data-es="Active los interruptores y vea encogerse una factura real de 1,011 kWh. Estas son las cinco palancas que importan en un hogar isleño — calculadas con la tarifa real.">Flip the switches and watch a real 1,011 kWh bill shrink. These are the five levers that matter in an island home — computed on the real tariff.</p>
+    <div class="card sim-card">
+      <div class="sim-rows">
+        <label class="switch-row sim-row"><span data-en="❄️ AC one degree warmer (24 → 25 °C)" data-es="❄️ Aire un grado más cálido (24 → 25 °C)">❄️ AC one degree warmer (24 → 25 °C)</span><span class="sim-amt mono">− L 291</span><input type="checkbox" class="switch sim-opt" data-save="291"></label>
+        <label class="switch-row sim-row"><span data-en="🕛 Laundry &amp; pump moved to midday (Midday Saver)" data-es="🕛 Lavandería y bomba al mediodía (Ahorro de Mediodía)">🕛 Laundry &amp; pump moved to midday (Midday Saver)</span><span class="sim-amt mono">− L 330</span><input type="checkbox" class="switch sim-opt" data-save="330"></label>
+        <label class="switch-row sim-row"><span data-en="🧊 Fridge door seal replaced" data-es="🧊 Sello del refrigerador reemplazado">🧊 Fridge door seal replaced</span><span class="sim-amt mono">− L 218</span><input type="checkbox" class="switch sim-opt" data-save="218"></label>
+        <label class="switch-row sim-row"><span data-en="🚿 Water heater on a 2-hour timer" data-es="🚿 Calentador con temporizador de 2 horas">🚿 Water heater on a 2-hour timer</span><span class="sim-amt mono">− L 211</span><input type="checkbox" class="switch sim-opt" data-save="211"></label>
+        <label class="switch-row sim-row"><span data-en="📱 Switch to prepaid (the see-your-balance effect)" data-es="📱 Cambiarse a prepago (el efecto de ver su saldo)">📱 Switch to prepaid (the see-your-balance effect)</span><span class="sim-amt mono">− L 700</span><input type="checkbox" class="switch sim-opt" data-save="700"></label>
+      </div>
+      <div class="sim-result">
+        <div class="sim-bar" aria-hidden="true"><div class="sim-fill" id="sim-fill" style="width:100%"><span id="sim-newbill" class="mono">L 8,809</span></div></div>
+        <p class="sim-verdict" id="sim-verdict" aria-live="polite"></p>
+      </div>
+      <p class="muted small" data-en="Estimates on the real May 2026 bill; savings overlap a little in real life, so treat the total as a good guess, not a promise." data-es="Estimaciones sobre la factura real de mayo 2026; en la vida real los ahorros se traslapan un poco, así que tome el total como una buena aproximación, no una promesa.">Estimates on the real May 2026 bill; savings overlap a little in real life, so treat the total as a good guess, not a promise.</p>
+    </div>
+  </div>
+
   <div class="section section-alt" id="fuel">
     <h2 class="section-title" data-en="The fuel adjustment, opened up" data-es="El ajuste por combustible, al descubierto">The fuel adjustment, opened up</h2>
     <p class="section-lede" data-en="RECO makes no profit on fuel. It is a pass-through cost: what the ship charges is what you pay, split across every kWh. Here is the actual math, published every month." data-es="RECO no gana nada con el combustible. Es un costo trasladado: lo que cobra el barco es lo que usted paga, repartido entre cada kWh. Aquí está el cálculo real, publicado cada mes.">RECO makes no profit on fuel. It is a pass-through cost: what the ship charges is what you pay, split across every kWh. Here is the actual math, published every month.</p>
@@ -1098,54 +1117,69 @@
 <section class="page" id="page-service" data-page="service" hidden>
   <div class="page-head">
     <h1 data-en="Start, move, or end service" data-es="Iniciar, trasladar o cancelar servicio">Start, move, or end service</h1>
-    <p data-en="Know the requirements before you start, submit everything online, and track your request — no repeat trips to the office." data-es="Conozca los requisitos antes de empezar, envíe todo en línea y dé seguimiento a su solicitud — sin viajes repetidos a la oficina.">Know the requirements before you start, submit everything online, and track your request — no repeat trips to the office.</p>
+    <p data-en="Tell us which one you are and we'll show exactly what you need — before you drive anywhere." data-es="Díganos cuál es su caso y le mostramos exactamente lo que necesita — antes de manejar a ningún lado.">Tell us which one you are and we'll show exactly what you need — before you drive anywhere.</p>
   </div>
 
-  <div class="section">
-    <div class="service-grid">
-      <div class="card">
-        <h2 data-en="New connection" data-es="Conexión nueva">New connection</h2>
-        <ol class="steps">
-          <li>
-            <strong data-en="Gather documents" data-es="Reúna sus documentos">Gather documents</strong>
-            <span data-en="ID or passport, proof of property or lease, and a site sketch or pin on the map." data-es="Identidad o pasaporte, constancia de propiedad o alquiler, y un croquis o pin en el mapa.">ID or passport, proof of property or lease, and a site sketch or pin on the map.</span>
-          </li>
-          <li>
-            <strong data-en="Apply online" data-es="Solicite en línea">Apply online</strong>
-            <span data-en="Upload photos of your documents — 10 minutes, from your phone." data-es="Suba fotos de sus documentos — 10 minutos, desde su teléfono.">Upload photos of your documents — 10 minutes, from your phone.</span>
-          </li>
-          <li>
-            <strong data-en="Site inspection" data-es="Inspección del sitio">Site inspection</strong>
-            <span data-en="A technician visits within 5 business days and confirms the connection cost up front." data-es="Un técnico visita en un máximo de 5 días hábiles y confirma el costo de conexión por adelantado.">A technician visits within 5 business days and confirms the connection cost up front.</span>
-          </li>
-          <li>
-            <strong data-en="Meter installed" data-es="Medidor instalado">Meter installed</strong>
-            <span data-en="Pay the quoted fee online; installation is scheduled within 10 business days." data-es="Pague la cotización en línea; la instalación se programa en un máximo de 10 días hábiles.">Pay the quoted fee online; installation is scheduled within 10 business days.</span>
-          </li>
-        </ol>
-        <button class="btn btn-primary" type="button" data-demo-alert data-en="Start application (demo)" data-es="Iniciar solicitud (demo)">Start application (demo)</button>
+  <div class="section svc-page">
+    <div class="svc-tabs" role="tablist" aria-label="Service type">
+      <button class="svc-tab is-on" role="tab" aria-selected="true" data-svc="new">
+        <span class="svc-tab-icon" aria-hidden="true">🏠</span>
+        <strong data-en="I'm building or need a new connection" data-es="Estoy construyendo o necesito conexión nueva">I'm building or need a new connection</strong>
+      </button>
+      <button class="svc-tab" role="tab" aria-selected="false" data-svc="move">
+        <span class="svc-tab-icon" aria-hidden="true">📦</span>
+        <strong data-en="I'm moving or taking over an account" data-es="Me mudo o asumo una cuenta">I'm moving or taking over an account</strong>
+      </button>
+      <button class="svc-tab" role="tab" aria-selected="false" data-svc="pro">
+        <span class="svc-tab-icon" aria-hidden="true">👷</span>
+        <strong data-en="I'm a contractor or developer" data-es="Soy contratista o desarrollador">I'm a contractor or developer</strong>
+      </button>
+      <button class="svc-tab" role="tab" aria-selected="false" data-svc="track">
+        <span class="svc-tab-icon" aria-hidden="true">🔎</span>
+        <strong data-en="I already applied — where is it?" data-es="Ya solicité — ¿dónde va?">I already applied — where is it?</strong>
+      </button>
+    </div>
+
+    <div class="svc-panel" id="svc-new" role="tabpanel">
+      <div class="svc-req card">
+        <h3 data-en="Have these three things ready" data-es="Tenga listas estas tres cosas">Have these three things ready</h3>
+        <ul class="check-list">
+          <li data-en="Your ID or passport (a phone photo is fine)" data-es="Su identidad o pasaporte (una foto del celular sirve)">Your ID or passport (a phone photo is fine)</li>
+          <li data-en="Proof of property or your lease" data-es="Constancia de propiedad o su contrato de alquiler">Proof of property or your lease</li>
+          <li data-en="A pin on the map of where the meter goes" data-es="Un pin en el mapa de dónde va el medidor">A pin on the map of where the meter goes</li>
+        </ul>
       </div>
-      <div class="stack">
-        <div class="card">
-          <h2 data-en="Transfer or move" data-es="Traspaso o traslado">Transfer or move</h2>
-          <p data-en="Moving house or taking over an account? Transfer service to your name online with your ID and the account number — the balance history stays with the old holder, not you." data-es="¿Se muda o asume una cuenta? Traspase el servicio a su nombre en línea con su identidad y el número de cuenta — el historial de saldo queda con el titular anterior, no con usted.">Moving house or taking over an account? Transfer service to your name online with your ID and the account number — the balance history stays with the old holder, not you.</p>
-          <button class="btn btn-ghost" type="button" data-demo-alert data-en="Request transfer (demo)" data-es="Solicitar traspaso (demo)">Request transfer (demo)</button>
-        </div>
-        <div class="card">
-          <h2 data-en="For contractors &amp; developers" data-es="Para contratistas y desarrolladores">For contractors &amp; developers</h2>
-          <p data-en="Technical standards, service specifications, and bulk connection requests for construction projects in Roatán and Santos Guardiola." data-es="Normas técnicas, especificaciones de servicio y solicitudes de conexión múltiple para proyectos de construcción en Roatán y Santos Guardiola.">Technical standards, service specifications, and bulk connection requests for construction projects in Roatán and Santos Guardiola.</p>
-          <button class="btn btn-ghost" type="button" data-demo-alert data-en="Contractor portal (demo)" data-es="Portal de contratistas (demo)">Contractor portal (demo)</button>
-        </div>
-        <div class="card">
-          <h2 data-en="Track a request" data-es="Seguimiento de solicitud">Track a request</h2>
-          <form class="form form-inline" id="track-form">
-            <label class="visually-hidden" for="track-id" data-en="Request number" data-es="Número de solicitud">Request number</label>
-            <input id="track-id" type="text" placeholder="REQ-2026-0148">
-            <button class="btn btn-primary" type="submit" data-en="Track" data-es="Buscar">Track</button>
-          </form>
-          <div id="track-result" hidden></div>
-        </div>
+      <ol class="steps steps-row svc-steps">
+        <li><strong data-en="Apply online" data-es="Solicite en línea">Apply online</strong><span data-en="10 minutes from your phone — no office visit." data-es="10 minutos desde su teléfono — sin ir a la oficina.">10 minutes from your phone — no office visit.</span></li>
+        <li><strong data-en="Inspection in ≤ 5 days" data-es="Inspección en ≤ 5 días">Inspection in ≤ 5 days</strong><span data-en="A technician visits and quotes the exact cost up front — in writing." data-es="Un técnico visita y cotiza el costo exacto por adelantado — por escrito.">A technician visits and quotes the exact cost up front — in writing.</span></li>
+        <li><strong data-en="Meter in ≤ 10 days" data-es="Medidor en ≤ 10 días">Meter in ≤ 10 days</strong><span data-en="Pay the quote online; installation is scheduled and tracked." data-es="Pague la cotización en línea; la instalación se programa y se rastrea.">Pay the quote online; installation is scheduled and tracked.</span></li>
+      </ol>
+      <button class="btn btn-primary" type="button" data-demo-alert data-en="Start my application (demo)" data-es="Iniciar mi solicitud (demo)">Start my application (demo)</button>
+    </div>
+
+    <div class="svc-panel" id="svc-move" role="tabpanel" hidden>
+      <p data-en="Transfer the account to your name online with your ID and the account number from any bill at the property. The old holder's balance history stays with them — you start clean, and the lights never blink." data-es="Traspase la cuenta a su nombre en línea con su identidad y el número de cuenta de cualquier factura de la propiedad. El historial de saldo del titular anterior se queda con él — usted empieza limpio, y la luz nunca parpadea.">Transfer the account to your name online with your ID and the account number from any bill at the property. The old holder's balance history stays with them — you start clean, and the lights never blink.</p>
+      <p class="muted small" data-en="Moving out instead? Final reading on the day you choose, deposit (if any) refunded to your account." data-es="¿Se muda y se va? Lectura final el día que elija, y el depósito (si existe) se devuelve a su cuenta.">Moving out instead? Final reading on the day you choose, deposit (if any) refunded to your account.</p>
+      <button class="btn btn-primary" type="button" data-demo-alert data-en="Request a transfer (demo)" data-es="Solicitar traspaso (demo)">Request a transfer (demo)</button>
+    </div>
+
+    <div class="svc-panel" id="svc-pro" role="tabpanel" hidden>
+      <p data-en="Building in Roatán or Santos Guardiola? Get the technical standards before you pour concrete, request multiple connections in one application, and schedule inspections online." data-es="¿Construyendo en Roatán o Santos Guardiola? Obtenga las normas técnicas antes de fundir concreto, solicite varias conexiones en una sola solicitud y programe inspecciones en línea.">Building in Roatán or Santos Guardiola? Get the technical standards before you pour concrete, request multiple connections in one application, and schedule inspections online.</p>
+      <div class="doc-list">
+        <button class="doc-row" type="button" data-demo-alert><span>📄</span><span data-en="Service entrance standards (PDF)" data-es="Normas de acometida (PDF)">Service entrance standards (PDF)</span></button>
+        <button class="doc-row" type="button" data-demo-alert><span>📄</span><span data-en="Transformer & load requirements (PDF)" data-es="Requisitos de transformador y carga (PDF)">Transformer &amp; load requirements (PDF)</span></button>
+        <button class="doc-row" type="button" data-demo-alert><span>📐</span><span data-en="Bulk connection application" data-es="Solicitud de conexión múltiple">Bulk connection application</span></button>
       </div>
+    </div>
+
+    <div class="svc-panel" id="svc-track" role="tabpanel" hidden>
+      <form class="form form-inline" id="track-form">
+        <label class="visually-hidden" for="track-id" data-en="Request number" data-es="Número de solicitud">Request number</label>
+        <input id="track-id" type="text" placeholder="REQ-2026-0148">
+        <button class="btn btn-primary" type="submit" data-en="Track" data-es="Buscar">Track</button>
+      </form>
+      <div id="track-result" hidden></div>
+      <p class="muted small" data-en="Your request number is in the confirmation WhatsApp/email. Try any number for the demo." data-es="Su número de solicitud está en el WhatsApp/correo de confirmación. Pruebe cualquier número para la demo.">Your request number is in the confirmation WhatsApp/email. Try any number for the demo.</p>
     </div>
   </div>
 </section>
@@ -1231,6 +1265,28 @@
     </div>
   </div>
 
+  <div class="section" id="flex-events">
+    <h2 class="section-title" data-en="Get paid to help the grid" data-es="Gane dinero por ayudar a la red">Get paid to help the grid</h2>
+    <p class="section-lede" data-en="The evening peak runs on the island's most expensive fuel. Sometimes it's cheaper to pay you than to burn it — so we do." data-es="El pico de la noche corre con el combustible más caro de la isla. A veces sale más barato pagarle a usted que quemarlo — así que lo hacemos.">The evening peak runs on the island's most expensive fuel. Sometimes it's cheaper to pay you than to burn it — so we do.</p>
+    <div class="event-grid">
+      <div class="card event-card">
+        <span class="event-when mono" data-en="Thu Jul 16 · 6–9 pm" data-es="Jue 16 jul · 6–9 pm">Thu Jul 16 · 6–9 pm</span>
+        <h3 data-en="⚡ Power Hour" data-es="⚡ Hora de Poder">⚡ Power Hour</h3>
+        <p data-en="Use less than your typical evening — delay laundry, nudge the AC one degree — and earn credit for every kWh you don't use. Measured against your own normal; no penalty if life gets in the way." data-es="Consuma menos que su noche típica — atrase la lavadora, suba el aire un grado — y gane crédito por cada kWh que no use. Medido contra su propio consumo normal; sin castigo si la vida se complica.">Use less than your typical evening — delay laundry, nudge the AC one degree — and earn credit for every kWh you don't use. Measured against your own normal; no penalty if life gets in the way.</p>
+        <span class="event-reward" data-en="Earn L 2 per kWh saved" data-es="Gane L 2 por kWh ahorrado">Earn L 2 per kWh saved</span>
+        <button class="btn btn-primary" type="button" data-demo-alert data-en="Count me in (demo)" data-es="Cuenten conmigo (demo)">Count me in (demo)</button>
+      </div>
+      <div class="card event-card sunny">
+        <span class="event-when mono" data-en="Sun Jul 19 · 12–2 pm" data-es="Dom 19 jul · 12–2 pm">Sun Jul 19 · 12–2 pm</span>
+        <h3 data-en="☀️ Sunny Sunday" data-es="☀️ Domingo Soleado">☀️ Sunny Sunday</h3>
+        <p data-en="When midday solar overflows, we'd rather give it away than waste it. Run the washer, charge everything, make ice — every kWh above your usual is free." data-es="Cuando el sol del mediodía sobra, preferimos regalarlo antes que desperdiciarlo. Ponga la lavadora, cargue todo, haga hielo — cada kWh por encima de lo usual es gratis.">When midday solar overflows, we'd rather give it away than waste it. Run the washer, charge everything, make ice — every kWh above your usual is free.</p>
+        <span class="event-reward" data-en="Extra use is FREE" data-es="El consumo extra es GRATIS">Extra use is FREE</span>
+        <button class="btn btn-primary" type="button" data-demo-alert data-en="Remind me (demo)" data-es="Recuérdenmelo (demo)">Remind me (demo)</button>
+      </div>
+    </div>
+    <p class="muted small" data-en="Modeled on Octopus Energy's Saving Sessions and Free Electricity Sessions (UK) — over a million customers joined, because it's a pure win." data-es="Basado en las Saving Sessions y sesiones de electricidad gratis de Octopus Energy (Reino Unido) — más de un millón de clientes se unieron, porque todos ganan.">Modeled on Octopus Energy's Saving Sessions and Free Electricity Sessions (UK) — over a million customers joined, because it's a pure win.</p>
+  </div>
+
   <div class="section" id="promise5030">
     <h2 class="section-title" data-en="Roatán 50×30 — the promise, tracked" data-es="Roatán 50×30 — la promesa, con seguimiento">Roatán 50×30 — the promise, tracked</h2>
     <p class="section-lede" data-en="Half the island's electricity from renewables by 2030. A public, dated commitment — updated monthly, in the open, whether the news is good or bad." data-es="La mitad de la electricidad de la isla de fuentes renovables para 2030. Un compromiso público con fecha — actualizado cada mes, a la vista, sea buena o mala la noticia.">Half the island's electricity from renewables by 2030. A public, dated commitment — updated monthly, in the open, whether the news is good or bad.</p>
@@ -1264,16 +1320,20 @@
 <section class="page" id="page-news" data-page="news" hidden>
   <div class="page-head">
     <h1 data-en="News &amp; announcements" data-es="Noticias y anuncios">News &amp; announcements</h1>
-    <p data-en="Service notices, planned maintenance, rate updates, and company news — searchable and in both languages." data-es="Avisos de servicio, mantenimientos programados, actualizaciones de tarifas y noticias — con buscador y en ambos idiomas.">Service notices, planned maintenance, rate updates, and company news — searchable and in both languages.</p>
+    <p data-en="What's happening right now, and the running record — because a utility that writes things down is a utility you can hold to its word." data-es="Lo que pasa ahora mismo, y el registro continuo — porque a una empresa que deja las cosas por escrito se le puede tomar la palabra.">What's happening right now, and the running record — because a utility that writes things down is a utility you can hold to its word.</p>
   </div>
-  <div class="section">
-    <div class="news-filter" role="group" aria-label="Filter news">
-      <button class="chip is-active" data-newsfilter="all" data-en="All" data-es="Todas">All</button>
-      <button class="chip" data-newsfilter="notice" data-en="Service notices" data-es="Avisos de servicio">Service notices</button>
-      <button class="chip" data-newsfilter="rates" data-en="Rates" data-es="Tarifas">Rates</button>
-      <button class="chip" data-newsfilter="company" data-en="Company" data-es="Empresa">Company</button>
+  <div class="section news-page">
+    <div id="news-now"></div>
+    <div class="section-head-row news-rec-head">
+      <h2 class="section-title" data-en="The record" data-es="El registro">The record</h2>
+      <div class="news-filter" role="group" aria-label="Filter news">
+        <button class="chip is-active" data-newsfilter="all" data-en="All" data-es="Todas">All</button>
+        <button class="chip" data-newsfilter="notice" data-en="Service notices" data-es="Avisos de servicio">Service notices</button>
+        <button class="chip" data-newsfilter="rates" data-en="Rates" data-es="Tarifas">Rates</button>
+        <button class="chip" data-newsfilter="company" data-en="Company" data-es="Empresa">Company</button>
+      </div>
     </div>
-    <div class="news-grid" id="news-list"></div>
+    <div id="news-list" class="news-tl"></div>
   </div>
 </section>
 
@@ -1463,6 +1523,7 @@
       <a href="#/energy" data-en="Our energy" data-es="Nuestra energía">Our energy</a>
       <a href="#/news" data-en="News" data-es="Noticias">News</a>
       <a href="#/contact" data-en="Contact" data-es="Contacto">Contact</a>
+      <a href="pitch.html" data-en="The proposal (for RECO)" data-es="La propuesta (para RECO)">The proposal (for RECO)</a>
     </nav>
     <div class="footer-meta">
       <p data-en="Emergencies 24/7:" data-es="Emergencias 24/7:">Emergencies 24/7:</p>

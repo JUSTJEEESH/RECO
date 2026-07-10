@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RECO Reimaginado — la propuesta / the proposal</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="icon.svg">
+<link rel="stylesheet" href="styles.css">
+<style>
+  .pitch { max-width: 760px; margin: 0 auto; padding: 40px 22px 60px; }
+  .pitch-head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+  .pitch-head .brand-mark { width: 44px; height: 44px; }
+  .pitch h1 { font-size: 1.9rem; margin: 0; }
+  .pitch-sub { color: var(--ink-2); margin-bottom: 26px; }
+  .pitch h2 { margin-top: 34px; border-bottom: 2px solid var(--line); padding-bottom: 6px; }
+  .pitch-tools { display: flex; gap: 10px; margin: 18px 0 26px; }
+  .pt-table { width: 100%; border-collapse: collapse; font-size: .92rem; }
+  .pt-table th { text-align: left; font-size: .74rem; text-transform: uppercase; letter-spacing: .06em; color: var(--ink-2); border-bottom: 2px solid var(--line); padding: .5em .6em; }
+  .pt-table td { padding: .55em .6em; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .pt-url { background: var(--deep); color: var(--deep-ink); border-radius: var(--radius); padding: 16px 20px; margin: 22px 0; }
+  .pt-url a { color: var(--accent); font-weight: 800; font-size: 1.1rem; word-break: break-all; }
+  .pitch .check-list li { font-weight: 500; }
+  @media print { .pitch-tools { display: none; } .pitch { padding: 0; } }
+</style>
+</head>
+<body>
+<div class="pitch">
+  <div class="pitch-head">
+    <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="7" fill="#0E7C86"/><path d="M18 5 9 18h6l-2 9 10-14h-6z" fill="#F2A413"/></svg>
+    <h1 data-en="RECO Reimagined — a working proposal" data-es="RECO Reimaginado — una propuesta funcional">RECO Reimaginado — una propuesta funcional</h1>
+  </div>
+  <p class="pitch-sub" data-en="A complete, working demonstration of what RECO's digital service could be — built by a customer, for the people of Roatán, at no cost and with no strings." data-es="Una demostración completa y funcional de lo que el servicio digital de RECO podría ser — construida por un cliente, para la gente de Roatán, sin costo y sin condiciones.">Una demostración completa y funcional de lo que el servicio digital de RECO podría ser — construida por un cliente, para la gente de Roatán, sin costo y sin condiciones.</p>
+
+  <div class="pitch-tools">
+    <button class="btn btn-ghost" onclick="toggleLang()" id="lang-btn" type="button">English version</button>
+    <button class="btn btn-primary" onclick="window.print()" type="button" data-en="Print this page" data-es="Imprimir esta página">Imprimir esta página</button>
+  </div>
+
+  <div class="pt-url">
+    <span data-en="The live demo — open it on any phone:" data-es="La demo en vivo — ábrala en cualquier teléfono:">La demo en vivo — ábrala en cualquier teléfono:</span><br>
+    <a href="https://justjeeesh.github.io/RECO/">justjeeesh.github.io/RECO</a>
+  </div>
+
+  <h2 data-en="Why this exists" data-es="Por qué existe esto">Por qué existe esto</h2>
+  <p data-en="RECO's engineering is real: an isolated island grid with LPG, wind, solar and batteries. But its digital front door doesn't reflect that work — and customers judge the company by the bill they can't read and the outage nobody explained. Every study of utility customers says the same thing: trust doesn't come from a perfect grid; it comes from radical visibility of cost, outages, and progress. This demo makes everything visible." data-es="La ingeniería de RECO es real: una red isleña aislada con GLP, viento, solar y baterías. Pero su puerta digital no refleja ese trabajo — y los clientes juzgan a la empresa por la factura que no pueden leer y el corte que nadie explicó. Todos los estudios de clientes de electricidad dicen lo mismo: la confianza no viene de una red perfecta; viene de la visibilidad radical del costo, los cortes y el progreso. Esta demo hace todo visible.">La ingeniería de RECO es real: una red isleña aislada con GLP, viento, solar y baterías. Pero su puerta digital no refleja ese trabajo — y los clientes juzgan a la empresa por la factura que no pueden leer y el corte que nadie explicó. Todos los estudios de clientes de electricidad dicen lo mismo: la confianza no viene de una red perfecta; viene de la visibilidad radical del costo, los cortes y el progreso. Esta demo hace todo visible.</p>
+
+  <h2 data-en="Everything in it is real" data-es="Todo en ella es real">Todo en ella es real</h2>
+  <ul class="check-list">
+    <li data-en="The residential rates were reconstructed from real 2025–2026 RECO bills and reproduce an actual bill to the centavo" data-es="Las tarifas residenciales se reconstruyeron de facturas reales de RECO 2025–2026 y reproducen una factura real al centavo">Las tarifas residenciales se reconstruyeron de facturas reales de RECO 2025–2026 y reproducen una factura real al centavo</li>
+    <li data-en="The outage events come from RECO's own published notices (June–July 2026, Sandy Bay double-circuit project)" data-es="Los eventos de cortes vienen de los avisos publicados por la propia RECO (junio–julio 2026, proyecto doble circuito de Sandy Bay)">Los eventos de cortes vienen de los avisos publicados por la propia RECO (junio–julio 2026, proyecto doble circuito de Sandy Bay)</li>
+    <li data-en="The map is the real island outline, with 19 communities and coverage zones traced by a resident" data-es="El mapa es el contorno real de la isla, con 19 comunidades y zonas de cobertura trazadas por un residente">El mapa es el contorno real de la isla, con 19 comunidades y zonas de cobertura trazadas por un residente</li>
+    <li data-en="Every word exists in Spanish and English, verified 1:1" data-es="Cada palabra existe en español e inglés, verificado 1:1">Cada palabra existe en español e inglés, verificado 1:1</li>
+  </ul>
+
+  <h2 data-en="What it demonstrates, ranked by trust impact" data-es="Lo que demuestra, ordenado por impacto en la confianza">Lo que demuestra, ordenado por impacto en la confianza</h2>
+  <div class="table-wrap">
+  <table class="pt-table">
+    <thead><tr><th data-en="Feature" data-es="Función">Función</th><th data-en="What it fixes" data-es="Qué resuelve">Qué resuelve</th></tr></thead>
+    <tbody>
+      <tr><td data-en="Pay in 2 minutes, no login — card, Tigo Money, bank; partial payments allowed" data-es="Pago en 2 minutos, sin cuenta — tarjeta, Tigo Money, banco; se permiten pagos parciales"><strong>Pago en 2 minutos, sin cuenta</strong> — tarjeta, Tigo Money, banco; se permiten pagos parciales</td><td data-en="Replaces the unreliable external payment page; instant receipts by WhatsApp" data-es="Reemplaza la página de pago externa poco confiable; recibos instantáneos por WhatsApp">Reemplaza la página de pago externa poco confiable; recibos instantáneos por WhatsApp</td></tr>
+      <tr><td data-en="The bill, finally clear — current charges separated from old balance, every line explained, meter readings verifiable" data-es="La factura, por fin clara — cargos del mes separados del saldo anterior, cada línea explicada, lecturas verificables"><strong>La factura, por fin clara</strong> — cargos del mes separados del saldo anterior, cada línea explicada, lecturas verificables</td><td data-en="The #1 source of complaints and mistrust" data-es="La fuente #1 de reclamos y desconfianza">La fuente #1 de reclamos y desconfianza</td></tr>
+      <tr><td data-en="Live outage map — real island, coverage zones, causes, crew status, restoration times" data-es="Mapa de cortes en vivo — isla real, zonas de cobertura, causas, estado de cuadrillas, tiempos de restablecimiento"><strong>Mapa de cortes en vivo</strong> — isla real, zonas de cobertura, causas, estado de cuadrillas, tiempos de restablecimiento</td><td data-en="Ends the Facebook-comment guessing game during outages" data-es="Termina el juego de adivinanzas en comentarios de Facebook durante los cortes">Termina el juego de adivinanzas en comentarios de Facebook durante los cortes</td></tr>
+      <tr><td data-en="RECO Prepaid — top up at any pulpería, balance like phone credit, humane rules" data-es="RECO Prepago — recarga en cualquier pulpería, saldo como el del celular, reglas humanas"><strong>RECO Prepago</strong> — recarga en cualquier pulpería, saldo como el del celular, reglas humanas</td><td data-en="Matches how the island actually manages money; prepay customers use 8–12% less" data-es="Encaja con cómo la isla maneja el dinero; los clientes prepago consumen 8–12% menos">Encaja con cómo la isla maneja el dinero; los clientes prepago consumen 8–12% menos</td></tr>
+      <tr><td data-en="Fuel-cost transparency — 'RECO makes no profit on fuel', with the monthly math" data-es="Transparencia del combustible — 'RECO no gana nada con el combustible', con el cálculo mensual"><strong>Transparencia del combustible</strong> — «RECO no gana nada con el combustible», con el cálculo mensual</td><td data-en="Attacks the single biggest accusation head-on" data-es="Enfrenta de lleno la mayor acusación">Enfrenta de lleno la mayor acusación</td></tr>
+      <tr><td data-en="Storm center — published restoration promise (24h/48h/96h) and priority order" data-es="Centro de tormentas — promesa de restablecimiento publicada (24h/48h/96h) y orden de prioridad"><strong>Centro de tormentas</strong> — promesa de restablecimiento publicada (24h/48h/96h) y orden de prioridad</td><td data-en="Turns hurricane chaos into a contract" data-es="Convierte el caos de un huracán en un contrato">Convierte el caos de un huracán en un contrato</td></tr>
+      <tr><td data-en="WhatsApp service, outage alerts by zone, Coco assistant, savings tools, projects tracker" data-es="Servicio por WhatsApp, alertas de cortes por zona, asistente Coco, herramientas de ahorro, seguimiento de proyectos"><strong>Y más</strong> — servicio por WhatsApp, alertas por zona, asistente Coco, herramientas de ahorro, seguimiento de proyectos</td><td data-en="Meets people in the channels they already use" data-es="Llega a la gente por los canales que ya usa">Llega a la gente por los canales que ya usa</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h2 data-en="Modeled on the best in the world" data-es="Basado en los mejores del mundo">Basado en los mejores del mundo</h2>
+  <p data-en="This design distills research on 30+ utilities: Octopus Energy (UK), SRP and FPL (USA), Meralco (Philippines), Kenya Power's M-PESA prepaid, EPM (Medellín), JPS (Jamaica), BELCO (Bermuda), Hawaiian Electric and KIUC (Hawaii), plus the behavioral-science platforms (Opower, Uplight, Bidgely) whose techniques are proven to cut complaint calls by a third and reduce consumption ~2% at scale." data-es="Este diseño destila investigación de más de 30 empresas eléctricas: Octopus Energy (Reino Unido), SRP y FPL (EE. UU.), Meralco (Filipinas), el prepago con M-PESA de Kenya Power, EPM (Medellín), JPS (Jamaica), BELCO (Bermudas), Hawaiian Electric y KIUC (Hawái), más las plataformas de ciencia del comportamiento (Opower, Uplight, Bidgely) cuyas técnicas está comprobado que reducen las llamadas de reclamo en un tercio y el consumo ~2% a escala.">Este diseño destila investigación de más de 30 empresas eléctricas: Octopus Energy (Reino Unido), SRP y FPL (EE. UU.), Meralco (Filipinas), el prepago con M-PESA de Kenya Power, EPM (Medellín), JPS (Jamaica), BELCO (Bermudas), Hawaiian Electric y KIUC (Hawái), más las plataformas de ciencia del comportamiento (Opower, Uplight, Bidgely) cuyas técnicas está comprobado que reducen las llamadas de reclamo en un tercio y el consumo ~2% a escala.</p>
+
+  <h2 data-en="What we'd need from RECO to make it real" data-es="Qué necesitaríamos de RECO para hacerlo realidad">Qué necesitaríamos de RECO para hacerlo realidad</h2>
+  <ul class="check-list">
+    <li data-en="The official tariff sheet and monthly fuel numbers (the site publishes them automatically)" data-es="El pliego tarifario oficial y las cifras mensuales de combustible (el sitio las publica automáticamente)">El pliego tarifario oficial y las cifras mensuales de combustible (el sitio las publica automáticamente)</li>
+    <li data-en="Feeder/zone maps, so outage areas are exact" data-es="Mapas de alimentadores/zonas, para que las áreas de corte sean exactas">Mapas de alimentadores/zonas, para que las áreas de corte sean exactas</li>
+    <li data-en="An outage feed (even a WhatsApp message to a bot is enough to start)" data-es="Un canal de datos de cortes (incluso un mensaje de WhatsApp a un bot basta para empezar)">Un canal de datos de cortes (incluso un mensaje de WhatsApp a un bot basta para empezar)</li>
+    <li data-en="A payment processor decision (the current GINIH flow loses customers)" data-es="Una decisión sobre el procesador de pagos (el flujo actual de GINIH pierde clientes)">Una decisión sobre el procesador de pagos (el flujo actual de GINIH pierde clientes)</li>
+    <li data-en="Photos and the green light to use the RECO name properly" data-es="Fotos y la autorización para usar el nombre de RECO correctamente">Fotos y la autorización para usar el nombre de RECO correctamente</li>
+  </ul>
+
+  <p class="muted small" style="margin-top:34px" data-en="Independent concept demo. Not affiliated with or endorsed by Roatán Electric Company. Account data simulated; rates reconstructed from real bills." data-es="Demostración conceptual independiente. No afiliada ni respaldada por Roatán Electric Company. Datos de cuenta simulados; tarifas reconstruidas de facturas reales.">Demostración conceptual independiente. No afiliada ni respaldada por Roatán Electric Company. Datos de cuenta simulados; tarifas reconstruidas de facturas reales.</p>
+</div>
+
+<script>
+var L = "es";
+function apply() {
+  document.documentElement.lang = L;
+  document.querySelectorAll("[data-en]").forEach(function (el) {
+    var txt = el.dataset[L];
+    if (txt != null) el.textContent = txt;
+  });
+  document.getElementById("lang-btn").textContent = L === "es" ? "English version" : "Versión en español";
+}
+function toggleLang() { L = L === "es" ? "en" : "es"; apply(); }
+apply();
+</script>
+</body>
+</html>
