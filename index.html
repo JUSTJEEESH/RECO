@@ -459,6 +459,52 @@
           <div id="usage-chart" class="usage-chart chart-anim"></div>
         </div>
 
+
+        <div class="card inner-card">
+          <div class="panel-head">
+            <h3 data-en="Where your 1,011 kWh went" data-es="A dónde fueron sus 1,011 kWh">Where your 1,011 kWh went</h3>
+            <span class="muted small" data-en="estimated from your usage pattern" data-es="estimado según su patrón de consumo">estimated from your usage pattern</span>
+          </div>
+          <div class="calc-bar app-bar" aria-hidden="true">
+            <span class="seg" style="width:55%; background: var(--brand)"></span>
+            <span class="seg" style="width:13%; background: var(--s-wind)"></span>
+            <span class="seg" style="width:11%; background: var(--s-solar)"></span>
+            <span class="seg" style="width:8%; background: var(--s-batt)"></span>
+            <span class="seg" style="width:7%; background: var(--s-gas)"></span>
+            <span class="seg" style="width:6%; background: var(--ink-3)"></span>
+          </div>
+          <div class="app-rows">
+            <div class="app-row"><span class="swatch" style="background: var(--brand)"></span><span data-en="❄️ Air conditioning" data-es="❄️ Aire acondicionado">❄️ Air conditioning</span><span class="app-amt mono">L 156/<span data-en="day" data-es="día">day</span> · 55%</span></div>
+            <div class="app-row"><span class="swatch" style="background: var(--s-wind)"></span><span data-en="🔌 Always-on (pump, router, standby)" data-es="🔌 Siempre encendido (bomba, router, standby)">🔌 Always-on (pump, router, standby)</span><span class="app-amt mono">L 37/<span data-en="day" data-es="día">day</span> · 13%</span></div>
+            <div class="app-row"><span class="swatch" style="background: var(--s-solar)"></span><span data-en="🧊 Refrigerator" data-es="🧊 Refrigerador">🧊 Refrigerator</span><span class="app-amt mono">L 31/<span data-en="day" data-es="día">day</span> · 11%</span></div>
+            <div class="app-row"><span class="swatch" style="background: var(--s-batt)"></span><span data-en="🚿 Water heating" data-es="🚿 Calentador de agua">🚿 Water heating</span><span class="app-amt mono">L 23/<span data-en="day" data-es="día">day</span> · 8%</span></div>
+            <div class="app-row"><span class="swatch" style="background: var(--s-gas)"></span><span data-en="💡 Lights &amp; fans" data-es="💡 Luces y abanicos">💡 Lights &amp; fans</span><span class="app-amt mono">L 20/<span data-en="day" data-es="día">day</span> · 7%</span></div>
+            <div class="app-row"><span class="swatch" style="background: var(--ink-3)"></span><span data-en="🧺 Laundry &amp; other" data-es="🧺 Lavandería y otros">🧺 Laundry &amp; other</span><span class="app-amt mono">L 17/<span data-en="day" data-es="día">day</span> · 6%</span></div>
+          </div>
+          <p class="muted small" data-en="One degree warmer on the AC saves ~6% of that L 156/day — about L 280 a month. With smart meters this breakdown becomes exact, not estimated." data-es="Un grado más de temperatura en el aire ahorra ~6% de esos L 156/día — unos L 280 al mes. Con medidores inteligentes este desglose sería exacto, no estimado.">One degree warmer on the AC saves ~6% of that L 156/day — about L 280 a month. With smart meters this breakdown becomes exact, not estimated.</p>
+        </div>
+
+        <div class="card inner-card">
+          <div class="panel-head">
+            <h3 data-en="Homes like yours" data-es="Hogares como el suyo">Homes like yours</h3>
+            <span class="muted small" data-en="West Bay, 3-bedroom with AC · May" data-es="West Bay, 3 habitaciones con aire · mayo">West Bay, 3-bedroom with AC · May</span>
+          </div>
+          <div class="nbr-rows">
+            <div class="nbr-row you">
+              <span class="nbr-label" data-en="You" data-es="Usted">You</span>
+              <div class="nbr-track"><div class="nbr-fill" style="--w:100%"><span class="mono">1,011 kWh</span></div></div>
+            </div>
+            <div class="nbr-row">
+              <span class="nbr-label" data-en="Similar homes" data-es="Hogares similares">Similar homes</span>
+              <div class="nbr-track"><div class="nbr-fill mid" style="--w:86%"><span class="mono">872 kWh</span></div></div>
+            </div>
+            <div class="nbr-row">
+              <span class="nbr-label" data-en="Efficient similar homes" data-es="Hogares similares eficientes">Efficient similar homes</span>
+              <div class="nbr-track"><div class="nbr-fill good" style="--w:61%"><span class="mono">615 kWh</span></div></div>
+            </div>
+          </div>
+          <p class="nbr-verdict" data-en="You used 16% more than similar homes — mostly evening AC. Matching the efficient homes would save about L 3,450 a month. 🙂 is within reach." data-es="Usted consumió 16% más que hogares similares — sobre todo aire por la noche. Igualar a los hogares eficientes ahorraría unos L 3,450 al mes. 🙂 está al alcance.">You used 16% more than similar homes — mostly evening AC. Matching the efficient homes would save about L 3,450 a month. 🙂 is within reach.</p>
+        </div>
         <div class="card inner-card">
           <h3 data-en="Bill history" data-es="Historial de facturas">Bill history</h3>
           <div class="table-wrap">
@@ -535,8 +581,51 @@
         <span class="ladder-step mono">3</span>
         <h3 data-en="Find help" data-es="Encontrar ayuda">Find help</h3>
         <p data-en="Answer 5 questions and we'll match you to the right option — installments, prepaid, or assistance programs — before any disconnection." data-es="Responda 5 preguntas y le indicamos la mejor opción — cuotas, prepago o programas de apoyo — antes de cualquier desconexión.">Answer 5 questions and we'll match you to the right option — installments, prepaid, or assistance programs — before any disconnection.</p>
-        <button class="btn btn-ghost" type="button" data-demo-alert data-en="Start the 5 questions" data-es="Responder las 5 preguntas">Start the 5 questions</button>
+        <a class="btn btn-ghost" href="#/billing#wizard" data-en="Start the 5 questions" data-es="Responder las 5 preguntas">Start the 5 questions</a>
       </div>
+    </div>
+
+    <div class="card wizard" id="wizard">
+      <h3 data-en="Find the right help — 5 quick questions" data-es="Encuentre la ayuda correcta — 5 preguntas rápidas">Find the right help — 5 quick questions</h3>
+      <p class="muted small" data-en="Private, no account needed, nothing is sent anywhere." data-es="Privado, sin cuenta, no se envía nada a ningún lado.">Private, no account needed, nothing is sent anywhere.</p>
+      <div class="wiz-q">
+        <span class="wiz-label" data-en="1 · How far behind are you?" data-es="1 · ¿Qué tan atrasado está?">1 · How far behind are you?</span>
+        <div class="choices">
+          <label class="chip"><input type="radio" name="wz1" value="0" checked><span data-en="Not behind" data-es="Al día">Not behind</span></label>
+          <label class="chip"><input type="radio" name="wz1" value="1"><span data-en="One bill" data-es="Una factura">One bill</span></label>
+          <label class="chip"><input type="radio" name="wz1" value="2"><span data-en="Several bills" data-es="Varias facturas">Several bills</span></label>
+        </div>
+      </div>
+      <div class="wiz-q">
+        <span class="wiz-label" data-en="2 · Is your income steady or seasonal?" data-es="2 · ¿Su ingreso es estable o de temporada?">2 · Is your income steady or seasonal?</span>
+        <div class="choices">
+          <label class="chip"><input type="radio" name="wz2" value="steady" checked><span data-en="Steady" data-es="Estable">Steady</span></label>
+          <label class="chip"><input type="radio" name="wz2" value="seasonal"><span data-en="Seasonal (tourism)" data-es="De temporada (turismo)">Seasonal (tourism)</span></label>
+        </div>
+      </div>
+      <div class="wiz-q">
+        <span class="wiz-label" data-en="3 · Would smaller, more frequent payments help?" data-es="3 · ¿Le ayudarían pagos más pequeños y frecuentes?">3 · Would smaller, more frequent payments help?</span>
+        <div class="choices">
+          <label class="chip"><input type="radio" name="wz3" value="yes" checked><span data-en="Yes" data-es="Sí">Yes</span></label>
+          <label class="chip"><input type="radio" name="wz3" value="no"><span data-en="No, monthly is fine" data-es="No, mensual está bien">No, monthly is fine</span></label>
+        </div>
+      </div>
+      <div class="wiz-q">
+        <span class="wiz-label" data-en="4 · Does your home run AC most days?" data-es="4 · ¿Su hogar usa aire casi todos los días?">4 · Does your home run AC most days?</span>
+        <div class="choices">
+          <label class="chip"><input type="radio" name="wz4" value="yes" checked><span data-en="Yes" data-es="Sí">Yes</span></label>
+          <label class="chip"><input type="radio" name="wz4" value="no"><span data-en="No / rarely" data-es="No / casi nunca">No / rarely</span></label>
+        </div>
+      </div>
+      <div class="wiz-q">
+        <span class="wiz-label" data-en="5 · Who pays this account?" data-es="5 · ¿Quién paga esta cuenta?">5 · Who pays this account?</span>
+        <div class="choices">
+          <label class="chip"><input type="radio" name="wz5" value="me" checked><span data-en="Me" data-es="Yo">Me</span></label>
+          <label class="chip"><input type="radio" name="wz5" value="family"><span data-en="Family abroad helps" data-es="Familia en el extranjero ayuda">Family abroad helps</span></label>
+        </div>
+      </div>
+      <button class="btn btn-primary" id="wiz-go" type="button" data-en="Show my best options" data-es="Ver mis mejores opciones">Show my best options</button>
+      <div id="wiz-result" class="wiz-result" hidden></div>
     </div>
   </div>
 
@@ -622,7 +711,7 @@
             <div class="bd-body"><p data-en="Funds the CREE, Honduras's national energy regulator — the referee that oversees electricity rates. (The current bill prints this twice, two lines in a row.)" data-es="Financia a la CREE, el regulador nacional de energía — el árbitro que supervisa las tarifas. (La factura actual lo imprime dos veces, en dos líneas seguidas.)">Funds the CREE, Honduras's national energy regulator — the referee that oversees electricity rates. (The current bill prints this twice, two lines in a row.)</p></div>
           </details>
         </div>
-        <p class="muted small" data-en="Gone from this redesign: five tax lines that all said L 0.00. If a line is zero, it doesn't belong on your bill." data-es="Eliminado en este rediseño: cinco líneas de impuestos que decían L 0.00. Si una línea es cero, no pertenece a su factura.">Gone from this redesign: five tax lines that all said L 0.00. If a line is zero, it doesn't belong on your bill.</p>
+        <p class="muted small" data-en="Gone from this redesign: five tax lines that all said L 0.00. And one more thing — the August 2025 bill showed a 10% discount line (D10) and even said 'Payment — Thank You!'. The new format dropped both. A bill should never get less honest over time." data-es="Eliminado en este rediseño: cinco líneas de impuestos que decían L 0.00. Y algo más — la factura de agosto 2025 mostraba una línea de descuento del 10% (D10) y hasta decía 'Pago — ¡Gracias!'. El formato nuevo eliminó ambas. Una factura nunca debería volverse menos honesta con el tiempo.">Gone from this redesign: five tax lines that all said L 0.00. And one more thing — the August 2025 bill showed a 10% discount line (D10) and even said 'Payment — Thank You!'. The new format dropped both. A bill should never get less honest over time.</p>
       </div>
 
       <!-- 4. Compared to before -->
@@ -767,18 +856,18 @@
               <th class="num" data-en="L / kWh" data-es="L / kWh">L / kWh</th>
             </tr></thead>
             <tbody>
-              <tr><td rowspan="3" data-en="Residential" data-es="Residencial">Residential</td><td>0 – 100 kWh</td><td class="num mono">5.90</td></tr>
-              <tr><td>101 – 300 kWh</td><td class="num mono">7.45</td></tr>
-              <tr><td data-en="301+ kWh" data-es="301+ kWh">301+ kWh</td><td class="num mono">8.85</td></tr>
+              <tr><td data-en="Residential (R-1)" data-es="Residencial (R-1)">Residential (R-1)</td><td data-en="All use — incl. fuel &amp; service" data-es="Todo consumo — incl. combustible y servicio">All use — incl. fuel &amp; service</td><td class="num mono">8.36</td></tr>
+              <tr><td data-en="+ Street lighting (AP)" data-es="+ Alumbrado público (AP)">+ Street lighting (AP)</td><td data-en="per kWh" data-es="por kWh">per kWh</td><td class="num mono">0.30</td></tr>
+              <tr><td data-en="+ Municipal (IMU) &amp; regulator (CRE)" data-es="+ Municipal (IMU) y regulador (CRE)">+ Municipal (IMU) &amp; regulator (CRE)</td><td data-en="per kWh" data-es="por kWh">per kWh</td><td class="num mono">0.06</td></tr>
               <tr><td data-en="Commercial" data-es="Comercial">Commercial</td><td data-en="All use" data-es="Todo consumo">All use</td><td class="num mono">9.77</td></tr>
               <tr><td data-en="Industrial" data-es="Industrial">Industrial</td><td data-en="All use" data-es="Todo consumo">All use</td><td class="num mono">8.17</td></tr>
             </tbody>
           </table>
         </div>
         <div class="rate-extras">
-          <p><strong data-en="Fuel adjustment:" data-es="Ajuste por combustible:">Fuel adjustment:</strong> <span class="mono">+L 1.12/kWh</span> <span data-en="this month — tied to the landed price of LPG, recalculated monthly and published with the source numbers." data-es="este mes — ligado al precio de importación del GLP, recalculado cada mes y publicado con las cifras de origen.">this month — tied to the landed price of LPG, recalculated monthly and published with the source numbers.</span></p>
-          <p><strong data-en="Fixed charge:" data-es="Cargo fijo:">Fixed charge:</strong> <span class="mono">L 62.00</span> <span data-en="per month covers metering, billing, and account service." data-es="al mes cubre medición, facturación y atención de la cuenta.">per month covers metering, billing, and account service.</span></p>
-          <p><strong data-en="Street lighting:" data-es="Alumbrado público:">Street lighting:</strong> <span data-en="municipal levy of" data-es="tasa municipal de">municipal levy of</span> <span class="mono">L 0.28/kWh</span>.</p>
+          <p><strong data-en="Fuel adjustment (the 'AC' line):" data-es="Ajuste por combustible (la línea 'AC'):">Fuel adjustment (the 'AC' line):</strong> <span class="mono">L 1.44/kWh</span> <span data-en="this month. On the August 2025 bill it was a real, separate line: L 1.52/kWh. Today it is hidden inside the bundled rate — we would publish it again, every month." data-es="este mes. En la factura de agosto 2025 era una línea real y separada: L 1.52/kWh. Hoy está escondido dentro de la tarifa combinada — nosotros lo publicaríamos de nuevo, cada mes.">this month. On the August 2025 bill it was a real, separate line: L 1.52/kWh. Today it is hidden inside the bundled rate — we would publish it again, every month.</span></p>
+          <p><strong data-en="Residential rates above are real" data-es="Las tarifas residenciales de arriba son reales">Residential rates above are real</strong> <span data-en="— reconstructed from actual 2025–2026 RECO bills, and they reproduce a real bill to the centavo. Commercial and industrial are samples pending the official sheet." data-es="— reconstruidas de facturas reales de RECO 2025–2026, y reproducen una factura real al centavo. Comercial e industrial son muestras pendientes del pliego oficial.">— reconstructed from actual 2025–2026 RECO bills, and they reproduce a real bill to the centavo. Commercial and industrial are samples pending the official sheet.</span></p>
+          <p><strong data-en="The vanished discount:" data-es="El descuento desaparecido:">The vanished discount:</strong> <span data-en="August 2025 bills carried a visible 10% discount line ('D10', worth L 2,015 on one real bill). Recent bills no longer show it. Did it end, or is it inside the bundle? A transparent bill would say." data-es="Las facturas de agosto 2025 tenían una línea visible de descuento del 10% ('D10', L 2,015 en una factura real). Las facturas recientes ya no la muestran. ¿Terminó, o está dentro de la tarifa combinada? Una factura transparente lo diría.">August 2025 bills carried a visible 10% discount line ('D10', worth L 2,015 on one real bill). Recent bills no longer show it. Did it end, or is it inside the bundle? A transparent bill would say.</span></p>
         </div>
       </div>
 
@@ -805,6 +894,43 @@
     </div>
   </div>
 
+
+  <div class="section" id="plans">
+    <h2 class="section-title" data-en="Four ways to pay for power — with your real numbers" data-es="Cuatro formas de pagar la luz — con sus números reales">Four ways to pay for power — with your real numbers</h2>
+    <p class="section-lede" data-en="Same electricity, four plans. Each card shows what YOUR last 12 months (12,377 kWh, from real bills) would have cost — so switching is a fact, not a leap of faith." data-es="La misma electricidad, cuatro planes. Cada tarjeta muestra lo que SUS últimos 12 meses (12,377 kWh, de facturas reales) habrían costado — para que cambiarse sea un hecho, no un salto de fe.">Same electricity, four plans. Each card shows what YOUR last 12 months (12,377 kWh, from real bills) would have cost — so switching is a fact, not a leap of faith.</p>
+    <div class="plan-grid">
+      <div class="card plan-card">
+        <h3 data-en="Standard" data-es="Estándar">Standard</h3>
+        <p class="plan-desc" data-en="Monthly bill after use, like today." data-es="Factura mensual después del consumo, como hoy.">Monthly bill after use, like today.</p>
+        <span class="plan-price mono" id="plan-std">—</span>
+        <span class="plan-per" data-en="over the last 12 months" data-es="en los últimos 12 meses">over the last 12 months</span>
+        <span class="plan-best" data-en="Best if: you like it as it is" data-es="Ideal si: le gusta como está">Best if: you like it as it is</span>
+      </div>
+      <div class="card plan-card featured">
+        <h3 data-en="RECO Prepaid" data-es="RECO Prepago">RECO Prepaid</h3>
+        <p class="plan-desc" data-en="Top up like phone credit; see your balance daily. Prepay customers typically use 8–12% less just by seeing it." data-es="Recargue como saldo de celular; vea su saldo a diario. Los clientes prepago típicamente consumen 8–12% menos con solo verlo.">Top up like phone credit; see your balance daily. Prepay customers typically use 8–12% less just by seeing it.</p>
+        <span class="plan-price mono" id="plan-pre">—</span>
+        <span class="plan-per" data-en="typical, with the visibility effect" data-es="típico, con el efecto de visibilidad">typical, with the visibility effect</span>
+        <span class="plan-best" data-en="Best if: income comes week by week" data-es="Ideal si: el ingreso llega semana a semana">Best if: income comes week by week</span>
+      </div>
+      <div class="card plan-card">
+        <h3 data-en="Steady Bill" data-es="Cuota Fija">Steady Bill</h3>
+        <p class="plan-desc" data-en="Your 12-month average, the same amount every month. No surprises in AC season." data-es="Su promedio de 12 meses, el mismo monto cada mes. Sin sorpresas en temporada de aire.">Your 12-month average, the same amount every month. No surprises in AC season.</p>
+        <span class="plan-price mono" id="plan-avg">—</span>
+        <span class="plan-per" data-en="every month, reviewed quarterly" data-es="cada mes, revisado trimestralmente">every month, reviewed quarterly</span>
+        <span class="plan-best" data-en="Best if: you budget month to month" data-es="Ideal si: presupuesta mes a mes">Best if: you budget month to month</span>
+      </div>
+      <div class="card plan-card">
+        <h3 data-en="Midday Saver" data-es="Ahorro de Mediodía">Midday Saver</h3>
+        <p class="plan-desc" data-en="Cheaper solar-hour power (10–15h), pricier evening peak. Shift laundry and pumps to the sun." data-es="Energía solar más barata (10–15h), pico nocturno más caro. Mueva lavadora y bombas al sol.">Cheaper solar-hour power (10–15h), pricier evening peak. Shift laundry and pumps to the sun.</p>
+        <span class="plan-price mono" id="plan-tou">—</span>
+        <span class="plan-per" data-en="if you shift ~15% of use to midday" data-es="si mueve ~15% del consumo al mediodía">if you shift ~15% of use to midday</span>
+        <span class="plan-best" data-en="Best if: someone's home at midday" data-es="Ideal si: alguien está en casa al mediodía">Best if: someone's home at midday</span>
+      </div>
+    </div>
+    <p class="muted small" data-en="The shadow-bill idea: before you switch, we compute every plan against your actual meter history — the way ConEd and Octopus do — so nobody switches blind." data-es="La idea de la factura sombra: antes de cambiarse, calculamos cada plan contra su historial real del medidor — como lo hacen ConEd y Octopus — para que nadie cambie a ciegas.">The shadow-bill idea: before you switch, we compute every plan against your actual meter history — the way ConEd and Octopus do — so nobody switches blind.</p>
+  </div>
+
   <div class="section section-alt" id="fuel">
     <h2 class="section-title" data-en="The fuel adjustment, opened up" data-es="El ajuste por combustible, al descubierto">The fuel adjustment, opened up</h2>
     <p class="section-lede" data-en="RECO makes no profit on fuel. It is a pass-through cost: what the ship charges is what you pay, split across every kWh. Here is the actual math, published every month." data-es="RECO no gana nada con el combustible. Es un costo trasladado: lo que cobra el barco es lo que usted paga, repartido entre cada kWh. Aquí está el cálculo real, publicado cada mes.">RECO makes no profit on fuel. It is a pass-through cost: what the ship charges is what you pay, split across every kWh. Here is the actual math, published every month.</p>
@@ -812,7 +938,7 @@
       <div class="card">
         <h3 data-en="Last 12 months — fuel adjustment (L/kWh)" data-es="Últimos 12 meses — ajuste por combustible (L/kWh)">Last 12 months — fuel adjustment (L/kWh)</h3>
         <div id="fuel-chart" class="fuel-chart chart-anim"></div>
-        <p class="muted small" data-en="Down 15% from the September peak as LPG prices eased and solar output grew." data-es="15% menos que el pico de septiembre, gracias a menores precios del GLP y más generación solar.">Down 15% from the September peak as LPG prices eased and solar output grew.</p>
+        <p class="muted small" data-en="August 2025 is a real value from an actual bill: L 1.52/kWh. The rest are illustrative — RECO would publish the real series here." data-es="Agosto 2025 es un valor real de una factura: L 1.52/kWh. El resto es ilustrativo — RECO publicaría aquí la serie real.">August 2025 is a real value from an actual bill: L 1.52/kWh. The rest are illustrative — RECO would publish the real series here.</p>
       </div>
       <div class="card">
         <h3 data-en="July 2026 — the actual math (sample)" data-es="Julio 2026 — el cálculo real (muestra)">July 2026 — the actual math (sample)</h3>
@@ -823,7 +949,7 @@
               <tr><td data-en="Landed cost incl. shipping" data-es="Costo puesto en isla, con flete">Landed cost incl. shipping</td><td class="num mono">L 21.4 M</td></tr>
               <tr><td data-en="kWh generated from LPG" data-es="kWh generados con GLP">kWh generated from LPG</td><td class="num mono">14.9 M</td></tr>
               <tr><td data-en="Renewable kWh (no fuel cost)" data-es="kWh renovables (sin costo de combustible)">Renewable kWh (no fuel cost)</td><td class="num mono">3.2 M</td></tr>
-              <tr class="fuel-total"><td data-en="Fuel adjustment = cost ÷ all kWh sold" data-es="Ajuste = costo ÷ todos los kWh vendidos">Fuel adjustment = cost ÷ all kWh sold</td><td class="num mono">L 1.12/kWh</td></tr>
+              <tr class="fuel-total"><td data-en="Fuel adjustment = cost ÷ all kWh sold" data-es="Ajuste = costo ÷ todos los kWh vendidos">Fuel adjustment = cost ÷ all kWh sold</td><td class="num mono">L 1.44/kWh</td></tr>
             </tbody>
           </table>
         </div>

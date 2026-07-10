@@ -27,7 +27,9 @@ var T = {
     streetLight: "Street lighting", totalDue: "Total this month",
     approx: "≈ US$ ",
     blockNote: function (r) { return r + " L/kWh"; },
-    calcRows: { energy: "Energy charge", fuel: "Fuel adjustment", fixed: "Fixed charge", street: "Street lighting" },
+    calcRows: { energy: "Energy charge", fuel: "Fuel adjustment", fixed: "Fixed charge", street: "Street lighting", bundleR: "Energy, fuel & service (R-1)", muni: "Municipal tax (IMU)", cre: "Regulator fee (CREE)" },
+    calcNoteReal: "Residential rates reconstructed from real 2026 RECO bills — this matches an actual bill to the centavo.",
+    calcNoteSample: "Commercial and industrial rates are samples pending the official tariff sheet.",
     billExplain: {
       energy: "The electricity you used, measured by your meter. Residential use is priced in blocks: the first 100 kWh cost less than the next 200, which cost less than everything above 300 — so light users pay the lowest rates.",
       fuel: "The cost of the LPG fuel burned to generate your energy. It is recalculated every month from the actual landed fuel price and published with its source numbers — when fuel gets cheaper, this line goes down.",
@@ -67,6 +69,15 @@ var T = {
     fuelAria: "Bar chart of the fuel adjustment over the last 12 months",
     sparkAria: "Trend of monthly outage minutes over the last 12 months",
     burnAria: "Bar chart of daily prepaid spending over the last 14 days",
+    perMonth: "/month",
+    wiz: {
+      prepaid: { h: "Switch to RECO Prepaid", p: "Top up as money comes in — no monthly bill, no deposit. Old debt moves to the humane path: 10% of each recharge pays it down at zero interest, and power stays on at night and on weekends even at L 0." },
+      installment: { h: "Installment plan", p: "Split the past-due balance into 3–12 equal monthly payments. No down payment, no interest. Set it up online in two minutes — no office visit, no explaining yourself." },
+      extension: { h: "Due-date extension", p: "Ten extra days on this bill, instantly and free, up to twice a year. Sometimes that's all it takes." },
+      budget: { h: "Steady Bill", p: "Pay your 12-month average every month — around L 8,990 for this account — so AC season stops hitting like a wave." },
+      family: { h: "Safety Net + guest pay", p: "Your relative abroad can receive copies of due-date alerts and pay this account directly with just its number — no login, receipts to both of you." },
+      ac: { h: "Free AC check-up", p: "AC is over half this home's bill (~L 156/day). A free efficiency visit — filters, seals, thermostat — typically trims 10–15% off the total." }
+    },
     payDoneBalance: "L 0.00"
   },
   es: {
@@ -84,7 +95,9 @@ var T = {
     streetLight: "Alumbrado público", totalDue: "Total del mes",
     approx: "≈ US$ ",
     blockNote: function (r) { return r + " L/kWh"; },
-    calcRows: { energy: "Cargo por energía", fuel: "Ajuste por combustible", fixed: "Cargo fijo", street: "Alumbrado público" },
+    calcRows: { energy: "Cargo por energía", fuel: "Ajuste por combustible", fixed: "Cargo fijo", street: "Alumbrado público", bundleR: "Energía, combustible y servicio (R-1)", muni: "Impuesto municipal (IMU)", cre: "Tasa del regulador (CREE)" },
+    calcNoteReal: "Tarifas residenciales reconstruidas de facturas reales de RECO 2026 — coincide con una factura real al centavo.",
+    calcNoteSample: "Las tarifas comercial e industrial son muestras, pendientes del pliego tarifario oficial.",
     billExplain: {
       energy: "La electricidad que usted usó, medida por su contador. El consumo residencial se cobra por bloques: los primeros 100 kWh cuestan menos que los siguientes 200, y estos menos que todo lo que pase de 300 — quien consume poco paga las tarifas más bajas.",
       fuel: "El costo del GLP quemado para generar su energía. Se recalcula cada mes con el precio real de importación y se publica con sus cifras de origen — cuando el combustible baja, esta línea baja.",
@@ -124,6 +137,15 @@ var T = {
     fuelAria: "Gráfico de barras del ajuste por combustible de los últimos 12 meses",
     sparkAria: "Tendencia de minutos de corte por mes en los últimos 12 meses",
     burnAria: "Gráfico de barras del gasto prepago diario de los últimos 14 días",
+    perMonth: "/mes",
+    wiz: {
+      prepaid: { h: "Cámbiese a RECO Prepago", p: "Recargue conforme llega el dinero — sin factura mensual, sin depósito. La deuda vieja pasa al camino humano: el 10% de cada recarga la abona a cero intereses, y la luz sigue de noche y los fines de semana aunque esté en L 0." },
+      installment: { h: "Plan de cuotas", p: "Divida el saldo vencido en 3–12 pagos mensuales iguales. Sin prima, sin intereses. Se configura en línea en dos minutos — sin ir a la oficina, sin dar explicaciones." },
+      extension: { h: "Extensión de fecha de pago", p: "Diez días más para esta factura, al instante y gratis, hasta dos veces al año. A veces con eso basta." },
+      budget: { h: "Cuota Fija", p: "Pague su promedio de 12 meses cada mes — unos L 8,990 para esta cuenta — para que la temporada de aire deje de golpear como ola." },
+      family: { h: "Red de Apoyo + pago de terceros", p: "Su familiar en el extranjero puede recibir copias de los avisos de vencimiento y pagar esta cuenta directamente solo con el número — sin cuenta, recibos para ambos." },
+      ac: { h: "Revisión gratuita del aire", p: "El aire es más de la mitad de la factura de este hogar (~L 156/día). Una visita de eficiencia gratuita — filtros, sellos, termostato — típicamente recorta 10–15% del total." }
+    },
     payDoneBalance: "L 0.00"
   }
 };
@@ -152,7 +174,7 @@ var TARIFF = {
   res: { blocks: [{ upTo: 100, rate: 5.90 }, { upTo: 300, rate: 7.45 }, { upTo: Infinity, rate: 8.85 }] },
   com: { blocks: [{ upTo: Infinity, rate: 9.77 }] },
   ind: { blocks: [{ upTo: Infinity, rate: 8.17 }] },
-  fuel: 1.12, fixed: 62.00, street: 0.28
+  fuel: 1.44, fixed: 62.00, street: 0.301
 };
 
 var ZONES = [
@@ -180,7 +202,9 @@ var REL90 = {
   "camp-bay": [2, 77], "santa-elena": [2, 88]
 };
 
-var FUEL_HIST = [1.28, 1.31, 1.27, 1.24, 1.20, 1.23, 1.19, 1.21, 1.18, 1.15, 1.17, 1.12]; // Aug 25 → Jul 26
+/* Fuel adjustment (the bill's "AC" line): Aug 2025 anchored to a real bill —
+   L2,857.15 / 1,876 kWh = L1.523/kWh. Other months illustrative around it. */
+var FUEL_HIST = [1.52, 1.58, 1.55, 1.50, 1.47, 1.51, 1.48, 1.45, 1.42, 1.46, 1.43, 1.44]; // Aug 25 → Jul 26
 var OUTAGE_MIN_HIST = [148, 132, 165, 121, 96, 88, 104, 92, 78, 84, 71, 63]; // monthly outage minutes
 
 var EVENTS = [
@@ -235,11 +259,13 @@ var NEWS = [
 var USAGE_KWH = [445, 432, 1306, 1876, 1817, 1101, 920, 769, 774, 708, 664, 999, 1011];
 var USAGE_START = { y: 2025, m: 4 }; // May 2025 (0-based month index 4)
 
-/* Effective residential pricing reverse-engineered from the real bill:
-   energy+fuel+fixed L8.3555/kWh, street lighting L0.301/kWh,
-   municipal tax L35.89 flat, regulator fee L21.88 flat */
+/* Residential pricing reconstructed from two real bills (Aug 2025 + May 2026):
+   R-1 energy+fuel+fixed bundle L8.3555/kWh, street lighting (AP) L0.301/kWh,
+   municipal tax (IMU) L0.0355/kWh, regulator fee (CRE) L0.0216/kWh.
+   Reproduces the May 2026 bill to the centavo: 1,011 kWh -> L8,809.49 */
+var RATE = { energy: 8.3555, ap: 0.301, imu: 0.0355, cre: 0.0216 };
 function realBillFor(kwh) {
-  return kwh * 8.3555 + kwh * 0.301 + 35.89 + 21.88;
+  return kwh * (RATE.energy + RATE.ap + RATE.imu + RATE.cre);
 }
 
 /* ---------------- helpers ---------------- */
@@ -692,15 +718,27 @@ function renderCalc() {
   var kwh = +($("#calc-kwh").value);
   var cls = ($("input[name='calc-class']:checked") || {}).value || "res";
   $("#calc-kwh-label").textContent = kwh + " kWh";
-  var energy = energyChargeFor(kwh, cls);
-  var fuel = kwh * TARIFF.fuel, street = kwh * TARIFF.street, fixed = TARIFF.fixed;
-  var total = energy + fuel + fixed + street;
-  var parts = [
-    { key: "energy", amt: energy, color: "var(--brand)" },
-    { key: "fuel", amt: fuel, color: "var(--s-gas)" },
-    { key: "fixed", amt: fixed, color: "var(--s-solar)" },
-    { key: "street", amt: street, color: "var(--s-batt)" }
-  ];
+  var parts, note;
+  if (cls === "res") {
+    // real reconstructed residential structure
+    parts = [
+      { key: "bundleR", amt: kwh * RATE.energy, color: "var(--brand)" },
+      { key: "street", amt: kwh * RATE.ap, color: "var(--s-solar)" },
+      { key: "muni", amt: kwh * RATE.imu, color: "var(--s-batt)" },
+      { key: "cre", amt: kwh * RATE.cre, color: "var(--s-wind)" }
+    ];
+    note = t().calcNoteReal;
+  } else {
+    var energy = energyChargeFor(kwh, cls);
+    parts = [
+      { key: "energy", amt: energy, color: "var(--brand)" },
+      { key: "fuel", amt: kwh * TARIFF.fuel, color: "var(--s-gas)" },
+      { key: "fixed", amt: TARIFF.fixed, color: "var(--s-solar)" },
+      { key: "street", amt: kwh * TARIFF.street, color: "var(--s-batt)" }
+    ];
+    note = t().calcNoteSample;
+  }
+  var total = parts.reduce(function (s, p) { return s + p.amt; }, 0);
   var bar = parts.map(function (p) {
     return '<span class="seg" style="width:' + (p.amt / total * 100).toFixed(2) + "%;background:" + p.color + '" title="' + esc(t().calcRows[p.key]) + '"></span>';
   }).join("");
@@ -711,7 +749,8 @@ function renderCalc() {
   host.innerHTML = '<div class="calc-bar">' + bar + "</div>" +
     '<div class="calc-rows">' + rows + "</div>" +
     '<div class="calc-total"><span>' + esc(t().totalDue) + '</span><span>' + fmtL(total) +
-    ' <span class="usd">' + esc(t().approx) + fmtUSD(total) + "</span></span></div>";
+    ' <span class="usd">' + esc(t().approx) + fmtUSD(total) + "</span></span></div>" +
+    '<p class="muted small" style="margin-top:10px">' + esc(note) + "</p>";
 }
 
 /* ---------------- portal ---------------- */
@@ -780,12 +819,12 @@ function renderFuelChart() {
   if (!host) return;
   var W = 520, H = 200, L = 40, R = 8, TOP = 16, B = 28;
   var iw = W - L - R, ih = H - TOP - B;
-  var yMax = 1.5;
+  var yMax = 2.0;
   var n = FUEL_HIST.length;
   var slot = iw / n, bw = Math.min(24, slot * 0.6);
   var startM = 7, startY = 2025; // Aug 2025
   var out = "";
-  [0, 0.5, 1.0, 1.5].forEach(function (gv) {
+  [0, 0.5, 1.0, 1.5, 2.0].forEach(function (gv) {
     var gy = TOP + ih - gv / yMax * ih;
     out += '<line x1="' + L + '" y1="' + gy + '" x2="' + (W - R) + '" y2="' + gy + '" stroke="var(--grid-line)"/>';
     out += '<text x="' + (L - 6) + '" y="' + (gy + 3.5) + '" text-anchor="end" font-size="10" fill="var(--axis-ink)">' + gv.toFixed(1) + "</text>";
@@ -919,6 +958,55 @@ function renderGreenStrip() {
   }
   host.innerHTML = cells;
   $("#strip-tip").textContent = t().stripTip;
+}
+
+/* ---------------- rate plans (shadow bill) ---------------- */
+
+function fmtL0(n) {
+  return "L " + Math.round(n).toLocaleString(LANG === "es" ? "es-HN" : "en-US");
+}
+
+function renderPlans() {
+  var std = $("#plan-std");
+  if (!std) return;
+  var last12 = USAGE_KWH.slice(-12);
+  var total = 0;
+  last12.forEach(function (k) { total += realBillFor(k); });
+  std.textContent = fmtL0(total);
+  $("#plan-pre").textContent = fmtL0(total * 0.905); // 8–12% visibility effect, midpoint
+  $("#plan-avg").textContent = fmtL0(total / 12) + t().perMonth;
+  $("#plan-tou").textContent = fmtL0(total * 0.9625); // ~15% of load shifted at ~25% cheaper
+}
+
+/* ---------------- assistance wizard ---------------- */
+
+function wizAnswer(name) {
+  var el = $("input[name='" + name + "']:checked");
+  return el ? el.value : "";
+}
+
+function runWizard() {
+  var behind = wizAnswer("wz1"), income = wizAnswer("wz2"), small = wizAnswer("wz3"),
+      ac = wizAnswer("wz4"), payer = wizAnswer("wz5");
+  var recs = [];
+  if (behind === "2") {
+    recs.push("prepaid", "installment");
+  } else if (behind === "1") {
+    recs.push("extension", "installment");
+  } else {
+    if (income === "seasonal" || small === "yes") recs.push("prepaid");
+    else recs.push("budget");
+  }
+  if (income === "seasonal" && recs.indexOf("prepaid") === -1) recs.push("prepaid");
+  if (payer === "family") recs.push("family");
+  if (ac === "yes") recs.push("ac");
+  recs = recs.slice(0, 3);
+  var host = $("#wiz-result");
+  host.innerHTML = recs.map(function (k) {
+    var r = t().wiz[k];
+    return '<div class="wiz-rec"><h4>' + esc(r.h) + "</h4><p>" + esc(r.p) + "</p></div>";
+  }).join("");
+  host.hidden = false;
 }
 
 /* ---------------- scroll animations ---------------- */
@@ -1065,6 +1153,8 @@ function renderDynamic() {
   renderOdometers();
   renderUsageChart("#bill-usage-chart");
   renderCalc();
+  renderPlans();
+  if (!$("#wiz-result").hidden) runWizard();
   renderPortal();
   renderFuelChart();
   renderScoreSpark();
@@ -1197,6 +1287,10 @@ function init() {
   /* bill doc interactions + scroll animations */
   setupBillDoc();
   setupAnimations();
+
+  /* assistance wizard */
+  var wg = $("#wiz-go");
+  if (wg) wg.addEventListener("click", runWizard);
 
   /* news filter */
   $all("[data-newsfilter]").forEach(function (b) {

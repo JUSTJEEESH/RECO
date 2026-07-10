@@ -754,6 +754,60 @@ input[type="range"] { padding: 0; accent-color: var(--brand); background: transp
 .bd-comp-val { font-weight: 800; font-size: 1.1rem; }
 .bd-foot { display: flex; gap: 12px; flex-wrap: wrap; border-top: 2px solid var(--line); padding-top: 22px; }
 
+/* ---------- rate plan menu ---------- */
+.plan-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-bottom: 16px; }
+.plan-card { display: flex; flex-direction: column; gap: 8px; }
+.plan-card.featured { border: 2px solid var(--brand); position: relative; }
+.plan-card.featured::before {
+  content: "★"; position: absolute; top: -13px; right: 16px;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--accent); color: var(--accent-ink);
+  display: flex; align-items: center; justify-content: center; font-size: .85rem;
+}
+.plan-desc { font-size: .88rem; color: var(--ink-2); flex-grow: 1; }
+.plan-price { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--brand-strong); }
+.plan-per { font-size: .78rem; color: var(--ink-3); }
+.plan-best {
+  margin-top: 8px; font-size: .8rem; font-weight: 700;
+  background: var(--card-2); border-radius: 99px; padding: .35em .9em; align-self: flex-start;
+}
+
+/* ---------- appliance & neighbor insights ---------- */
+.app-bar { margin-bottom: 12px; }
+.app-rows { display: grid; gap: 7px; }
+.app-row { display: flex; align-items: center; gap: 9px; font-size: .92rem; }
+.app-row .swatch { width: 11px; height: 11px; border-radius: 3px; flex: none; }
+.app-amt { margin-left: auto; color: var(--ink-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.nbr-rows { display: grid; gap: 10px; margin-bottom: 12px; }
+.nbr-row { display: grid; grid-template-columns: 170px 1fr; align-items: center; gap: 12px; }
+.nbr-label { font-size: .85rem; font-weight: 650; color: var(--ink-2); text-align: right; }
+.nbr-row.you .nbr-label { color: var(--ink); font-weight: 800; }
+.nbr-track { background: var(--card-2); border-radius: 99px; height: 26px; overflow: hidden; }
+.nbr-fill {
+  height: 100%; width: 0; border-radius: 99px;
+  background: var(--s-gas); display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 10px; color: #fff; font-size: .76rem; font-weight: 700;
+  transition: width 1s cubic-bezier(.2,.7,.3,1);
+  min-width: 84px;
+}
+.nbr-fill.mid { background: var(--s-wind); }
+.nbr-fill.good { background: var(--s-batt); }
+.card.in .nbr-fill, .nbr-anim .nbr-fill { width: var(--w); }
+.nbr-verdict { font-weight: 650; font-size: .95rem; }
+
+/* ---------- assistance wizard ---------- */
+.wizard { margin-top: 22px; max-width: 720px; }
+.wiz-q { display: grid; gap: 8px; margin: 16px 0; }
+.wiz-label { font-weight: 700; font-size: .92rem; }
+.wiz-result { margin-top: 18px; display: grid; gap: 12px; }
+.wiz-rec {
+  border-left: 4px solid var(--brand); background: var(--card-2);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 14px 16px;
+}
+.wiz-rec h4 { margin: 0 0 4px; font-family: var(--font-display); }
+.wiz-rec p { font-size: .92rem; color: var(--ink-2); margin: 0; }
+
 /* ---------- scroll animations ---------- */
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.3,1); }
 .reveal.in { opacity: 1; transform: none; }
@@ -794,6 +848,8 @@ input[type="range"] { padding: 0; accent-color: var(--brand); background: transp
   .feature-grid, .news-grid, .why-grid, .contact-grid, .offices,
   .ready-grid, .score-grid { grid-template-columns: 1fr 1fr; }
   .phase-grid, .prep-grid, .ladder-grid { grid-template-columns: 1fr; }
+  .plan-grid { grid-template-columns: 1fr 1fr; }
+  .nbr-row { grid-template-columns: 120px 1fr; }
   .steps-row { grid-template-columns: 1fr; gap: 16px; }
   .ladder-grid { row-gap: 30px; }
   .pay-grid { grid-template-columns: 1fr 1fr; }
@@ -821,6 +877,9 @@ input[type="range"] { padding: 0; accent-color: var(--brand); background: transp
   .ready-grid, .score-grid, .bd-comp-grid { grid-template-columns: 1fr; }
   .fan-discount { margin-left: 0; width: 100%; }
   .bd-split { flex-direction: column; }
+  .plan-grid { grid-template-columns: 1fr; }
+  .nbr-row { grid-template-columns: 1fr; gap: 4px; }
+  .nbr-label { text-align: left; }
   .bd-plus { display: none; }
   .bill-doc { padding: 18px; }
   .odo-result { margin-left: 0; }
