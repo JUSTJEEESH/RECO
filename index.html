@@ -7,6 +7,8 @@
 <meta name="description" content="A concept redesign of the Roatán Electric Company website: bilingual, transparent, and built for the people of Roatán.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E7C86'/%3E%3Cpath d='M18 5 9 18h6l-2 9 10-14h-6z' fill='%23F2A413'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="styles.css">
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0E7C86">
 </head>
 <body>
 
@@ -23,7 +25,7 @@
   <a href="#/outages" class="status-strip-inner">
     <span class="status-dot ok" aria-hidden="true"></span>
     <strong data-en="Grid status: Normal" data-es="Estado de la red: Normal">Grid status: Normal</strong>
-    <span class="status-detail" data-en="13 of 14 zones energized · 1 planned maintenance tonight" data-es="13 de 14 zonas energizadas · 1 mantenimiento programado esta noche">13 of 14 zones energized · 1 planned maintenance tonight</span>
+    <span class="status-detail" data-en="13 of 14 zones energized · planned work today 9 am – 1 pm (Coxen Hole area)" data-es="13 de 14 zonas energizadas · trabajo programado hoy 9 am – 1 pm (zona de Coxen Hole)">13 of 14 zones energized · planned work today 9 am – 1 pm (Coxen Hole area)</span>
     <span class="status-link" data-en="View outage map →" data-es="Ver mapa de cortes →">View outage map →</span>
   </a>
 </div>
@@ -53,7 +55,7 @@
       <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle dark mode">
         <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path class="icon-moon" d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
       </button>
-      <a class="btn btn-accent header-pay" href="#/billing" data-en="Pay bill" data-es="Pagar factura">Pay bill</a>
+      <a class="btn btn-accent header-pay" href="#/billing#paynow" data-en="Pay bill" data-es="Pagar factura">Pay bill</a>
       <button class="nav-burger" id="nav-burger" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="Menu">
         <span></span><span></span><span></span>
       </button>
@@ -75,7 +77,7 @@
         <h1 data-en="Your power company should work as hard as you do." data-es="Su compañía eléctrica debería trabajar tan duro como usted.">Your power company should work as hard as you do.</h1>
         <p class="hero-lede" data-en="Check outages in real time, pay in two minutes, understand every lempira on your bill — in English or Español, on any device." data-es="Consulte cortes en tiempo real, pague en dos minutos y entienda cada lempira de su factura — en español o inglés, desde cualquier dispositivo.">Check outages in real time, pay in two minutes, understand every lempira on your bill — in English or Español, on any device.</p>
         <div class="quick-actions">
-          <a class="qa-card" href="#/billing">
+          <a class="qa-card" href="#/billing#paynow">
             <span class="qa-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M2 10h20" stroke="currentColor" stroke-width="2"/></svg></span>
             <span class="qa-label" data-en="Pay my bill" data-es="Pagar mi factura">Pay my bill</span>
           </a>
@@ -250,6 +252,26 @@
         <div class="card">
           <h2 data-en="Active &amp; planned events" data-es="Eventos activos y programados">Active &amp; planned events</h2>
           <div id="outage-list" class="outage-list"></div>
+        </div>
+        <div class="card project-card">
+          <div class="panel-head">
+            <h2 data-en="Why Sandy Bay keeps losing power on weekday mornings" data-es="Por qué Sandy Bay pierde la luz entre semana por la mañana">Why Sandy Bay keeps losing power on weekday mornings</h2>
+          </div>
+          <p data-en="It's one project, not chaos: the Sandy Bay Double-Circuit Project is building a second line into the west side, so one fallen tree can no longer black out West End and West Bay. Each work window needs the line off, 9 am – 1 pm." data-es="Es un proyecto, no caos: el Proyecto Doble Circuito Sandy Bay construye una segunda línea hacia el lado oeste, para que un solo árbol caído ya no deje sin luz a West End y West Bay. Cada jornada requiere apagar la línea, de 9 am a 1 pm.">It's one project, not chaos: the Sandy Bay Double-Circuit Project is building a second line into the west side, so one fallen tree can no longer black out West End and West Bay. Each work window needs the line off, 9 am – 1 pm.</p>
+          <div class="promise-bar big proj-bar" role="img" aria-label="Project progress: 5 of 8 work windows complete">
+            <div class="promise-fill" style="width:62%"><span data-en="5 of 8 windows done" data-es="5 de 8 jornadas hechas">5 of 8 windows done</span></div>
+          </div>
+          <div class="proj-dates">
+            <span class="proj-date done mono">Jun 5 ✓</span>
+            <span class="proj-date done mono">Jun 9 ✓</span>
+            <span class="proj-date done mono">Jun 12 ✓</span>
+            <span class="proj-date done mono">Jun 16 ✓</span>
+            <span class="proj-date done mono" data-en="Jul 10 (today) ✓" data-es="10 jul (hoy) ✓">Jul 10 (today) ✓</span>
+            <span class="proj-date next mono">Jul 14</span>
+            <span class="proj-date mono">Jul 17</span>
+            <span class="proj-date mono">Jul 21</span>
+          </div>
+          <p class="muted small" data-en="When it's finished (target: end of July): faults west of French Harbour re-route in seconds instead of hours. Dates from RECO's real published notices." data-es="Al terminar (meta: fin de julio): las fallas al oeste de French Harbour se re-enrutan en segundos en vez de horas. Fechas de los avisos reales publicados por RECO.">When it's finished (target: end of July): faults west of French Harbour re-route in seconds instead of hours. Dates from RECO's real published notices.</p>
         </div>
       </div>
     </div>
@@ -519,6 +541,79 @@
               <tbody></tbody>
             </table>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="paynow">
+    <div class="card pay-flow">
+      <div class="panel-head">
+        <h2 data-en="Pay in two minutes — right here" data-es="Pague en dos minutos — aquí mismo">Pay in two minutes — right here</h2>
+        <span class="live-chip"><span data-en="Demo" data-es="Demo">Demo</span></span>
+      </div>
+      <div class="pf-steps" aria-hidden="true">
+        <span class="pf-step is-on" data-pf="1"><i>1</i><span data-en="Account" data-es="Cuenta">Account</span></span>
+        <span class="pf-step" data-pf="2"><i>2</i><span data-en="Amount" data-es="Monto">Amount</span></span>
+        <span class="pf-step" data-pf="3"><i>3</i><span data-en="Pay" data-es="Pagar">Pay</span></span>
+        <span class="pf-step" data-pf="4"><i>✓</i><span data-en="Receipt" data-es="Recibo">Receipt</span></span>
+      </div>
+
+      <div class="pf-pane" id="pf-1">
+        <form class="form form-inline" id="pf-form-acct">
+          <label class="visually-hidden" for="pf-acct" data-en="Account number" data-es="Número de cuenta">Account number</label>
+          <input id="pf-acct" type="text" inputmode="numeric" placeholder="R0012492" autocomplete="off">
+          <button class="btn btn-primary" type="submit" data-en="Find my account" data-es="Buscar mi cuenta">Find my account</button>
+        </form>
+        <p class="muted small" data-en="No login, no app, no account creation. The number is on any bill." data-es="Sin cuenta, sin app, sin registrarse. El número está en cualquier factura.">No login, no app, no account creation. The number is on any bill.</p>
+      </div>
+
+      <div class="pf-pane" id="pf-2" hidden>
+        <p class="pf-found"><strong data-en="Residential account · West Bay" data-es="Cuenta residencial · West Bay">Residential account · West Bay</strong> <span class="mono" id="pf-acct-echo">R0012492</span></p>
+        <div class="choices pf-amounts">
+          <label class="chip"><input type="radio" name="pf-amt" value="17514.88" checked><span data-en="Everything — L 17,514.88" data-es="Todo — L 17,514.88">Everything — L 17,514.88</span></label>
+          <label class="chip"><input type="radio" name="pf-amt" value="8809.49"><span data-en="This month only — L 8,809.49" data-es="Solo este mes — L 8,809.49">This month only — L 8,809.49</span></label>
+          <label class="chip"><input type="radio" name="pf-amt" value="5000"><span data-en="Partial — L 5,000" data-es="Parcial — L 5,000">Partial — L 5,000</span></label>
+        </div>
+        <p class="muted small" data-en="Yes — partial payments are allowed, and they push your disconnection date back. The current system never tells people that." data-es="Sí — se permiten pagos parciales, y alejan su fecha de corte. El sistema actual nunca se lo dice a la gente.">Yes — partial payments are allowed, and they push your disconnection date back. The current system never tells people that.</p>
+        <button class="btn btn-primary" id="pf-to-method" type="button" data-en="Continue" data-es="Continuar">Continue</button>
+      </div>
+
+      <div class="pf-pane" id="pf-3" hidden>
+        <div class="choices">
+          <label class="chip"><input type="radio" name="pf-method" checked><span data-en="💳 Card" data-es="💳 Tarjeta">💳 Card</span></label>
+          <label class="chip"><input type="radio" name="pf-method"><span>📱 Tigo Money</span></label>
+          <label class="chip"><input type="radio" name="pf-method"><span data-en="🏦 Bank transfer" data-es="🏦 Transferencia">🏦 Bank transfer</span></label>
+        </div>
+        <div class="form-2col pf-card-fields">
+          <div class="form-row"><label data-en="Card number" data-es="Número de tarjeta">Card number</label><input type="text" placeholder="4111 •••• •••• 1234" disabled></div>
+          <div class="form-row"><label data-en="Expiry / CVC" data-es="Vence / CVC">Expiry / CVC</label><input type="text" placeholder="12/28 · •••" disabled></div>
+        </div>
+        <button class="btn btn-accent" id="pf-pay" type="button" data-en="Pay now" data-es="Pagar ahora">Pay now</button>
+        <p class="muted small" data-en="Demo — fields disabled, no charge happens." data-es="Demo — campos deshabilitados, no se cobra nada.">Demo — fields disabled, no charge happens.</p>
+      </div>
+
+      <div class="pf-pane pf-processing" id="pf-proc" hidden>
+        <div class="pf-spinner" aria-hidden="true"></div>
+        <p data-en="Talking to the bank…" data-es="Hablando con el banco…">Talking to the bank…</p>
+      </div>
+
+      <div class="pf-pane pf-done" id="pf-4" hidden>
+        <svg class="pf-check" viewBox="0 0 64 64" aria-hidden="true">
+          <circle class="pfc-ring" cx="32" cy="32" r="28" fill="none" stroke="var(--ok)" stroke-width="4"/>
+          <path class="pfc-tick" d="M20 33 L29 42 L45 24" fill="none" stroke="var(--ok)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <h3 data-en="Payment received" data-es="Pago recibido">Payment received</h3>
+        <div class="pf-receipt">
+          <div class="pf-row"><span data-en="Amount" data-es="Monto">Amount</span><span class="mono" id="pf-rc-amt">—</span></div>
+          <div class="pf-row"><span data-en="Account" data-es="Cuenta">Account</span><span class="mono" id="pf-rc-acct">—</span></div>
+          <div class="pf-row"><span data-en="Reference" data-es="Referencia">Reference</span><span class="mono">RECO-2026-071085</span></div>
+          <div class="pf-row"><span data-en="New balance" data-es="Nuevo saldo">New balance</span><span class="mono" id="pf-rc-bal">—</span></div>
+        </div>
+        <p class="form-done" data-en="✓ Receipt sent by WhatsApp and email — instantly, every time. That predictable receipt IS the trust." data-es="✓ Recibo enviado por WhatsApp y correo — al instante, siempre. Ese recibo predecible ES la confianza.">✓ Receipt sent by WhatsApp and email — instantly, every time. That predictable receipt IS the trust.</p>
+        <div class="bd-foot" style="border:none;padding-top:6px">
+          <button class="btn btn-ghost" type="button" data-demo-alert data-en="Download PDF" data-es="Descargar PDF">Download PDF</button>
+          <button class="btn btn-primary" id="pf-again" type="button" data-en="Done" data-es="Listo">Done</button>
         </div>
       </div>
     </div>
@@ -1200,7 +1295,8 @@
       </div>
       <div class="card contact-card">
         <h2 data-en="Phone &amp; email" data-es="Teléfono y correo">Phone &amp; email</h2>
-        <p><span class="mono">2405-1130 · +504 9448-8542</span></p>
+        <p><span class="mono">2407-2170 / 79 · ext. 1108, 1110, 1112</span></p>
+        <p><span class="mono">2405-1130 · WhatsApp +504 9448-8542</span></p>
         <p><a class="text-link" href="mailto:electric@recoroatan.com">electric@recoroatan.com</a></p>
         <p data-en="Written requests get a ticket number and a committed response time." data-es="Las solicitudes escritas reciben un número de ticket y un tiempo de respuesta comprometido.">Written requests get a ticket number and a committed response time.</p>
       </div>
