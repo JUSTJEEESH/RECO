@@ -215,7 +215,21 @@ var ZONES = [
   { id: "jonesville",  en: "Jonesville",      es: "Jonesville",      x: 489, y: 115, status: "ok",      lbl: "b" },
   { id: "oak-ridge",   en: "Oak Ridge",       es: "Oak Ridge",       x: 529, y: 90,  status: "ok",      lbl: "b" },
   { id: "camp-bay",    en: "Camp Bay",        es: "Camp Bay",        x: 732, y: 49,  status: "ok",      lbl: "t" },
-  { id: "santa-elena", en: "Santa Elena",     es: "Santa Elena",     x: 822, y: 53,  status: "ok",      lbl: "b" }
+  { id: "santa-elena", en: "Santa Elena",     es: "Santa Elena",     x: 822, y: 53,  status: "ok",      lbl: "b" },
+  /* minor communities — shown when zoomed in */
+  { id: "palmetto",    en: "Palmetto Bay",    es: "Palmetto Bay",    x: 248, y: 191,   status: "ok", lbl: "t", minor: true, side: "n" },
+  { id: "milton",      en: "Milton Bight",    es: "Milton Bight",    x: 372, y: 138,   status: "ok", lbl: "t", minor: true, side: "n" },
+  { id: "punta-blanca",en: "Punta Blanca",    es: "Punta Blanca",    x: 515, y: 75,   status: "ok", lbl: "t", minor: true, side: "n" },
+  { id: "diamond-rock",en: "Diamond Rock",    es: "Diamond Rock",    x: 558, y: 58,   status: "ok", lbl: "t", minor: true, side: "n" },
+  { id: "port-royal",  en: "Port Royal",      es: "Port Royal",      x: 622, y: 73,   status: "ok", lbl: "b", minor: true, side: "s" }
+];
+
+/* Landmarks — appear when zoomed in; not outage zones */
+var LANDMARKS = [
+  { id: "lm-airport",  en: "✈ Juan Manuel Gálvez Intl. Airport", es: "✈ Aeropuerto Intl. Juan Manuel Gálvez", x: 205, y: 246, dy: -14, side: "s" },
+  { id: "lm-portroa",  en: "🚢 Port of Roatán (cruise)",          es: "🚢 Puerto de Roatán (cruceros)",        x: 158, y: 286, dy: 16,  side: "coast-s" },
+  { id: "lm-ferry",    en: "⛴ Ferry terminal (Galaxy Wave)",     es: "⛴ Terminal de ferry (Galaxy Wave)",    x: 222, y: 271, dy: 16,  side: "coast-s" },
+  { id: "lm-mahogany", en: "🚢 Mahogany Bay (cruise)",            es: "🚢 Mahogany Bay (cruceros)",            x: 240, y: 266, dy: 30,  side: "coast-s" }
 ];
 
 /* per-zone reliability, last 90 days: [outage count, total minutes] (demo) */
@@ -223,7 +237,8 @@ var REL90 = {
   "west-bay": [1, 44], "west-end": [2, 71], "sandy-bay": [3, 126], "flowers-bay": [1, 38],
   "coxen-hole": [2, 65], "brick-bay": [1, 52], "french-hbr": [2, 58], "parrot-tree": [1, 31],
   "politilly": [2, 84], "punta-gorda": [5, 216], "jonesville": [3, 102], "oak-ridge": [3, 95],
-  "camp-bay": [2, 77], "santa-elena": [2, 88]
+  "camp-bay": [2, 77], "santa-elena": [2, 88],
+  "palmetto": [2, 66], "milton": [2, 74], "punta-blanca": [3, 118], "diamond-rock": [2, 81], "port-royal": [1, 47]
 };
 
 /* Fuel adjustment (the bill's "AC" line): Aug 2025 anchored to a real bill —
@@ -577,13 +592,25 @@ function mapApplyView() {
   mapSvg.setAttribute("viewBox", mapView.x + " " + mapView.y + " " + mapView.w + " " + mapView.h);
   var s = Math.max(0.32, mapView.w / MAP_W);
   $all(".zone-dot", mapSvg).forEach(function (g) {
+    var r0 = +(g.dataset.r || 8), fs0 = +(g.dataset.fs || 13);
     var c = g.querySelector("circle.z-dot");
-    if (c) { c.setAttribute("r", 8 * Math.max(s, 0.4)); c.setAttribute("stroke-width", 2 * Math.max(s, 0.5)); }
+    if (c) { c.setAttribute("r", r0 * Math.max(s, 0.4)); c.setAttribute("stroke-width", 2 * Math.max(s, 0.5)); }
     var txt = g.querySelector("text");
-    if (txt) txt.setAttribute("font-size", 13 * Math.max(s, 0.5));
+    if (txt) txt.setAttribute("font-size", fs0 * Math.max(s, 0.5));
+  });
+  $all("#lm-layer text", mapSvg).forEach(function (txt) {
+    txt.setAttribute("font-size", 10 * Math.max(s, 0.45));
   });
   var sea = $("#map-sea-label", mapSvg);
   if (sea) sea.setAttribute("opacity", mapView.w / MAP_W > 0.85 ? "1" : "0");
+  // landmarks + minor communities fade in as you zoom
+  var zoomedIn = mapView.w / MAP_W <= 0.62;
+  var lm = $("#lm-layer", mapSvg);
+  if (lm) lm.setAttribute("opacity", zoomedIn ? "1" : "0");
+  $all(".zone-dot.z-minor", mapSvg).forEach(function (g) {
+    var st = zoneById(g.dataset.zone).status;
+    g.setAttribute("opacity", zoomedIn || st !== "ok" ? "1" : "0");
+  });
 }
 
 function mapZoomTo(cx, cy, w, animate) {
@@ -631,20 +658,30 @@ function renderMap() {
   var statusColor = { ok: "var(--ok)", planned: "var(--warn)", out: "var(--danger)" };
   var dots = ZONES.map(function (z) {
     var above = z.lbl === "t";
+    var minor = !!z.minor;
+    var fs = minor ? 10.5 : 13, r0 = minor ? 5.5 : 8, off = minor ? [12, 20] : [15, 25];
     var anchor = z.x > 900 ? "end" : (z.x < 45 ? "start" : "middle");
     var lx = anchor === "end" ? z.x + 12 : (anchor === "start" ? z.x - 12 : z.x);
-    var label = '<text x="' + lx + '" y="' + (above ? z.y - 15 : z.y + 25) + '" text-anchor="' + anchor + '" font-size="13" font-weight="600" fill="var(--ink-2)" paint-order="stroke" stroke="var(--card)" stroke-width="3" stroke-linejoin="round">' + esc(z[LANG]) + "</text>";
+    var label = '<text x="' + lx + '" y="' + (above ? z.y - off[0] : z.y + off[1]) + '" text-anchor="' + anchor + '" font-size="' + fs + '" font-weight="600" fill="var(--ink-2)" paint-order="stroke" stroke="var(--card)" stroke-width="3" stroke-linejoin="round">' + esc(z[LANG]) + "</text>";
     var ring = z.status === "out" ? '<circle cx="' + z.x + '" cy="' + z.y + '" r="12" fill="none" stroke="var(--danger)" opacity="0.5"><animate attributeName="r" values="8;16;8" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0.1;0.6" dur="2s" repeatCount="indefinite"/></circle>' : "";
-    return '<g class="zone-dot" tabindex="0" role="button" data-zone="' + z.id + '" aria-label="' + esc(z[LANG]) + ": " + esc(t().zoneStatus[z.status]) + '">' +
+    return '<g class="zone-dot' + (minor ? " z-minor" : "") + '" tabindex="0" role="button" data-zone="' + z.id + '" data-r="' + r0 + '" data-fs="' + fs + '" aria-label="' + esc(z[LANG]) + ": " + esc(t().zoneStatus[z.status]) + '">' +
       ring +
-      '<circle class="z-dot" cx="' + z.x + '" cy="' + z.y + '" r="8" fill="' + statusColor[z.status] + '" stroke="var(--card)" stroke-width="2"/>' +
+      '<circle class="z-dot" cx="' + z.x + '" cy="' + z.y + '" r="' + r0 + '" fill="' + statusColor[z.status] + '" stroke="var(--card)" stroke-width="2"/>' +
       label + "</g>";
+  }).join("");
+
+  var lms = LANDMARKS.map(function (m) {
+    var d = "M " + m.x + " " + (m.y - 5.5) + " L " + (m.x + 5.5) + " " + m.y + " L " + m.x + " " + (m.y + 5.5) + " L " + (m.x - 5.5) + " " + m.y + " Z";
+    return '<g class="landmark" data-lm="' + m.id + '">' +
+      '<path d="' + d + '" fill="var(--deep)" stroke="var(--card)" stroke-width="1.5"/>' +
+      '<text x="' + m.x + '" y="' + (m.y + m.dy) + '" text-anchor="middle" font-size="10" fill="var(--ink-2)" paint-order="stroke" stroke="var(--card)" stroke-width="3" stroke-linejoin="round">' + esc(m[LANG]) + "</text></g>";
   }).join("");
 
   host.innerHTML =
     '<svg viewBox="0 0 ' + MAP_W + " " + MAP_H + '" class="roatan-svg" role="application" aria-label="Roatán outage map. Use the plus and minus buttons to zoom.">' +
     '<path d="' + ISLAND_D + '" fill="color-mix(in srgb, var(--brand) 22%, var(--card))" stroke="var(--brand)" stroke-opacity="0.5" stroke-width="1"/>' +
     '<text id="map-sea-label" x="620" y="330" font-size="15" fill="var(--axis-ink)" letter-spacing="3" opacity="1">MAR CARIBE · CARIBBEAN SEA</text>' +
+    '<g id="lm-layer" opacity="0">' + lms + "</g>" +
     dots + "</svg>" +
     '<div class="map-zoom" role="group" aria-label="Zoom">' +
     '<button type="button" data-mz="in" aria-label="Zoom in">+</button>' +
@@ -743,6 +780,62 @@ function renderMap() {
     dot.addEventListener("blur", hideTip);
     dot.addEventListener("click", function () { mapFlyToZone(z.id); });
     dot.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); mapFlyToZone(z.id); } });
+  });
+
+  $all(".landmark", host).forEach(function (g) {
+    var m = null;
+    LANDMARKS.forEach(function (x) { if (x.id === g.dataset.lm) m = x; });
+    g.addEventListener("mousemove", function (e) { showTip(esc(m[LANG]), e.clientX, e.clientY); });
+    g.addEventListener("mouseleave", hideTip);
+  });
+
+  setupTraceMode(host);
+}
+
+/* Zone-boundary trace mode — open with ?trace=1 to draw coverage areas
+   on the accurate island and export the coordinates as JSON. */
+function setupTraceMode(host) {
+  if (location.search.indexOf("trace") === -1 || !mapSvg) return;
+  var zones = [], cur = { name: "", points: [] };
+  var layer = document.createElementNS("http://www.w3.org/2000/svg", "g");
+  mapSvg.appendChild(layer);
+  var panel = document.createElement("div");
+  panel.className = "trace-panel";
+  panel.innerHTML = '<strong>TRACE MODE</strong> <span id="tr-n">0 pts</span> ' +
+    '<button type="button" id="tr-new">New zone</button>' +
+    '<button type="button" id="tr-undo">Undo</button>' +
+    '<button type="button" id="tr-copy">Copy JSON</button>';
+  host.appendChild(panel);
+  function redraw() {
+    var svgNS = "";
+    zones.concat([cur]).forEach(function (z) {
+      svgNS += z.points.length > 1 ? '<polygon points="' + z.points.map(function (p) { return p.join(","); }).join(" ") + '" fill="rgba(242,164,19,.3)" stroke="#F2A413" stroke-width="1.5"/>' : "";
+      svgNS += z.points.map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.5" fill="#F2A413"/>'; }).join("");
+    });
+    layer.innerHTML = svgNS;
+    $("#tr-n").textContent = cur.points.length + " pts (" + (cur.name || "unnamed") + ")";
+  }
+  mapSvg.addEventListener("click", function (e) {
+    if (e.target.closest(".zone-dot") || e.target.closest(".landmark")) return;
+    var r = mapSvg.getBoundingClientRect();
+    var x = Math.round((mapView.x + (e.clientX - r.left) / r.width * mapView.w) * 10) / 10;
+    var y = Math.round((mapView.y + (e.clientY - r.top) / r.height * mapView.h) * 10) / 10;
+    cur.points.push([x, y]);
+    redraw();
+  });
+  $("#tr-new").addEventListener("click", function () {
+    if (cur.points.length > 2) zones.push(cur);
+    cur = { name: prompt("Zone name:") || "zone-" + (zones.length + 1), points: [] };
+    redraw();
+  });
+  $("#tr-undo").addEventListener("click", function () { cur.points.pop(); redraw(); });
+  $("#tr-copy").addEventListener("click", function () {
+    if (cur.points.length > 2) { zones.push(cur); cur = { name: cur.name, points: [] }; }
+    var json = JSON.stringify(zones);
+    (navigator.clipboard ? navigator.clipboard.writeText(json) : Promise.reject()).then(
+      function () { showToast("✓ Zone JSON copied — paste it to Claude"); },
+      function () { console.log(json); showToast("JSON printed to the browser console"); }
+    );
   });
 }
 
