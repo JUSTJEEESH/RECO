@@ -70,6 +70,17 @@ var T = {
     sparkAria: "Trend of monthly outage minutes over the last 12 months",
     burnAria: "Bar chart of daily prepaid spending over the last 14 days",
     perMonth: "/month",
+    trackTech: "Technician: Marco A. · Tue Jul 14 · arrives ≈ 10:40 am · you're #3 on the route",
+    coco: {
+      tag: "RECO assistant · demo",
+      hi: "Hi! I'm Coco 🦎 I can check outages, balances, and payments — or hand you to a human. What do you need?",
+      chips: { outage: "Outage in my zone?", balance: "My balance", pay: "How do I pay?", report: "Report a problem", human: "Talk to a human" },
+      aOutageHead: "Right now on the island:",
+      aBalance: "Demo account · West Bay: <strong>L 17,514.88</strong> due June 12 (L 8,809.49 is this month, the rest is carried balance). Prepaid demo meter: <strong>L 342.50</strong> ≈ 8 days. <a href='#/billing'>Open my account →</a>",
+      aPay: "Fastest way: pay right here, two minutes, no login — card, Tigo Money, or bank. Partial payments count too. <a href='#/billing#paynow'>Pay now →</a>",
+      aReport: "Tap your zone on the <a href='#/outages'>outage map</a>, or WhatsApp us at +504 9448-8542 with a landmark (\"near the Punta Gorda dock\"). ⚠ If a line is down, stay 10 m away and call 2405-1130 first.",
+      aHuman: "Real people, no phone trees: ☎ 2407-2170 / 79 (ext. 1108, 1110, 1112) · WhatsApp +504 9448-8542. Your neighborhood has one assigned team — the same five people every time. Emergencies are answered 24/7."
+    },
     wiz: {
       prepaid: { h: "Switch to RECO Prepaid", p: "Top up as money comes in — no monthly bill, no deposit. Old debt moves to the humane path: 10% of each recharge pays it down at zero interest, and power stays on at night and on weekends even at L 0." },
       installment: { h: "Installment plan", p: "Split the past-due balance into 3–12 equal monthly payments. No down payment, no interest. Set it up online in two minutes — no office visit, no explaining yourself." },
@@ -138,6 +149,17 @@ var T = {
     sparkAria: "Tendencia de minutos de corte por mes en los últimos 12 meses",
     burnAria: "Gráfico de barras del gasto prepago diario de los últimos 14 días",
     perMonth: "/mes",
+    trackTech: "Técnico: Marco A. · mar 14 jul · llega ≈ 10:40 am · usted es el #3 de la ruta",
+    coco: {
+      tag: "asistente de RECO · demo",
+      hi: "¡Hola! Soy Coco 🦎 Puedo revisar cortes, saldos y pagos — o pasarle con una persona. ¿Qué necesita?",
+      chips: { outage: "¿Corte en mi zona?", balance: "Mi saldo", pay: "¿Cómo pago?", report: "Reportar un problema", human: "Hablar con una persona" },
+      aOutageHead: "Ahora mismo en la isla:",
+      aBalance: "Cuenta demo · West Bay: <strong>L 17,514.88</strong> vence el 12 de junio (L 8,809.49 es este mes, el resto es saldo anterior). Medidor prepago demo: <strong>L 342.50</strong> ≈ 8 días. <a href='#/billing'>Abrir mi cuenta →</a>",
+      aPay: "Lo más rápido: pague aquí mismo, dos minutos, sin cuenta — tarjeta, Tigo Money o banco. Los pagos parciales también cuentan. <a href='#/billing#paynow'>Pagar ahora →</a>",
+      aReport: "Toque su zona en el <a href='#/outages'>mapa de cortes</a>, o escríbanos por WhatsApp al +504 9448-8542 con una referencia (\"cerca del muelle de Punta Gorda\"). ⚠ Si hay una línea caída, manténgase a 10 m y llame primero al 2405-1130.",
+      aHuman: "Personas reales, sin menús telefónicos: ☎ 2407-2170 / 79 (ext. 1108, 1110, 1112) · WhatsApp +504 9448-8542. Su vecindario tiene un equipo asignado — las mismas cinco personas siempre. Las emergencias se atienden 24/7."
+    },
     wiz: {
       prepaid: { h: "Cámbiese a RECO Prepago", p: "Recargue conforme llega el dinero — sin factura mensual, sin depósito. La deuda vieja pasa al camino humano: el 10% de cada recarga la abona a cero intereses, y la luz sigue de noche y los fines de semana aunque esté en L 0." },
       installment: { h: "Plan de cuotas", p: "Divida el saldo vencido en 3–12 pagos mensuales iguales. Sin prima, sin intereses. Se configura en línea en dos minutos — sin ir a la oficina, sin dar explicaciones." },
@@ -178,18 +200,18 @@ var TARIFF = {
 };
 
 var ZONES = [
-  { id: "west-bay",    en: "West Bay",        es: "West Bay",        x: 58,  y: 196, status: "planned", lbl: "b" },
+  { id: "west-bay",    en: "West Bay",        es: "West Bay",        x: 58,  y: 196, status: "ok",      lbl: "b" },
   { id: "west-end",    en: "West End",        es: "West End",        x: 88,  y: 166, status: "ok",      lbl: "t" },
-  { id: "sandy-bay",   en: "Sandy Bay",       es: "Sandy Bay",       x: 146, y: 143, status: "ok",      lbl: "t" },
+  { id: "sandy-bay",   en: "Sandy Bay",       es: "Sandy Bay",       x: 146, y: 143, status: "planned", lbl: "t" },
   { id: "flowers-bay", en: "Flowers Bay",     es: "Flowers Bay",     x: 140, y: 212, status: "ok",      lbl: "b" },
-  { id: "coxen-hole",  en: "Coxen Hole",      es: "Coxen Hole",      x: 196, y: 192, status: "ok",      lbl: "b" },
+  { id: "coxen-hole",  en: "Coxen Hole",      es: "Coxen Hole",      x: 196, y: 192, status: "planned", lbl: "b" },
   { id: "brick-bay",   en: "Brick Bay",       es: "Brick Bay",       x: 268, y: 186, status: "ok",      lbl: "b" },
   { id: "french-hbr",  en: "French Harbour",  es: "French Harbour",  x: 330, y: 166, status: "ok",      lbl: "b" },
   { id: "parrot-tree", en: "Parrot Tree",     es: "Parrot Tree",     x: 392, y: 158, status: "ok",      lbl: "b" },
   { id: "politilly",   en: "Politilly Bight", es: "Politilly Bight", x: 468, y: 132, status: "ok",      lbl: "t" },
   { id: "punta-gorda", en: "Punta Gorda",     es: "Punta Gorda",     x: 540, y: 104, status: "out",     lbl: "t" },
   { id: "jonesville",  en: "Jonesville",      es: "Jonesville",      x: 562, y: 138, status: "ok",      lbl: "b" },
-  { id: "oak-ridge",   en: "Oak Ridge",       es: "Oak Ridge",       x: 614, y: 128, status: "planned", lbl: "b" },
+  { id: "oak-ridge",   en: "Oak Ridge",       es: "Oak Ridge",       x: 614, y: 128, status: "ok",      lbl: "b" },
   { id: "camp-bay",    en: "Camp Bay",        es: "Camp Bay",        x: 692, y: 102, status: "ok",      lbl: "t" },
   { id: "santa-elena", en: "Santa Elena",     es: "Santa Elena",     x: 762, y: 108, status: "ok",      lbl: "b" }
 ];
@@ -207,7 +229,14 @@ var REL90 = {
 var FUEL_HIST = [1.52, 1.58, 1.55, 1.50, 1.47, 1.51, 1.48, 1.45, 1.42, 1.46, 1.43, 1.44]; // Aug 25 → Jul 26
 var OUTAGE_MIN_HIST = [148, 132, 165, 121, 96, 88, 104, 92, 78, 84, 71, 63]; // monthly outage minutes
 
+/* Events based on RECO's real published outage notices (June–July 2026) */
 var EVENTS = [
+  {
+    zone: "coxen-hole", type: "planned",
+    cause: { en: "Scheduled maintenance — Coxen Hole & central zones (real RECO notice, Jul 10)", es: "Mantenimiento programado — Coxen Hole y zonas centrales (aviso real de RECO, 10 jul)" },
+    meta:  { en: "Today 9:00 am – 1:00 pm · incl. Dixon Cove, the airport, Flowers Bay, Brass Hill, Spring Garden", es: "Hoy 9:00 am – 1:00 pm · incl. Dixon Cove, el aeropuerto, Flowers Bay, Brass Hill, Spring Garden" },
+    eta:   { en: "Power back by 1:00 pm", es: "Energía de vuelta a la 1:00 pm" }
+  },
   {
     zone: "punta-gorda", type: "out", stage: 3,
     cause: { en: "Tree on the line near the main road", es: "Árbol sobre la línea cerca de la carretera principal" },
@@ -215,19 +244,13 @@ var EVENTS = [
     eta:   { en: "Estimated restoration: 6:30 pm today", es: "Restablecimiento estimado: 6:30 pm hoy" }
   },
   {
-    zone: "oak-ridge", type: "planned",
-    cause: { en: "Transformer maintenance", es: "Mantenimiento de transformador" },
-    meta:  { en: "Tonight 10:00 pm – 1:00 am · notified by WhatsApp 48 h ahead", es: "Hoy 10:00 pm – 1:00 am · avisado por WhatsApp con 48 h" },
+    zone: "sandy-bay", type: "planned",
+    cause: { en: "Sandy Bay Double-Circuit Project — next work window", es: "Proyecto Doble Circuito Sandy Bay — próxima ventana de trabajo" },
+    meta:  { en: "Tue Jul 14 · 9:00 am – 1:00 pm · West End & West Bay may see brief blinks", es: "Mar 14 jul · 9:00 am – 1:00 pm · West End y West Bay pueden ver parpadeos breves" },
     eta:   { en: "", es: "" }
   },
   {
-    zone: "west-bay", type: "planned",
-    cause: { en: "Line upgrade — replacing 6 poles", es: "Mejora de línea — reemplazo de 6 postes" },
-    meta:  { en: "Tue Jul 14 · 9:00 am – 12:00 pm", es: "Mar 14 jul · 9:00 am – 12:00 pm" },
-    eta:   { en: "", es: "" }
-  },
-  {
-    zone: "sandy-bay", type: "restored",
+    zone: "oak-ridge", type: "restored",
     cause: { en: "Salt buildup on insulators", es: "Acumulación de sal en aisladores" },
     meta:  { en: "Restored 11:05 am · out for 42 min", es: "Restablecido 11:05 am · 42 min sin servicio" },
     eta:   { en: "", es: "" }
@@ -1009,6 +1032,129 @@ function runWizard() {
   host.hidden = false;
 }
 
+/* ---------------- pay flow ---------------- */
+
+var pfAmount = 17514.88;
+
+function pfShow(id) {
+  ["pf-1", "pf-2", "pf-3", "pf-proc", "pf-4"].forEach(function (p) {
+    var el = document.getElementById(p);
+    if (el) el.hidden = p !== id;
+  });
+  var stepFor = { "pf-1": 1, "pf-2": 2, "pf-3": 3, "pf-proc": 3, "pf-4": 4 };
+  var cur = stepFor[id];
+  $all(".pf-step").forEach(function (st) {
+    var n = +st.dataset.pf;
+    st.classList.toggle("is-on", n === cur);
+    st.classList.toggle("is-done", n < cur);
+  });
+}
+
+function setupPayFlow() {
+  var fa = $("#pf-form-acct");
+  if (!fa) return;
+  fa.addEventListener("submit", function (e) {
+    e.preventDefault();
+    $("#pf-acct-echo").textContent = ($("#pf-acct").value.trim() || "R0012492").toUpperCase();
+    pfShow("pf-2");
+  });
+  $("#pf-to-method").addEventListener("click", function () {
+    var sel = $("input[name='pf-amt']:checked");
+    pfAmount = sel ? +sel.value : 17514.88;
+    pfShow("pf-3");
+  });
+  $("#pf-pay").addEventListener("click", function () {
+    pfShow("pf-proc");
+    setTimeout(function () {
+      $("#pf-rc-amt").textContent = fmtL(pfAmount);
+      $("#pf-rc-acct").textContent = $("#pf-acct-echo").textContent;
+      $("#pf-rc-bal").textContent = fmtL(Math.max(0, 17514.88 - pfAmount));
+      pfShow("pf-4");
+    }, 1400);
+  });
+  $("#pf-again").addEventListener("click", function () { pfShow("pf-1"); });
+}
+
+/* ---------------- Coco chat assistant ---------------- */
+
+var cocoBuilt = false;
+
+function cocoOutageAnswer() {
+  var bits = [esc(t().coco.aOutageHead)];
+  EVENTS.forEach(function (ev) {
+    if (ev.type === "restored") return;
+    var z = zoneById(ev.zone);
+    var icon = ev.type === "out" ? "🔴" : "🟠";
+    bits.push(icon + " <strong>" + esc(z[LANG]) + "</strong> — " + esc(ev.cause[LANG]) +
+      (ev.eta[LANG] ? " · " + esc(ev.eta[LANG]) : ""));
+  });
+  bits.push('<a href="#/outages">' + (LANG === "es" ? "Ver el mapa completo →" : "See the full map →") + "</a>");
+  return bits.join("<br>");
+}
+
+function cocoAnswer(k) {
+  if (k === "outage") return cocoOutageAnswer();
+  if (k === "balance") return t().coco.aBalance;
+  if (k === "pay") return t().coco.aPay;
+  if (k === "report") return t().coco.aReport;
+  return t().coco.aHuman;
+}
+
+function cocoMsg(html, who) {
+  var m = document.createElement("div");
+  m.className = "coco-msg " + who;
+  m.innerHTML = html;
+  $("#coco-msgs").appendChild(m);
+  $("#coco-msgs").scrollTop = 99999;
+}
+
+function cocoReset() {
+  if (!cocoBuilt) return;
+  $("#coco-msgs").innerHTML = "";
+  $(".coco-head strong").textContent = "Coco";
+  $(".coco-head .small").textContent = t().coco.tag;
+  cocoMsg(esc(t().coco.hi), "bot");
+  var chips = $("#coco-chips");
+  chips.innerHTML = "";
+  ["outage", "balance", "pay", "report", "human"].forEach(function (k) {
+    var b = document.createElement("button");
+    b.className = "coco-chip";
+    b.type = "button";
+    b.textContent = t().coco.chips[k];
+    b.addEventListener("click", function () {
+      cocoMsg(esc(t().coco.chips[k]), "user");
+      setTimeout(function () { cocoMsg(cocoAnswer(k), "bot"); }, 350);
+    });
+    chips.appendChild(b);
+  });
+}
+
+function buildCoco() {
+  var fab = document.createElement("button");
+  fab.className = "coco-fab";
+  fab.type = "button";
+  fab.setAttribute("aria-label", "Coco — chat assistant");
+  fab.innerHTML = "💬";
+  var panel = document.createElement("div");
+  panel.className = "coco-panel";
+  panel.hidden = true;
+  panel.innerHTML =
+    '<div class="coco-head"><span class="coco-avatar">🦎</span><div><strong>Coco</strong><span class="small"></span></div>' +
+    '<button class="coco-close" type="button" aria-label="Close">×</button></div>' +
+    '<div class="coco-msgs" id="coco-msgs"></div>' +
+    '<div class="coco-chips" id="coco-chips"></div>';
+  document.body.appendChild(panel);
+  document.body.appendChild(fab);
+  cocoBuilt = true;
+  cocoReset();
+  fab.addEventListener("click", function () { panel.hidden = !panel.hidden; });
+  panel.querySelector(".coco-close").addEventListener("click", function () { panel.hidden = true; });
+  // route links inside chat close the panel
+  panel.addEventListener("click", function (e) {
+    if (e.target.tagName === "A") panel.hidden = true;
+  });
+}
+
 /* ---------------- scroll animations ---------------- */
 
 var REDUCE_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -1169,6 +1315,7 @@ function setLang(lang) {
   localStorage.setItem("reco-lang", lang);
   applyStaticLang();
   renderDynamic();
+  cocoReset();
 }
 
 /* ---------------- tips rotator ---------------- */
@@ -1251,6 +1398,7 @@ function init() {
       var dotCls = i === 0 ? "ok" : (i === 1 ? "planned" : "pending");
       html += '<div class="track-step"><span class="key-dot ' + dotCls + '"></span><strong>' + esc(steps[i]) + "</strong><span class='muted'>" + esc(dates[i]) + "</span></div>";
     }
+    html += '<p class="form-note" style="margin-top:6px">🛻 ' + esc(t().trackTech) + "</p>";
     host.innerHTML = html + "</div>";
     host.hidden = false;
   });
@@ -1291,6 +1439,16 @@ function init() {
   /* assistance wizard */
   var wg = $("#wiz-go");
   if (wg) wg.addEventListener("click", runWizard);
+
+  /* pay flow + Coco */
+  setupPayFlow();
+  buildCoco();
+
+  /* PWA */
+  if ("serviceWorker" in navigator && location.protocol === "https:" &&
+      location.hostname.indexOf("claude.ai") === -1) {
+    navigator.serviceWorker.register("sw.js").catch(function () { /* not fatal */ });
+  }
 
   /* news filter */
   $all("[data-newsfilter]").forEach(function (b) {
