@@ -199,22 +199,23 @@ var TARIFF = {
   fuel: 1.44, fixed: 62.00, street: 0.301
 };
 
-/* Positions traced against the real island outline (viewBox 1025×394) */
+/* Town positions derived from reference maps of Roatán and pinned to the
+   traced outline's actual shores (programmatically verified on land). */
 var ZONES = [
-  { id: "west-bay",    en: "West Bay",        es: "West Bay",        x: 30,  y: 322, status: "ok",      lbl: "b" },
-  { id: "west-end",    en: "West End",        es: "West End",        x: 52,  y: 268, status: "ok",      lbl: "t" },
-  { id: "flowers-bay", en: "Flowers Bay",     es: "Flowers Bay",     x: 112, y: 288, status: "ok",      lbl: "b" },
-  { id: "sandy-bay",   en: "Sandy Bay",       es: "Sandy Bay",       x: 176, y: 206, status: "planned", lbl: "t" },
-  { id: "coxen-hole",  en: "Coxen Hole",      es: "Coxen Hole",      x: 200, y: 255, status: "planned", lbl: "b" },
-  { id: "brick-bay",   en: "Brick Bay",       es: "Brick Bay",       x: 292, y: 210, status: "ok",      lbl: "b" },
-  { id: "french-hbr",  en: "French Harbour",  es: "French Harbour",  x: 345, y: 180, status: "ok",      lbl: "b" },
-  { id: "parrot-tree", en: "Parrot Tree",     es: "Parrot Tree",     x: 410, y: 152, status: "ok",      lbl: "b" },
-  { id: "politilly",   en: "Politilly Bight", es: "Politilly Bight", x: 452, y: 92,  status: "ok",      lbl: "t" },
-  { id: "punta-gorda", en: "Punta Gorda",     es: "Punta Gorda",     x: 575, y: 62,  status: "out",     lbl: "t" },
-  { id: "jonesville",  en: "Jonesville",      es: "Jonesville",      x: 602, y: 98,  status: "ok",      lbl: "b" },
-  { id: "oak-ridge",   en: "Oak Ridge",       es: "Oak Ridge",       x: 670, y: 87,  status: "ok",      lbl: "b" },
-  { id: "camp-bay",    en: "Camp Bay",        es: "Camp Bay",        x: 782, y: 44,  status: "ok",      lbl: "t" },
-  { id: "santa-elena", en: "Santa Elena",     es: "Santa Elena",     x: 934, y: 32,  status: "ok",      lbl: "b" }
+  { id: "west-bay",    en: "West Bay",        es: "West Bay",        x: 22,  y: 356, status: "ok",      lbl: "b" },
+  { id: "west-end",    en: "West End",        es: "West End",        x: 34,  y: 309, status: "ok",      lbl: "t" },
+  { id: "flowers-bay", en: "Flowers Bay",     es: "Flowers Bay",     x: 92,  y: 293, status: "ok",      lbl: "b" },
+  { id: "sandy-bay",   en: "Sandy Bay",       es: "Sandy Bay",       x: 128, y: 237, status: "planned", lbl: "t" },
+  { id: "coxen-hole",  en: "Coxen Hole",      es: "Coxen Hole",      x: 165, y: 268, status: "planned", lbl: "b" },
+  { id: "brick-bay",   en: "Brick Bay",       es: "Brick Bay",       x: 281, y: 207, status: "ok",      lbl: "b" },
+  { id: "french-hbr",  en: "French Harbour",  es: "French Harbour",  x: 321, y: 189, status: "ok",      lbl: "b" },
+  { id: "parrot-tree", en: "Parrot Tree",     es: "Parrot Tree",     x: 378, y: 172, status: "ok",      lbl: "b" },
+  { id: "politilly",   en: "Politilly Bight", es: "Politilly Bight", x: 407, y: 123, status: "ok",      lbl: "t" },
+  { id: "punta-gorda", en: "Punta Gorda",     es: "Punta Gorda",     x: 489, y: 83,  status: "out",     lbl: "t" },
+  { id: "jonesville",  en: "Jonesville",      es: "Jonesville",      x: 489, y: 115, status: "ok",      lbl: "b" },
+  { id: "oak-ridge",   en: "Oak Ridge",       es: "Oak Ridge",       x: 529, y: 90,  status: "ok",      lbl: "b" },
+  { id: "camp-bay",    en: "Camp Bay",        es: "Camp Bay",        x: 732, y: 49,  status: "ok",      lbl: "t" },
+  { id: "santa-elena", en: "Santa Elena",     es: "Santa Elena",     x: 822, y: 53,  status: "ok",      lbl: "b" }
 ];
 
 /* per-zone reliability, last 90 days: [outage count, total minutes] (demo) */
