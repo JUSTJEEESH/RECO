@@ -674,6 +674,104 @@ input[type="range"] { padding: 0; accent-color: var(--brand); background: transp
 .pref-foot select { width: auto; }
 .pref-foot .btn { margin-left: auto; }
 
+/* ---------- interactive bill doc ---------- */
+.bill-doc { max-width: 780px; margin: 0 auto; display: grid; gap: 34px; padding: 28px; }
+.bill-doc h3 { margin-bottom: 12px; }
+
+.bd-hero { display: grid; gap: 16px; }
+.bd-due { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px; }
+.bd-total { font-family: var(--font-display); font-size: clamp(2.2rem, 6vw, 3.2rem); font-weight: 800; letter-spacing: -.02em; }
+.bd-duedate { font-weight: 700; color: var(--danger); }
+.bd-split { display: flex; align-items: stretch; justify-content: center; gap: 10px; flex-wrap: wrap; }
+.bd-part {
+  font: inherit; cursor: pointer; text-align: left;
+  display: flex; flex-direction: column; gap: 2px;
+  background: var(--card-2); border: 2px solid var(--line); border-radius: var(--radius);
+  padding: 12px 18px; color: var(--ink); min-width: 190px;
+  transition: border-color .15s ease, transform .12s ease;
+}
+.bd-part:hover { transform: translateY(-2px); border-color: var(--brand); }
+.bd-part.is-active { border-color: var(--brand); }
+.bd-part.carried { border-style: dashed; }
+.bd-part.carried .bd-part-amt { color: var(--warn); }
+.bd-part-label { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); }
+.bd-part-amt { font-size: 1.35rem; font-weight: 800; }
+.bd-plus { align-self: center; font-size: 1.6rem; font-weight: 800; color: var(--ink-3); }
+.bd-info {
+  background: var(--card-2); border-left: 4px solid var(--brand);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 12px 16px; font-size: .93rem; color: var(--ink-2); max-width: none;
+}
+
+.odo-row { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+.odo-group { display: grid; gap: 6px; }
+.odo-label { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); }
+.odo-arrow { font-size: 1.5rem; color: var(--ink-3); font-weight: 700; }
+.odometer { display: flex; gap: 3px; }
+.odo-digit {
+  width: 1.35em; height: 1.5em; overflow: hidden;
+  background: var(--deep); color: var(--deep-ink);
+  border-radius: 6px; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,.35);
+}
+.odo-strip { display: block; transition: transform 1.6s cubic-bezier(.23,1,.32,1); }
+.odo-strip i { display: block; height: 1.5em; line-height: 1.5em; font-style: normal; text-align: center; }
+.odo-result { display: grid; gap: 2px; margin-left: auto; }
+.bd-kwh { font-family: var(--font-display); font-size: 1.5rem; font-weight: 800; color: var(--brand-strong); }
+
+.bd-bar { display: flex; height: 40px; border-radius: 10px; overflow: hidden; background: var(--card-2); margin-bottom: 16px; }
+.bd-seg { width: 0; min-width: 5px; border-right: 2px solid var(--card); transition: width 1s cubic-bezier(.2,.7,.3,1), filter .15s ease, opacity .15s ease; cursor: pointer; }
+.bd-seg:last-child { border-right: none; }
+.bill-doc.in .bd-seg { width: var(--w); }
+.bd-seg.hot { filter: brightness(1.15); }
+.bd-rows { display: grid; }
+.bd-row { border-bottom: 1px solid var(--line); transition: background .15s ease; }
+.bd-row:last-child { border-bottom: none; }
+.bd-row.hot, .bd-row:hover { background: var(--card-2); }
+.bd-row summary {
+  display: flex; align-items: center; gap: 12px; cursor: pointer; list-style: none;
+  padding: 14px 10px; font-weight: 650;
+}
+.bd-row summary::-webkit-details-marker { display: none; }
+.bd-row summary::after { content: "+"; color: var(--brand); font-weight: 800; margin-left: 4px; }
+.bd-row[open] summary::after { content: "–"; }
+.bd-row .swatch { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+.bd-amt { margin-left: auto; font-variant-numeric: tabular-nums; }
+.bd-body { padding: 0 10px 16px 34px; color: var(--ink-2); font-size: .93rem; }
+.bd-sub { display: grid; gap: 6px; margin: 10px 0; }
+.bd-subrow {
+  display: flex; justify-content: space-between; gap: 12px;
+  background: var(--card-2); border-radius: var(--radius-sm); padding: 8px 12px; font-size: .9rem;
+}
+.bd-verdict { font-weight: 650; font-size: 1.02rem; margin-bottom: 14px; }
+.bd-comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 12px; }
+.bd-comp {
+  display: grid; gap: 6px; justify-items: start;
+  background: var(--card-2); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 14px 16px;
+}
+.bd-comp-label { font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; color: var(--ink-2); }
+.bd-comp-val { font-weight: 800; font-size: 1.1rem; }
+.bd-foot { display: flex; gap: 12px; flex-wrap: wrap; border-top: 2px solid var(--line); padding-top: 22px; }
+
+/* ---------- scroll animations ---------- */
+.reveal { opacity: 0; transform: translateY(14px); transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.3,1); }
+.reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+.chart-anim .grow { transform: scaleY(0); transform-box: fill-box; transform-origin: bottom; }
+.chart-anim.in .grow { animation: growY .65s cubic-bezier(.2,.7,.3,1) forwards; }
+@keyframes growY { to { transform: scaleY(1); } }
+@media (prefers-reduced-motion: reduce) {
+  .chart-anim .grow { transform: none; animation: none !important; }
+}
+.usage-chart:not(.chart-anim) .grow { transform: none; }
+
+/* card hover lift — consistent, subtle */
+.section .card { transition: transform .18s ease, box-shadow .18s ease, opacity .55s ease, border-color .15s ease; }
+
 /* ---------- viz tooltip ---------- */
 .viz-tooltip {
   position: fixed; z-index: 90; pointer-events: none;
@@ -720,8 +818,12 @@ input[type="range"] { padding: 0; accent-color: var(--brand); background: transp
 }
 @media (max-width: 560px) {
   .feature-grid, .news-grid, .why-grid, .contact-grid, .offices, .pay-grid, .form-2col,
-  .ready-grid, .score-grid { grid-template-columns: 1fr; }
+  .ready-grid, .score-grid, .bd-comp-grid { grid-template-columns: 1fr; }
   .fan-discount { margin-left: 0; width: 100%; }
+  .bd-split { flex-direction: column; }
+  .bd-plus { display: none; }
+  .bill-doc { padding: 18px; }
+  .odo-result { margin-left: 0; }
   .grid-stats { grid-template-columns: 1fr 1fr; }
   .status-link { display: none; }
   .mix-wrap { flex-direction: column; align-items: stretch; }

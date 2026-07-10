@@ -240,7 +240,7 @@
                 <option data-en="Sparks or transformer noise" data-es="Chispas o ruido en transformador">Sparks or transformer noise</option>
               </select>
             </div>
-            <p class="form-note danger" data-en="⚠ If a line is down: stay 10 m away, keep others clear, and call 2455-7381 immediately." data-es="⚠ Si hay una línea caída: manténgase a 10 m, aleje a otras personas y llame de inmediato al 2455-7381.">⚠ If a line is down: stay 10 m away, keep others clear, and call 2455-7381 immediately.</p>
+            <p class="form-note danger" data-en="⚠ If a line is down: stay 10 m away, keep others clear, and call 2405-1130 immediately." data-es="⚠ Si hay una línea caída: manténgase a 10 m, aleje a otras personas y llame de inmediato al 2405-1130.">⚠ If a line is down: stay 10 m away, keep others clear, and call 2405-1130 immediately.</p>
             <button class="btn btn-primary" type="submit" data-en="Send report" data-es="Enviar reporte">Send report</button>
             <p class="form-done" hidden data-en="✓ Report received. You'll get updates by SMS/WhatsApp. (Demo — nothing was sent.)" data-es="✓ Reporte recibido. Recibirá avisos por SMS/WhatsApp. (Demo — no se envió nada.)">✓ Report received. You'll get updates by SMS/WhatsApp. (Demo — nothing was sent.)</p>
           </form>
@@ -369,7 +369,7 @@
     </div>
     <p class="storm-cta">
       <a class="btn btn-primary" href="#/outages#alerts" data-en="Sign up for storm alerts" data-es="Suscribirse a alertas de tormenta">Sign up for storm alerts</a>
-      <span class="mono storm-phone">☎ 2455-7381 · WhatsApp +504 9448-8542</span>
+      <span class="mono storm-phone">☎ 2405-1130 · WhatsApp +504 9448-8542</span>
     </p>
   </div>
 </section>
@@ -456,7 +456,7 @@
             <h3 data-en="Your last 12 months" data-es="Sus últimos 12 meses">Your last 12 months</h3>
             <span class="muted small" data-en="kWh per billing month" data-es="kWh por mes facturado">kWh per billing month</span>
           </div>
-          <div id="usage-chart" class="usage-chart"></div>
+          <div id="usage-chart" class="usage-chart chart-anim"></div>
         </div>
 
         <div class="card inner-card">
@@ -541,9 +541,122 @@
   </div>
 
   <div class="section" id="understand-bill">
-    <h2 class="section-title" data-en="Understand your bill" data-es="Entienda su factura">Understand your bill</h2>
-    <p class="section-lede" data-en="Tap each line to see what it means and how it's calculated. No fine print." data-es="Toque cada línea para ver qué significa y cómo se calcula. Sin letra pequeña.">Tap each line to see what it means and how it's calculated. No fine print.</p>
-    <div class="bill-explainer card" id="bill-explainer"></div>
+    <h2 class="section-title" data-en="Your bill, finally clear" data-es="Su factura, por fin clara">Your bill, finally clear</h2>
+    <p class="section-lede" data-en="This is a real May 2026 residential bill from West Bay, rebuilt the way a bill should be. Touch anything to see what it means — no fine print, no mystery numbers." data-es="Esta es una factura residencial real de West Bay, mayo 2026, reconstruida como debe ser una factura. Toque cualquier parte para ver qué significa — sin letra pequeña, sin números misteriosos.">This is a real May 2026 residential bill from West Bay, rebuilt the way a bill should be. Touch anything to see what it means — no fine print, no mystery numbers.</p>
+
+    <div class="bill-doc card" id="bill-doc">
+
+      <!-- 1. What you owe, and when -->
+      <div class="bd-hero">
+        <div class="bd-due">
+          <span class="tile-label" data-en="Total to pay" data-es="Total a pagar">Total to pay</span>
+          <span class="bd-total mono">L 17,514.88</span>
+          <span class="bd-duedate" data-en="by Friday, June 12" data-es="antes del viernes 12 de junio">by Friday, June 12</span>
+        </div>
+        <div class="bd-split">
+          <button class="bd-part" type="button" data-bdinfo="month">
+            <span class="bd-part-label" data-en="This month" data-es="Este mes">This month</span>
+            <span class="bd-part-amt mono">L 8,809.49</span>
+          </button>
+          <span class="bd-plus" aria-hidden="true">+</span>
+          <button class="bd-part carried" type="button" data-bdinfo="carried">
+            <span class="bd-part-label" data-en="Still owed from before" data-es="Pendiente de antes">Still owed from before</span>
+            <span class="bd-part-amt mono">L 8,705.39</span>
+          </button>
+        </div>
+        <p class="bd-info" id="bd-info" data-en="On the current bill these two are silently mixed into one 'Total' — the single biggest source of confusion. A clear bill always separates them." data-es="En la factura actual estos dos se mezclan en un solo 'Total' sin explicación — la mayor fuente de confusión. Una factura clara siempre los separa.">On the current bill these two are silently mixed into one 'Total' — the single biggest source of confusion. A clear bill always separates them.</p>
+      </div>
+
+      <!-- 2. What you used -->
+      <div class="bd-meter">
+        <h3 data-en="What you used" data-es="Lo que consumió">What you used</h3>
+        <div class="odo-row">
+          <div class="odo-group">
+            <span class="odo-label" data-en="Meter on May 2" data-es="Medidor el 2 de mayo">Meter on May 2</span>
+            <div class="odometer" data-value="0956" aria-label="0956"></div>
+          </div>
+          <span class="odo-arrow" aria-hidden="true">→</span>
+          <div class="odo-group">
+            <span class="odo-label" data-en="Meter on June 2" data-es="Medidor el 2 de junio">Meter on June 2</span>
+            <div class="odometer" data-value="1967" aria-label="1967"></div>
+          </div>
+          <div class="odo-result">
+            <span class="bd-kwh mono">= 1,011 kWh</span>
+            <span class="muted small" data-en="in 31 days · about 33 kWh each day · L 284 per day (about six baleadas)" data-es="en 31 días · unos 33 kWh al día · L 284 por día (como seis baleadas)">in 31 days · about 33 kWh each day · L 284 per day (about six baleadas)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. Where the money goes -->
+      <div class="bd-breakdown">
+        <h3 data-en="Where this month's L 8,809 goes" data-es="A dónde van los L 8,809 de este mes">Where this month's L 8,809 goes</h3>
+        <div class="bd-bar" aria-hidden="true">
+          <span class="bd-seg" data-k="energy" style="--w:95.9%; background: var(--brand)"></span>
+          <span class="bd-seg" data-k="street" style="--w:3.45%; background: var(--s-solar)"></span>
+          <span class="bd-seg" data-k="muni" style="--w:0.41%; background: var(--s-batt)"></span>
+          <span class="bd-seg" data-k="reg" style="--w:0.25%; background: var(--s-wind)"></span>
+        </div>
+        <div class="bd-rows">
+          <details class="bd-row" data-k="energy">
+            <summary><span class="swatch" style="background: var(--brand)"></span><span class="bd-name" data-en="Energy, fuel &amp; service" data-es="Energía, combustible y servicio">Energy, fuel &amp; service</span><span class="bd-amt mono">L 8,447.41</span></summary>
+            <div class="bd-body">
+              <p data-en="Your 1,011 kWh at L 8.3555 each. On today's bill this is one bundled line with an unexplained code — “(37.9069)”. A trustworthy bill shows the pieces:" data-es="Sus 1,011 kWh a L 8.3555 cada uno. En la factura actual esta es una sola línea con un código sin explicar — “(37.9069)”. Una factura confiable muestra las partes:">Your 1,011 kWh at L 8.3555 each. On today's bill this is one bundled line with an unexplained code — “(37.9069)”. A trustworthy bill shows the pieces:</p>
+              <div class="bd-sub">
+                <div class="bd-subrow"><span data-en="⛽ Fuel shipped to the island" data-es="⛽ Combustible traído a la isla">⛽ Fuel shipped to the island</span><span class="mono">≈ L 3,900</span></div>
+                <div class="bd-subrow"><span data-en="⚡ Running the plant &amp; the lines" data-es="⚡ Operar la planta y las líneas">⚡ Running the plant &amp; the lines</span><span class="mono">≈ L 4,485</span></div>
+                <div class="bd-subrow"><span data-en="📋 Fixed service charge" data-es="📋 Cargo fijo de servicio">📋 Fixed service charge</span><span class="mono">L 62.00</span></div>
+              </div>
+              <p class="muted small" data-en="Split shown is illustrative — RECO has the exact numbers, and a world-class bill would print them here every month." data-es="La división es ilustrativa — RECO tiene las cifras exactas, y una factura de clase mundial las publicaría aquí cada mes.">Split shown is illustrative — RECO has the exact numbers, and a world-class bill would print them here every month.</p>
+            </div>
+          </details>
+          <details class="bd-row" data-k="street">
+            <summary><span class="swatch" style="background: var(--s-solar)"></span><span class="bd-name" data-en="Street lighting" data-es="Alumbrado público">Street lighting</span><span class="bd-amt mono">L 304.31</span></summary>
+            <div class="bd-body"><p data-en="L 0.30 per kWh that pays for the public lights on roads and in communities. Collected by RECO, spent on the island's lighting." data-es="L 0.30 por kWh que paga las luces públicas de calles y comunidades. RECO lo cobra y se destina al alumbrado de la isla.">L 0.30 per kWh that pays for the public lights on roads and in communities. Collected by RECO, spent on the island's lighting.</p></div>
+          </details>
+          <details class="bd-row" data-k="muni">
+            <summary><span class="swatch" style="background: var(--s-batt)"></span><span class="bd-name" data-en="Municipal tax" data-es="Impuesto municipal">Municipal tax</span><span class="bd-amt mono">L 35.89</span></summary>
+            <div class="bd-body"><p data-en="A small tax that goes to the municipality — not to RECO." data-es="Un pequeño impuesto que va a la municipalidad — no a RECO.">A small tax that goes to the municipality — not to RECO.</p></div>
+          </details>
+          <details class="bd-row" data-k="reg">
+            <summary><span class="swatch" style="background: var(--s-wind)"></span><span class="bd-name" data-en="Regulator's fee" data-es="Tasa del regulador">Regulator's fee</span><span class="bd-amt mono">L 21.88</span></summary>
+            <div class="bd-body"><p data-en="Funds the CREE, Honduras's national energy regulator — the referee that oversees electricity rates. (The current bill prints this twice, two lines in a row.)" data-es="Financia a la CREE, el regulador nacional de energía — el árbitro que supervisa las tarifas. (La factura actual lo imprime dos veces, en dos líneas seguidas.)">Funds the CREE, Honduras's national energy regulator — the referee that oversees electricity rates. (The current bill prints this twice, two lines in a row.)</p></div>
+          </details>
+        </div>
+        <p class="muted small" data-en="Gone from this redesign: five tax lines that all said L 0.00. If a line is zero, it doesn't belong on your bill." data-es="Eliminado en este rediseño: cinco líneas de impuestos que decían L 0.00. Si una línea es cero, no pertenece a su factura.">Gone from this redesign: five tax lines that all said L 0.00. If a line is zero, it doesn't belong on your bill.</p>
+      </div>
+
+      <!-- 4. Compared to before -->
+      <div class="bd-compare">
+        <h3 data-en="Is this normal for you?" data-es="¿Esto es normal para usted?">Is this normal for you?</h3>
+        <p class="bd-verdict" data-en="In one sentence: this bill is almost identical to last month's — but your home now uses more than double what it did a year ago." data-es="En una frase: esta factura es casi igual a la del mes pasado — pero su hogar ahora consume más del doble que hace un año.">In one sentence: this bill is almost identical to last month's — but your home now uses more than double what it did a year ago.</p>
+        <div class="bd-comp-grid">
+          <div class="bd-comp">
+            <span class="bd-comp-label" data-en="vs. last month (Apr)" data-es="vs. el mes pasado (abr)">vs. last month (Apr)</span>
+            <span class="bd-comp-val mono">999 → 1,011 kWh</span>
+            <span class="pill paid" data-en="+1% · steady" data-es="+1% · estable">+1% · steady</span>
+          </div>
+          <div class="bd-comp">
+            <span class="bd-comp-label" data-en="vs. May last year" data-es="vs. mayo del año pasado">vs. May last year</span>
+            <span class="bd-comp-val mono">445 → 1,011 kWh</span>
+            <span class="pill due" data-en="+127% · worth a look" data-es="+127% · vale revisar">+127% · worth a look</span>
+          </div>
+        </div>
+        <p class="muted small" data-en="A good bill tells you when something changed and why it might have — new AC, more guests, a fridge seal — before you have to call and ask." data-es="Una buena factura le avisa cuando algo cambió y por qué pudo pasar — un aire nuevo, más huéspedes, el sello del refrigerador — antes de que tenga que llamar a preguntar.">A good bill tells you when something changed and why it might have — new AC, more guests, a fridge seal — before you have to call and ask.</p>
+      </div>
+
+      <!-- 5. Your 13 months -->
+      <div class="bd-history">
+        <h3 data-en="Your last 13 months" data-es="Sus últimos 13 meses">Your last 13 months</h3>
+        <div id="bill-usage-chart" class="usage-chart chart-anim"></div>
+        <p class="muted small" data-en="July–September is AC season — use triples. The current bill prints this chart so blurry it can't be read; your history deserves better." data-es="Julio–septiembre es temporada de aire — el consumo se triplica. La factura actual imprime esta gráfica tan borrosa que no se puede leer; su historial merece algo mejor.">July–September is AC season — use triples. The current bill prints this chart so blurry it can't be read; your history deserves better.</p>
+      </div>
+
+      <div class="bd-foot">
+        <button class="btn btn-accent" type="button" data-demo-alert data-en="Pay L 17,514.88 now" data-es="Pagar L 17,514.88 ahora">Pay L 17,514.88 now</button>
+        <button class="btn btn-ghost" type="button" data-demo-alert data-en="Split it into payments" data-es="Dividirlo en pagos">Split it into payments</button>
+        <button class="btn btn-ghost" type="button" data-demo-alert data-en="Warn me before it's this high again" data-es="Avisarme antes de que vuelva a ser tan alta">Warn me before it's this high again</button>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -573,7 +686,7 @@
             <span class="pp-days-num mono" id="pp-days">—</span>
           </div>
         </div>
-        <div id="pp-burn" class="pp-burn"></div>
+        <div id="pp-burn" class="pp-burn chart-anim"></div>
         <p class="muted small" data-en="Your last 14 days of use, in lempiras per day. Yesterday: L 41 — mostly the AC after 7 pm." data-es="Sus últimos 14 días de consumo, en lempiras por día. Ayer: L 41 — sobre todo el aire después de las 7 pm.">Your last 14 days of use, in lempiras per day. Yesterday: L 41 — mostly the AC after 7 pm.</p>
         <div class="pp-topup">
           <span data-en="Top up:" data-es="Recargar:">Top up:</span>
@@ -698,7 +811,7 @@
     <div class="fuel-layout">
       <div class="card">
         <h3 data-en="Last 12 months — fuel adjustment (L/kWh)" data-es="Últimos 12 meses — ajuste por combustible (L/kWh)">Last 12 months — fuel adjustment (L/kWh)</h3>
-        <div id="fuel-chart" class="fuel-chart"></div>
+        <div id="fuel-chart" class="fuel-chart chart-anim"></div>
         <p class="muted small" data-en="Down 15% from the September peak as LPG prices eased and solar output grew." data-es="15% menos que el pico de septiembre, gracias a menores precios del GLP y más generación solar.">Down 15% from the September peak as LPG prices eased and solar output grew.</p>
       </div>
       <div class="card">
@@ -951,7 +1064,7 @@
     <div class="contact-grid">
       <div class="card contact-card emergency">
         <h2 data-en="Emergency — line down / danger" data-es="Emergencia — línea caída / peligro">Emergency — line down / danger</h2>
-        <p class="contact-big mono">2455-7381</p>
+        <p class="contact-big mono">2405-1130</p>
         <p data-en="24 hours, every day. Stay 10 m away from any downed line." data-es="24 horas, todos los días. Manténgase a 10 m de cualquier línea caída.">24 hours, every day. Stay 10 m away from any downed line.</p>
       </div>
       <div class="card contact-card">
@@ -961,8 +1074,8 @@
       </div>
       <div class="card contact-card">
         <h2 data-en="Phone &amp; email" data-es="Teléfono y correo">Phone &amp; email</h2>
-        <p><span class="mono">2455-6725 · 2455-7070</span></p>
-        <p><a class="text-link" href="mailto:cs@recoroatan.com">cs@recoroatan.com</a></p>
+        <p><span class="mono">2405-1130 · +504 9448-8542</span></p>
+        <p><a class="text-link" href="mailto:electric@recoroatan.com">electric@recoroatan.com</a></p>
         <p data-en="Written requests get a ticket number and a committed response time." data-es="Las solicitudes escritas reciben un número de ticket y un tiempo de respuesta comprometido.">Written requests get a ticket number and a committed response time.</p>
       </div>
     </div>
@@ -1093,7 +1206,7 @@
     </nav>
     <div class="footer-meta">
       <p data-en="Emergencies 24/7:" data-es="Emergencias 24/7:">Emergencies 24/7:</p>
-      <p class="mono">2455-7381 · WhatsApp +504 9448-8542</p>
+      <p class="mono">2405-1130 · WhatsApp +504 9448-8542</p>
     </div>
   </div>
   <div class="footer-legal">

@@ -52,7 +52,7 @@ var T = {
     crewLabel: "Crew status: ",
     rel90: function (n, m) { return n + " outages · " + m + " min in the last 90 days"; },
     projected: "Projected month-end: ",
-    dayOf: function (d) { return "Day " + d + " of 30"; },
+    dayOf: function (d) { return "Day " + d + " of 31"; },
     soFar: " so far",
     fanStrong: "Strong trade winds at Brass Hill — members are saving right now",
     fanLight: "Light winds — standard rate applies",
@@ -109,7 +109,7 @@ var T = {
     crewLabel: "Estado de la cuadrilla: ",
     rel90: function (n, m) { return n + " cortes · " + m + " min en los últimos 90 días"; },
     projected: "Proyección a fin de mes: ",
-    dayOf: function (d) { return "Día " + d + " de 30"; },
+    dayOf: function (d) { return "Día " + d + " de 31"; },
     soFar: " hasta hoy",
     fanStrong: "Vientos alisios fuertes en Brass Hill — los miembros ahorran ahora mismo",
     fanLight: "Vientos suaves — aplica la tarifa estándar",
@@ -231,8 +231,16 @@ var NEWS = [
     body:  { en: "Every component of the tariff, its legal basis, and a worked example bill, in English and Spanish. Transparency is policy, not a slogan.", es: "Cada componente de la tarifa, su base legal y un ejemplo de factura calculado, en español e inglés. La transparencia es política, no eslogan." } }
 ];
 
-var USAGE_KWH = [418, 396, 372, 355, 348, 361, 389, 442, 486, 512, 538, 497]; // 12 months, oldest first
-var USAGE_START = { y: 2025, m: 6 }; // Jul 2025 (0-based month index 6)
+/* Real 13-month history from an actual May 2026 West Bay residential bill */
+var USAGE_KWH = [445, 432, 1306, 1876, 1817, 1101, 920, 769, 774, 708, 664, 999, 1011];
+var USAGE_START = { y: 2025, m: 4 }; // May 2025 (0-based month index 4)
+
+/* Effective residential pricing reverse-engineered from the real bill:
+   energy+fuel+fixed L8.3555/kWh, street lighting L0.301/kWh,
+   municipal tax L35.89 flat, regulator fee L21.88 flat */
+function realBillFor(kwh) {
+  return kwh * 8.3555 + kwh * 0.301 + 35.89 + 21.88;
+}
 
 /* ---------------- helpers ---------------- */
 
@@ -371,13 +379,13 @@ function renderMixDonut() {
   if (sr) sr.textContent = renewPct + "%";
 }
 
-function renderUsageChart() {
-  var host = $("#usage-chart");
+function renderUsageChart(hostSel) {
+  var host = $(hostSel || "#usage-chart");
   if (!host) return;
   var W = 560, H = 220, L = 44, R = 10, TOP = 18, B = 30;
   var iw = W - L - R, ih = H - TOP - B;
   var max = Math.max.apply(null, USAGE_KWH);
-  var yMax = Math.ceil(max / 100) * 100;
+  var yMax = Math.ceil(max / 400) * 400; // keeps the 4 gridline steps on round numbers
   var n = USAGE_KWH.length;
   var slot = iw / n, bw = Math.min(26, slot * 0.62);
 
@@ -402,7 +410,7 @@ function renderUsageChart() {
       " H" + (x + bw - rr) +
       " Q" + (x + bw) + " " + y + " " + (x + bw) + " " + (y + rr) +
       " V" + (TOP + ih) + " Z";
-    out += '<path d="' + d + '" fill="var(--brand)" opacity="' + (last ? 1 : 0.55) + '" data-i="' + i + '" class="u-bar"/>';
+    out += '<path d="' + d + '" fill="var(--brand)" opacity="' + (last ? 1 : 0.55) + '" data-i="' + i + '" class="u-bar grow" style="animation-delay:' + (i * 45) + 'ms"/>';
     if (last) {
       out += '<text x="' + (x + bw / 2) + '" y="' + (y - 6) + '" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)" style="font-variant-numeric:tabular-nums">' + v + "</text>";
     }
@@ -421,7 +429,7 @@ function renderUsageChart() {
       var mIdx = (USAGE_START.m + i) % 12;
       var yy = USAGE_START.y + Math.floor((USAGE_START.m + i) / 12);
       var pt = e.touches ? e.touches[0] : e;
-      showTip("<strong>" + monthLabel(yy, mIdx) + "</strong><br>" + USAGE_KWH[i] + " kWh · " + fmtL(billTotalFor(USAGE_KWH[i], "res")), pt.clientX, pt.clientY);
+      showTip("<strong>" + monthLabel(yy, mIdx) + "</strong><br>" + USAGE_KWH[i] + " kWh · " + fmtL(realBillFor(USAGE_KWH[i])), pt.clientX, pt.clientY);
     }
     bar.addEventListener("mousemove", tip);
     bar.addEventListener("mouseleave", hideTip);
@@ -459,7 +467,7 @@ function renderDemandChart() {
   sArea += " L " + X(23) + " " + Y(0) + " Z";
   out += '<path d="' + sArea + '" fill="var(--s-solar)" opacity="0.30"/>';
   out += '<path d="' + sArea + '" fill="none"/>';
-  out += '<path d="' + dLine + '" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linejoin="round"/>';
+  out += '<path id="dc-line" d="' + dLine + '" fill="none" stroke="var(--brand)" stroke-width="2.5" stroke-linejoin="round"/>';
   // endpoint emphasis at current hour
   var nowH = Math.min(23, new Date().getHours() + new Date().getMinutes() / 60);
   out += '<circle cx="' + X(nowH) + '" cy="' + Y(demandAt(nowH)) + '" r="4.5" fill="var(--brand)" stroke="var(--card)" stroke-width="2"/>';
@@ -618,30 +626,62 @@ function renderNews() {
   }
 }
 
-/* ---------------- bill explainer ---------------- */
+/* ---------------- interactive bill doc ---------------- */
 
-function renderBillExplainer() {
-  var host = $("#bill-explainer");
-  if (!host) return;
-  var kwh = 350;
-  var energy = energyChargeFor(kwh, "res");
-  var fuel = kwh * TARIFF.fuel, street = kwh * TARIFF.street;
-  var total = energy + fuel + TARIFF.fixed + street;
-  var lines = [
-    { label: t().energyCharge, amt: energy, body: t().billExplain.energy },
-    { label: t().fuelAdj, amt: fuel, body: t().billExplain.fuel },
-    { label: t().fixedCharge, amt: TARIFF.fixed, body: t().billExplain.fixed },
-    { label: t().streetLight, amt: street, body: t().billExplain.street }
-  ];
-  host.innerHTML = '<p class="muted small" style="padding-top:12px">' + esc(t().sampleBillNote) + "</p>" +
-    lines.map(function (l) {
-      return '<details class="bill-line"><summary>' + esc(l.label) +
-        '<span class="bl-amount">' + fmtL(l.amt) + "</span></summary>" +
-        '<div class="bl-body">' + esc(l.body) + "</div></details>";
-    }).join("") +
-    '<details class="bill-line total"><summary>' + esc(t().totalDue) +
-    '<span class="bl-amount">' + fmtL(total) + "</span></summary>" +
-    '<div class="bl-body">' + esc(t().billExplain.total) + " " + esc(t().approx) + fmtUSD(total) + "</div></details>";
+var BD_INFO = {
+  month: {
+    en: "L 8,809.49 is May's charges: 1,011 kWh of energy plus street lighting, the municipal tax and the regulator's fee — every line itemized below.",
+    es: "L 8,809.49 son los cargos de mayo: 1,011 kWh de energía más alumbrado público, el impuesto municipal y la tasa del regulador — cada línea detallada abajo."
+  },
+  carried: {
+    en: "L 8,705.39 was already owed before this bill arrived. The current bill never says this — it just quietly adds it into 'Total'. If paying it all at once is hard, 'Split it into payments' below exists for exactly this.",
+    es: "L 8,705.39 ya se debían antes de que llegara esta factura. La factura actual nunca lo dice — solo lo suma al 'Total' sin explicar. Si pagarlo todo de una vez es difícil, 'Dividirlo en pagos' abajo existe exactamente para esto."
+  }
+};
+
+function renderOdometers() {
+  $all(".odometer").forEach(function (o) {
+    if (o.dataset.done) return;
+    var val = o.dataset.value, html = "";
+    for (var i = 0; i < val.length; i++) {
+      html += '<span class="odo-digit"><span class="odo-strip" data-d="' + val[i] + '" style="transition-delay:' + (200 + i * 140) + 'ms">' +
+        "0123456789".split("").map(function (d) { return "<i>" + d + "</i>"; }).join("") +
+        "</span></span>";
+    }
+    o.innerHTML = html;
+    o.dataset.done = "1";
+  });
+}
+
+function animateBillDoc() {
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  $all("#bill-doc .odo-strip").forEach(function (strip) {
+    var d = +strip.dataset.d;
+    if (reduce) strip.style.transition = "none";
+    strip.style.transform = "translateY(" + (-d * 1.5) + "em)";
+  });
+}
+
+function setupBillDoc() {
+  var doc = $("#bill-doc");
+  if (!doc) return;
+  function hl(k, on) {
+    $all('#bill-doc [data-k="' + k + '"]').forEach(function (x) { x.classList.toggle("hot", on); });
+  }
+  $all("#bill-doc .bd-row, #bill-doc .bd-seg").forEach(function (el) {
+    el.addEventListener("mouseenter", function () { hl(el.dataset.k, true); });
+    el.addEventListener("mouseleave", function () { hl(el.dataset.k, false); });
+  });
+  $all("#bill-doc .bd-part").forEach(function (b) {
+    b.addEventListener("click", function () {
+      var info = $("#bd-info");
+      var txt = BD_INFO[b.dataset.bdinfo];
+      info.dataset.en = txt.en;
+      info.dataset.es = txt.es;
+      info.textContent = txt[LANG];
+      $all("#bill-doc .bd-part").forEach(function (x) { x.classList.toggle("is-active", x === b); });
+    });
+  });
 }
 
 /* ---------------- calculator ---------------- */
@@ -693,34 +733,34 @@ function closePortal() {
 }
 function renderPortal() {
   if (!portalOpen) return;
-  $("#dash-name").textContent = LANG === "es" ? "Cuenta demo — Sandy Bay" : "Demo account — Sandy Bay";
+  $("#dash-name").textContent = LANG === "es" ? "Cuenta demo — West Bay" : "Demo account — West Bay";
   $("#dash-acct").textContent = (LANG === "es" ? "Cuenta " : "Account ") + portalAcct;
   var lastK = USAGE_KWH[USAGE_KWH.length - 1], prevK = USAGE_KWH[USAGE_KWH.length - 2];
-  var bal = billTotalFor(lastK, "res");
+  var bal = realBillFor(lastK);
   var paid = $("#pay-done").hidden === false;
   $("#dash-balance").textContent = paid ? "L 0.00" : fmtL(bal);
-  $("#dash-due").textContent = paid ? "—" : t().dueBy + (LANG === "es" ? "24 jul 2026" : "Jul 24, 2026");
+  $("#dash-due").textContent = paid ? "—" : t().dueBy + (LANG === "es" ? "12 jun 2026" : "Jun 12, 2026");
   $("#dash-kwh").textContent = lastK + " kWh";
   var diff = Math.round((lastK - prevK) / prevK * 100);
   $("#dash-kwh-diff").textContent = diff === 0 ? t().vsPrev[2] : Math.abs(diff) + (diff < 0 ? t().vsPrev[0] : t().vsPrev[1]);
 
-  // this cycle so far (day 14 of 30, trending slightly above last month)
-  var cycleDay = 14, cycleLen = 30;
+  // this cycle so far (day 14 of 31, trending slightly above last month)
+  var cycleDay = 14, cycleLen = 31;
   var soFarK = Math.round(lastK * 1.08 * cycleDay / cycleLen);
   var projK = Math.round(soFarK / cycleDay * cycleLen);
   $("#dash-sofar").textContent = soFarK + " kWh" + t().soFar;
-  $("#dash-projected").textContent = t().projected + fmtL(billTotalFor(projK, "res"));
+  $("#dash-projected").textContent = t().projected + fmtL(realBillFor(projK));
   $("#cycle-fill").style.width = Math.round(cycleDay / cycleLen * 100) + "%";
   $("#cycle-day").textContent = t().dayOf(cycleDay);
 
-  renderUsageChart();
+  renderUsageChart("#usage-chart");
 
   var tbody = $("#bill-table tbody");
   var rows = "";
   for (var i = USAGE_KWH.length - 1; i >= 0; i--) {
     var mIdx = (USAGE_START.m + i) % 12;
     var yy = USAGE_START.y + Math.floor((USAGE_START.m + i) / 12);
-    var amt = billTotalFor(USAGE_KWH[i], "res");
+    var amt = realBillFor(USAGE_KWH[i]);
     var isLatest = i === USAGE_KWH.length - 1;
     var pill = isLatest && !paid ? '<span class="pill due">' + esc(t().due) + "</span>" : '<span class="pill paid">' + esc(t().paid) + "</span>";
     rows += "<tr><td>" + monthLabel(yy, mIdx) + '</td><td class="num">' + USAGE_KWH[i] +
@@ -756,7 +796,7 @@ function renderFuelChart() {
     var x = L + slot * i + (slot - bw) / 2;
     var bh = v / yMax * ih, y = TOP + ih - bh;
     var last = i === n - 1;
-    out += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + bh + '" rx="3" fill="var(--s-gas)" opacity="' + (last ? 1 : 0.5) + '" class="f-bar" data-i="' + i + '"/>';
+    out += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + bh + '" rx="3" fill="var(--s-gas)" opacity="' + (last ? 1 : 0.5) + '" class="f-bar grow" data-i="' + i + '" style="animation-delay:' + (i * 45) + 'ms"/>';
     if (last) out += '<text x="' + (x + bw / 2) + '" y="' + (y - 6) + '" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">' + v.toFixed(2) + "</text>";
     var mIdx = (startM + i) % 12, yy = startY + Math.floor((startM + i) / 12);
     if (i % 2 === 0 || last) labels += '<text x="' + (x + bw / 2) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="10" fill="var(--axis-ink)">' + monthLabel(yy, mIdx) + "</text>";
@@ -824,7 +864,7 @@ function renderPrepaid() {
     var bh = PP_BURN[i] / max * (H - B - P);
     var y = H - B - bh;
     var last = i === n - 1;
-    out += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + bh.toFixed(1) + '" rx="3" fill="var(--brand)" opacity="' + (last ? 1 : 0.45) + '"/>';
+    out += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + bh.toFixed(1) + '" rx="3" fill="var(--brand)" opacity="' + (last ? 1 : 0.45) + '" class="grow" style="animation-delay:' + (i * 40) + 'ms"/>';
     if (last) out += '<text x="' + (x + bw / 2) + '" y="' + (y - 5) + '" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">L ' + PP_BURN[i] + "</text>";
   }
   out += '<line x1="' + P + '" y1="' + (H - B) + '" x2="' + (W - P) + '" y2="' + (H - B) + '" stroke="var(--axis-ink)"/>';
@@ -881,6 +921,107 @@ function renderGreenStrip() {
   $("#strip-tip").textContent = t().stripTip;
 }
 
+/* ---------------- scroll animations ---------------- */
+
+var REDUCE_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function runCountUp(el) {
+  if (el.dataset.counted) return;
+  el.dataset.counted = "1";
+  if (REDUCE_MOTION) return;
+  var text = el.textContent;
+  var m = text.match(/-?\d[\d,]*\.?\d*/);
+  if (!m) return;
+  var raw = m[0];
+  var target = parseFloat(raw.replace(/,/g, ""));
+  if (isNaN(target)) return;
+  var decimals = (raw.split(".")[1] || "").length;
+  var hasComma = raw.indexOf(",") !== -1;
+  var prefix = text.slice(0, m.index), suffix = text.slice(m.index + raw.length);
+  var t0 = null, dur = 950;
+  function frame(ts) {
+    if (!t0) t0 = ts;
+    var p = Math.min(1, (ts - t0) / dur);
+    var eased = 1 - Math.pow(1 - p, 3);
+    var v = target * eased;
+    var s = v.toFixed(decimals);
+    if (hasComma) s = (+s).toLocaleString("en-US", { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    el.textContent = prefix + s + suffix;
+    if (p < 1) requestAnimationFrame(frame);
+    else el.textContent = text;
+  }
+  requestAnimationFrame(frame);
+}
+
+function drawDemandLine() {
+  var host = $("#demand-chart");
+  if (!host || REDUCE_MOTION) return;
+  var path = $("#dc-line", host);
+  if (!path || path.dataset.drawn) return;
+  path.dataset.drawn = "1";
+  try {
+    var len = path.getTotalLength();
+    path.style.strokeDasharray = len;
+    path.style.strokeDashoffset = len;
+    path.getBoundingClientRect(); // reflow
+    path.style.transition = "stroke-dashoffset 1.3s ease .15s";
+    path.style.strokeDashoffset = "0";
+  } catch (e) { /* non-rendered SVG */ }
+}
+
+var revealIO = null;
+function setupAnimations() {
+  // choose reveal targets and stagger them within their parent
+  var targets = [];
+  $all(".section .card, .qa-card, .hero-panel").forEach(function (el) {
+    if (targets.indexOf(el) === -1) targets.push(el);
+  });
+  $all(".chart-anim").forEach(function (el) { if (targets.indexOf(el) === -1) targets.push(el); });
+  $all("#demand-chart").forEach(function (el) { if (targets.indexOf(el) === -1) targets.push(el); });
+
+  var byParent = {};
+  targets.forEach(function (el) {
+    el.classList.add("reveal");
+    var pk = el.parentElement ? (el.parentElement.dataset.rvKey || (el.parentElement.dataset.rvKey = Math.random().toString(36).slice(2))) : "x";
+    byParent[pk] = (byParent[pk] || 0);
+    el.style.transitionDelay = Math.min(byParent[pk] * 70, 420) + "ms";
+    byParent[pk]++;
+  });
+
+  if (!("IntersectionObserver" in window) || REDUCE_MOTION) {
+    targets.forEach(function (el) { el.classList.add("in"); el.classList.remove("reveal"); el.style.transitionDelay = ""; });
+    animateBillDoc();
+    return;
+  }
+
+  revealIO = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (!en.isIntersecting) return;
+      var el = en.target;
+      el.classList.add("in");
+      revealIO.unobserve(el);
+      // after the entrance completes, return the element to its natural CSS
+      // so hover transitions aren't slowed by the reveal transition
+      el.addEventListener("transitionend", function h(ev) {
+        if (ev.target !== el) return;
+        el.classList.remove("reveal");
+        el.style.transitionDelay = "";
+        el.removeEventListener("transitionend", h);
+      });
+      if (el.id === "bill-doc") animateBillDoc();
+      if (el.id === "demand-chart" || $("#demand-chart", el)) drawDemandLine();
+      $all(".ready-tile .tile-value, .stat-value", el).forEach(runCountUp);
+      if (el.classList.contains("ready-tile")) $all(".tile-value", el).forEach(runCountUp);
+    });
+  }, { threshold: 0.15 });
+  targets.forEach(function (el) { revealIO.observe(el); });
+
+  // safety: never leave charts invisible
+  setTimeout(function () {
+    $all(".chart-anim").forEach(function (el) { el.classList.add("in"); });
+  }, 3000);
+}
+
 /* ---------------- router ---------------- */
 
 var ROUTES = ["home", "outages", "storm", "billing", "prepaid", "rates", "service", "energy", "news", "contact"];
@@ -921,7 +1062,8 @@ function renderDynamic() {
   renderOutageList();
   fillZoneSelects();
   renderNews();
-  renderBillExplainer();
+  renderOdometers();
+  renderUsageChart("#bill-usage-chart");
   renderCalc();
   renderPortal();
   renderFuelChart();
@@ -1051,6 +1193,10 @@ function init() {
 
   /* dynamic content */
   renderDynamic();
+
+  /* bill doc interactions + scroll animations */
+  setupBillDoc();
+  setupAnimations();
 
   /* news filter */
   $all("[data-newsfilter]").forEach(function (b) {
