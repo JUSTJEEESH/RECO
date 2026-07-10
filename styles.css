@@ -325,7 +325,30 @@ img, svg { max-width: 100%; }
 /* ---------- outage page ---------- */
 .outage-layout { display: grid; grid-template-columns: 1.1fr .9fr; gap: 24px; align-items: start; }
 .map-card h2 { margin-bottom: 4px; }
-.island-map svg { width: 100%; height: auto; display: block; }
+.island-map { position: relative; }
+.island-map svg {
+  width: 100%; height: auto; display: block;
+  background: color-mix(in srgb, var(--s-wind) 9%, var(--card));
+  border-radius: 14px;
+  cursor: grab; touch-action: none;
+}
+.island-map svg:active { cursor: grabbing; }
+.map-zoom {
+  position: absolute; top: 10px; right: 10px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.map-zoom button {
+  width: 34px; height: 34px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+  font-size: 1.1rem; font-weight: 700; cursor: pointer; line-height: 1;
+  box-shadow: var(--shadow);
+}
+.map-zoom button:hover { border-color: var(--brand); color: var(--brand-strong); }
+.z-dot.z-focus { animation: z-pop 1s ease; }
+@keyframes z-pop { 0% { stroke-width: 2; } 30% { stroke-width: 10; } 100% { stroke-width: 2; } }
+.oe-map-link { font-size: .8rem; font-weight: 700; color: var(--brand-strong); margin-top: 4px; }
+.outage-event { cursor: pointer; transition: border-color .15s ease, background .15s ease; }
+.outage-event:hover { border-color: var(--brand); background: var(--card-2); }
 .map-key { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 10px; font-size: .84rem; color: var(--ink-2); }
 .key-item { display: inline-flex; align-items: center; gap: 6px; }
 .key-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; flex: none; }

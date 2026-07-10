@@ -199,21 +199,22 @@ var TARIFF = {
   fuel: 1.44, fixed: 62.00, street: 0.301
 };
 
+/* Positions traced against the real island outline (viewBox 1025×394) */
 var ZONES = [
-  { id: "west-bay",    en: "West Bay",        es: "West Bay",        x: 58,  y: 196, status: "ok",      lbl: "b" },
-  { id: "west-end",    en: "West End",        es: "West End",        x: 88,  y: 166, status: "ok",      lbl: "t" },
-  { id: "sandy-bay",   en: "Sandy Bay",       es: "Sandy Bay",       x: 146, y: 143, status: "planned", lbl: "t" },
-  { id: "flowers-bay", en: "Flowers Bay",     es: "Flowers Bay",     x: 140, y: 212, status: "ok",      lbl: "b" },
-  { id: "coxen-hole",  en: "Coxen Hole",      es: "Coxen Hole",      x: 196, y: 192, status: "planned", lbl: "b" },
-  { id: "brick-bay",   en: "Brick Bay",       es: "Brick Bay",       x: 268, y: 186, status: "ok",      lbl: "b" },
-  { id: "french-hbr",  en: "French Harbour",  es: "French Harbour",  x: 330, y: 166, status: "ok",      lbl: "b" },
-  { id: "parrot-tree", en: "Parrot Tree",     es: "Parrot Tree",     x: 392, y: 158, status: "ok",      lbl: "b" },
-  { id: "politilly",   en: "Politilly Bight", es: "Politilly Bight", x: 468, y: 132, status: "ok",      lbl: "t" },
-  { id: "punta-gorda", en: "Punta Gorda",     es: "Punta Gorda",     x: 540, y: 104, status: "out",     lbl: "t" },
-  { id: "jonesville",  en: "Jonesville",      es: "Jonesville",      x: 562, y: 138, status: "ok",      lbl: "b" },
-  { id: "oak-ridge",   en: "Oak Ridge",       es: "Oak Ridge",       x: 614, y: 128, status: "ok",      lbl: "b" },
-  { id: "camp-bay",    en: "Camp Bay",        es: "Camp Bay",        x: 692, y: 102, status: "ok",      lbl: "t" },
-  { id: "santa-elena", en: "Santa Elena",     es: "Santa Elena",     x: 762, y: 108, status: "ok",      lbl: "b" }
+  { id: "west-bay",    en: "West Bay",        es: "West Bay",        x: 30,  y: 322, status: "ok",      lbl: "b" },
+  { id: "west-end",    en: "West End",        es: "West End",        x: 52,  y: 268, status: "ok",      lbl: "t" },
+  { id: "flowers-bay", en: "Flowers Bay",     es: "Flowers Bay",     x: 112, y: 288, status: "ok",      lbl: "b" },
+  { id: "sandy-bay",   en: "Sandy Bay",       es: "Sandy Bay",       x: 176, y: 206, status: "planned", lbl: "t" },
+  { id: "coxen-hole",  en: "Coxen Hole",      es: "Coxen Hole",      x: 200, y: 255, status: "planned", lbl: "b" },
+  { id: "brick-bay",   en: "Brick Bay",       es: "Brick Bay",       x: 292, y: 210, status: "ok",      lbl: "b" },
+  { id: "french-hbr",  en: "French Harbour",  es: "French Harbour",  x: 345, y: 180, status: "ok",      lbl: "b" },
+  { id: "parrot-tree", en: "Parrot Tree",     es: "Parrot Tree",     x: 410, y: 152, status: "ok",      lbl: "b" },
+  { id: "politilly",   en: "Politilly Bight", es: "Politilly Bight", x: 452, y: 92,  status: "ok",      lbl: "t" },
+  { id: "punta-gorda", en: "Punta Gorda",     es: "Punta Gorda",     x: 575, y: 62,  status: "out",     lbl: "t" },
+  { id: "jonesville",  en: "Jonesville",      es: "Jonesville",      x: 602, y: 98,  status: "ok",      lbl: "b" },
+  { id: "oak-ridge",   en: "Oak Ridge",       es: "Oak Ridge",       x: 670, y: 87,  status: "ok",      lbl: "b" },
+  { id: "camp-bay",    en: "Camp Bay",        es: "Camp Bay",        x: 782, y: 44,  status: "ok",      lbl: "t" },
+  { id: "santa-elena", en: "Santa Elena",     es: "Santa Elena",     x: 934, y: 32,  status: "ok",      lbl: "b" }
 ];
 
 /* per-zone reliability, last 90 days: [outage count, total minutes] (demo) */
@@ -561,12 +562,67 @@ function renderDemandChart() {
 
 /* ---------------- island map ---------------- */
 
-var ISLAND_PATH =
-  "M 40 192 C 52 158, 104 132, 168 140 C 226 147, 288 128, 348 116 " +
-  "C 410 104, 470 96, 530 86 C 592 76, 664 66, 716 84 C 754 97, 758 122, 726 138 " +
-  "C 682 158, 630 148, 574 158 C 516 168, 452 176, 390 184 C 328 192, 268 204, 208 210 " +
-  "C 148 216, 58 228, 40 192 Z";
-var SANTA_ELENA_PATH = "M 744 104 C 752 94, 772 92, 780 102 C 788 112, 774 122, 762 120 C 750 118, 738 112, 744 104 Z";
+/* The real island: traced from the official "Roatan Island Outline.svg"
+   (18 subpaths: main island, Helene, Barbareta and the cays), minified to
+   0.1px precision. ViewBox 0 0 1025 394. */
+var MAP_W = 1025, MAP_H = 394;
+var ISLAND_D = "M 0 378.2 L 0 361.5 L 2.7 356.6 C 6.3 350 7.8 342.7 9.1 326.5 C 10 316.4 10 312.9 9.2 312.1 C 7.6 310.5 7.9 309.9 10.2 310 C 13 310.1 13.7 306.1 11 305.4 C 8.1 304.6 8 302.6 10.8 299.5 L 13.3 296.6 L 14.8 299 C 15.6 300.4 17 302.5 17.7 303.8 C 20.3 308 21 305.1 19.5 297.5 C 17.8 289.6 18.4 287.7 22.5 288.1 C 24.5 288.3 24.9 288 24.8 286.3 C 24.7 282.3 27.7 284.9 28.6 289.6 C 29.3 293 29.9 293.1 33.4 290.1 C 36.8 287.2 36.9 286.4 34 284.1 C 31.3 282 31 280.6 33.2 280.6 C 34.1 280.6 35.9 279.6 37.3 278.2 C 39.6 276 42.9 273.5 53.1 266.2 C 55.5 264.4 59.6 260.9 62.2 258.5 C 77.1 244.1 89.5 234.9 102.7 228.4 C 105.1 227.2 109.4 224.5 112.3 222.6 C 118.5 218.1 123.4 216.9 126.9 218.7 C 129.7 220.1 131.9 219.6 132.6 217.3 C 132.9 216.5 133.9 214.9 134.9 213.9 C 136.3 212.3 137.4 212.1 140 212.5 C 142.6 212.9 144.5 212.4 149.4 209.9 C 152.8 208.2 156 206 156.5 204.8 C 157.8 202.3 159.4 202.2 159.4 204.6 C 159.4 205.6 159.9 206.4 160.6 206.4 C 161.3 206.4 163.4 207.6 165.2 209.1 C 168.9 212.1 170.2 212 170.2 208.7 C 170.2 207.6 171 205.7 171.9 204.5 C 175.1 200.4 175.9 198.2 174.8 196.9 C 173.9 195.9 174.5 195.3 177.5 193.7 C 179.6 192.7 181.5 192 181.7 192.2 C 181.9 192.5 181.5 194 180.6 195.5 C 179.3 198.2 179.3 198.5 180.7 200.1 C 182.8 202.4 184.9 202.3 190 199.6 C 192.3 198.4 194.8 197.4 195.5 197.4 C 196.2 197.4 198.6 196.3 200.7 195 C 202.9 193.8 206.3 192.2 208.4 191.4 C 210.4 190.7 212.9 189.1 213.8 187.9 C 214.8 186.7 216.1 185.9 216.8 186.1 C 217.5 186.4 218.9 186.2 219.9 185.7 C 221.9 184.6 224 179.6 222.7 178.8 C 221.2 177.8 221.8 175.7 224.1 174.2 C 227.4 172 233.7 172.2 237 174.6 C 240.6 177.1 242.8 177 247.5 174.3 C 249.6 173.1 253.1 171.4 255.4 170.5 C 257.6 169.7 261.5 167.6 264 166 C 266.4 164.4 269.5 162.8 270.7 162.5 C 273.2 161.9 279.3 157.7 287 151.4 C 290.3 148.8 292.6 147.6 294.5 147.6 C 296 147.6 297.7 146.9 298.3 146.1 C 299.3 144.8 299.7 144.9 302.2 147 C 303.9 148.5 306.1 149.4 307.8 149.4 C 309.5 149.4 312 150.3 313.7 151.7 C 317.3 154.4 317.3 154.4 334.6 148.7 C 344.3 145.6 344.7 145.4 346.4 141.8 C 348.5 137.2 348.6 137.2 356 134.9 C 362.2 133 364.2 131.3 368.8 124.1 C 370.2 121.9 372 120.6 374.8 119.7 C 378.8 118.3 379.2 118.4 385 120.8 C 386.3 121.3 387.1 120.5 389 116.4 C 391.7 110.6 394 109.6 403.3 109.5 C 410.9 109.5 417.5 104.9 417.8 99.2 C 417.9 98.1 419.6 96.4 422.4 94.7 C 424.9 93.1 428.3 90.6 429.8 88.9 C 431.4 87.3 433.1 86 433.7 86 C 435.2 86 434.8 88 432.7 90.2 L 430.8 92.2 L 434.3 93.2 C 436.2 93.8 439.2 94.2 441 94 C 443.8 93.7 444.4 93.2 446.2 89.4 C 448.4 84.9 452.6 81.5 456 81.5 C 457.1 81.5 459.4 80.9 461.2 80.1 C 463 79.4 465.7 78.8 467.2 78.8 C 468.8 78.8 471.5 78 473.4 77.1 C 475.2 76.1 477.8 75.1 479.1 74.8 C 480.5 74.5 484 72.4 487.1 70.1 C 490.3 67.6 495 65.1 498.3 64.1 C 505.4 61.9 519.1 58.8 521.8 58.8 C 523.1 58.8 525.3 57.4 527.5 55.2 C 529.4 53.2 531.5 51.6 532.1 51.6 C 532.8 51.6 533.9 52.8 534.7 54.3 C 537.5 59.8 542.3 61.2 545.2 57.5 C 546.2 56.3 548.3 55 550 54.7 C 552.2 54.3 553.2 53.5 554 51.4 C 554.9 48.8 555.2 48.7 558.4 49.4 C 560.3 49.8 565.3 50.1 569.6 49.9 C 576.3 49.7 577.5 49.4 579.1 47.6 C 581.4 44.9 582.9 44.5 586.6 45.5 C 590.2 46.5 598.2 45 604 42.3 C 611.1 39 611.9 38.7 612.8 39.2 C 613.3 39.5 613.6 39.2 613.6 38.4 C 613.6 37.7 613.3 37.1 612.9 37.1 C 612.5 37.1 612.1 36.1 612.1 34.8 C 612.1 31.9 614.3 31.9 619.5 34.8 C 624.5 37.7 626.4 37.7 629.4 34.7 C 632.2 32.1 635.7 31.7 660.1 31.3 C 666.8 31.2 677.6 30.4 684.1 29.6 C 699.1 27.6 706.3 28.2 710.8 31.8 C 712.6 33.2 716.8 35.6 720.3 37.2 C 726 39.8 727.5 40.1 734.5 40.1 C 739.3 40 745.8 39.1 751.7 37.8 C 760.5 35.7 762.1 35.6 778 36.1 C 793.7 36.6 795 36.8 797 38.6 C 798.5 40 799.8 40.4 801.5 40.1 C 802.8 39.9 805.1 40.3 806.6 41.1 C 810.5 43.1 812.3 42.9 817.4 40.2 C 820.7 38.4 822.6 38 825.3 38.3 C 830.5 39 860 33.3 865 30.6 C 866 30.1 866.6 30.1 866.6 30.8 C 866.6 31.3 868.6 32.7 871.1 33.8 C 874.4 35.3 876.2 36.8 878.3 40.1 C 879.8 42.5 881.1 44.6 881.1 44.8 C 881.1 45 880.1 45.9 878.9 46.6 C 876.9 48 876.3 47.9 871.4 45.9 C 868.5 44.6 863.2 43.4 859.7 43 L 853.3 42.4 L 847 49.1 C 841.3 55.3 840.5 55.9 837.9 55.5 C 835.6 55.1 834.6 55.5 832.9 57.4 C 831.7 58.7 829.4 61.2 827.6 63 C 825.9 64.7 824.1 66.6 823.6 67.1 C 818.9 72.2 816 74.4 811.7 76 C 803.1 79.2 802.7 79.1 802.6 73.4 C 802.5 70.5 801.7 66.8 800.5 64.3 C 798.7 60.5 797.7 59.6 792 56.8 C 782.4 52.1 777.2 51.1 772 52.9 C 769.4 53.8 764.7 54.3 759.8 54.3 C 752.7 54.3 751.3 54.6 746.4 57.1 L 741 59.9 L 733.4 58.8 C 728.9 58.2 723.8 56.9 721.1 55.5 C 718.4 54.2 715.6 53.5 714.7 53.8 C 712.1 54.6 708.6 58.7 705.4 64.6 C 703.9 67.5 702 70.8 701.2 72 C 699.9 73.9 700 74.2 701.7 75.1 C 704.1 76.4 704.1 77.8 701.8 77.8 C 700.8 77.8 698.4 76.2 696.4 74.3 C 693.6 71.5 691.9 70.6 688.5 70.1 C 686.1 69.7 682.6 68.7 680.8 67.8 C 677.1 65.9 674.3 65.5 662.2 64.7 L 653.8 64.2 L 650.2 67.5 L 646.6 70.8 L 647.1 76.1 C 647.6 80.4 647.4 81.5 646.4 81.5 C 645.7 81.5 642.7 82.6 639.8 84.1 C 635.3 86.3 634 86.5 631.3 85.8 C 623.5 83.9 620.5 83.9 618 85.9 C 615.9 87.5 614.8 87.7 610.7 87.2 C 606.2 86.7 605.8 86.8 605.4 88.8 C 600.3 111.9 600.5 111.5 591.2 112.5 C 568.4 114.9 567.8 114.7 567.8 107.3 C 567.8 103.9 567 100.7 565.1 96.6 C 562.5 90.7 562.5 90.7 563.9 85.1 C 564.6 82.1 565.1 79.4 564.8 79.1 C 563.9 78.2 560.3 81.9 558.2 86.2 C 556.2 90.1 556.1 90.7 557.2 92.6 C 557.9 93.7 558.8 98.1 559.1 102.3 C 559.6 109.1 559.9 110.2 561.9 111.6 C 563.1 112.6 564.1 113.9 564.1 114.6 C 564.1 116.2 563.7 116.2 560 114.4 C 557.4 113.2 556.9 112.5 556.9 109.9 C 556.9 105.6 554.7 105.9 552.4 110.4 C 551 113.2 549.9 114.1 547.6 114.5 C 537.9 116.1 533 116.7 532.2 116.2 C 531.7 115.9 531.6 113.9 532 111.7 C 532.4 108.4 532.2 107.2 530.6 104.9 C 527.7 100.9 526.8 103 527.5 111.8 L 528.1 119 L 521.4 122.5 C 517.8 124.4 514.1 126.4 513.3 127 C 512.2 127.7 511.3 127.6 509.6 126.5 C 507.4 125.1 506.2 120.7 506.2 114 C 506.2 111.3 503.9 108.3 502.4 109.2 C 502 109.4 501.6 111.4 501.6 113.5 C 501.7 118.8 500.7 123.8 499.5 124.7 C 498.4 125.6 487.4 130.4 486.5 130.4 C 486.3 130.4 486.3 129.2 486.6 127.7 C 486.9 126.2 486.7 124.7 486.2 124.4 C 485.6 124.1 485.4 122.9 485.7 121.7 C 486.1 120.1 485.8 119.5 484.4 119 C 483.4 118.7 482.6 118 482.6 117.4 C 482.5 116.8 482.2 117.2 481.7 118.4 C 480.5 121.3 477.5 121 475.8 117.7 C 475.1 116.2 474 115 473.6 115 C 472.4 115 472.4 119.2 473.7 121.5 C 474.5 123.1 474.4 123.6 473.1 124.6 C 471.6 125.7 471.7 125.9 474.4 126.4 C 476.5 126.8 477.6 127.7 478.5 129.8 C 479.1 131.4 480.5 133.4 481.6 134.3 C 482.7 135.3 483.5 136.4 483.5 136.8 C 483.5 138 478.4 140.3 475.7 140.3 C 472.1 140.4 469.9 142.3 470.6 144.7 C 471.3 147.5 468.3 147.3 467.2 144.4 C 466.8 143.1 464.7 139.9 462.7 137.1 C 459.5 132.8 458.8 132.3 457.3 133.1 C 452.7 135.5 452.6 140.4 456.9 146.6 L 460.1 151.3 L 456.9 157.1 C 455.1 160.3 453.2 163.1 452.7 163.4 C 452.2 163.7 451.8 164.7 451.8 165.5 C 451.8 167.5 446.4 172.9 444.3 172.9 C 442.2 172.9 439.1 171.1 437.1 168.6 C 436.2 167.5 435 166.6 434.5 166.6 C 433.9 166.6 433 166 432.5 165.2 C 431.7 164.2 430.6 164 427.5 164.5 C 422.8 165.4 422.3 166.7 426.3 167.9 C 427.9 168.4 429.2 169.2 429.2 169.7 C 429.2 171.3 421.4 173.6 414.5 174.2 L 408.4 174.6 L 408.9 172.1 C 409.3 170.4 409 169.2 407.9 168.3 C 406.6 167.3 406.2 167.3 405.9 168.2 C 405.7 168.8 404.5 169.3 403.3 169.3 C 400.7 169.3 400.3 172.5 402.7 174.3 C 404.1 175.3 404.1 175.7 402.6 179.5 C 400.5 185.1 398.3 186.8 393.7 186.6 C 388.5 186.4 387.7 185.3 390.2 181.9 C 392.9 178.2 393.5 174 391.8 169.9 C 390.3 166.3 387.8 165.5 385.7 167.9 C 384.8 169.1 384.9 169.6 386.1 171 C 387.7 172.7 387.4 176.6 385.5 179 C 385 179.6 384.8 182 385 184.2 C 385.3 188.3 385.3 188.3 382.5 188.3 C 380.9 188.3 377.2 189.1 374.1 190.1 C 368.6 191.8 360.1 191.8 359 190 C 358.7 189.6 358.9 187.7 359.4 185.8 C 360.5 182.1 359.4 179.9 357.5 181.8 C 356.7 182.6 356.1 182.5 354.8 181.4 C 353.3 180 353.1 180 352.6 182.8 C 352.3 184.4 351.8 185.4 351.5 185.2 C 351.3 184.9 350.5 185.1 349.8 185.7 C 349.2 186.3 347.3 187.4 345.7 188.2 C 343.6 189.2 342.7 190.3 342.7 191.8 C 342.7 193.4 342.1 194.2 340.5 194.7 C 339.2 195 336.4 195.8 334.1 196.5 C 331.9 197.1 327.9 198.6 325.4 199.7 C 319.7 202.3 320 202.3 319.4 200.1 C 318.9 198.3 318.8 198.3 315.4 199.7 C 310 201.9 308.8 203.4 310 206 L 311 208.1 L 312.7 204.9 C 314.5 201.5 315.5 201.7 316.5 205.7 C 317.2 208.5 314.9 210.4 309.7 211.3 C 307.9 211.6 305.8 212.7 304.9 213.6 C 303 215.8 301.3 216 299.6 214 C 298.6 212.8 298.7 212.1 300 209.8 C 301.2 207.8 301.3 206.7 300.6 206.1 C 299.9 205.4 297 207.8 290.3 214.6 C 285.2 219.8 279.8 224.7 278.4 225.4 C 277 226.2 273.2 229.3 270.1 232.5 C 263.6 238.9 262.4 239.5 253.3 240.9 C 249.7 241.5 246 242.3 245.2 242.7 C 243.6 243.5 241.7 248.8 242.4 250.1 C 242.9 251.1 247 250.9 247.6 249.9 C 248.4 248.6 250.6 249.8 251.1 251.8 C 251.4 252.9 251.1 253.8 250.3 254.1 C 249.6 254.3 248.4 256.7 247.7 259.2 C 245.5 266.6 242.4 270.5 238.4 271.1 C 236.5 271.4 234 271.8 232.7 272 C 231.5 272.2 229.8 272.6 228.9 273 C 227.8 273.4 227 272.8 226 270.8 C 225.2 269.2 224.1 268 223.7 268 C 222.5 268 224.6 273.6 226.3 275 C 227.5 275.9 227.4 276.1 225.5 276.1 C 224.2 276.1 222.7 275.8 222.1 275.4 C 220.5 274.4 219 269 220.1 268.4 C 220.6 268.1 220.3 266.7 219.5 265.1 C 218.2 262.5 218.2 262 219.6 258.3 C 221.5 253.4 220.8 252.4 217.5 255.5 C 216.2 256.7 213.9 258.5 212.6 259.4 C 210.5 260.7 210.1 261.6 210.1 264.7 L 210.1 268.5 L 205.3 269.4 C 201.1 270.1 200.4 270.6 199.2 273.3 C 197.9 276.3 197.9 276.3 192.7 275.9 C 188.3 275.6 187.4 275.8 187 277.1 C 186.7 278 185.1 278.9 183.4 279.2 C 181.7 279.5 175.9 282 170.5 284.6 C 155 292.2 143.9 296.4 143 295 C 142.6 294.4 142.5 293.5 142.8 293.1 C 143.4 292 140.4 288.8 138.8 288.8 C 138.1 288.8 136.4 289.6 135.2 290.6 C 132.2 293 129 292.9 127.3 290.5 C 126.1 288.8 125.5 288.6 123 289.3 C 121.3 289.8 119.6 291.1 119.1 292.2 C 118 294.7 117 294.7 114.4 292.3 C 112.4 290.4 112.2 290.4 109.2 291.8 C 107.5 292.6 105.7 293.3 105.2 293.3 C 103.6 293.3 97.8 300.8 94.9 306.7 C 92.8 311 89.7 314.7 82 322.1 C 76.5 327.4 70 333 67.5 334.6 C 64.5 336.4 62.4 338.5 61.3 340.7 C 60.4 342.6 58.7 344.5 57.5 344.9 C 56.2 345.4 55 346.4 54.7 347.2 C 54.4 347.9 52.1 350.2 49.6 352.2 C 46.3 354.8 44.2 355.8 42 355.8 C 38.6 355.8 38.5 355.9 40.1 358.6 C 41.1 360.3 40.8 360.8 37.6 363.3 C 35.7 364.9 30.4 369.5 25.9 373.5 C 19.2 379.4 6.7 389.8 1.1 394.1 C 0.2 394.7 0 391.5 0 378.2 Z M 131.7 301.2 C 131.1 299.5 133.5 295.1 135 295.1 C 137.1 295.1 136.9 298.1 134.6 300.3 C 132.6 302.4 132.2 302.5 131.7 301.2 Z M 55.5 259.3 C 55.2 258.5 55.5 257.5 56.2 257 C 57.5 256.3 59.1 258.6 58.2 260 C 57.6 261.2 56.1 260.8 55.5 259.3 Z M 264.2 245.6 C 264.9 245.4 265.7 245.4 266 245.7 C 266.3 246 265.7 246.2 264.8 246.2 C 263.7 246.1 263.5 245.9 264.2 245.6 Z M 274.4 234.6 C 274.4 233.8 280.1 228.1 281 228.1 C 282.4 228.1 281.5 231.6 279.5 233.4 C 277.5 235.3 274.4 236.1 274.4 234.6 Z M 292.5 217.7 C 293.7 216.2 296.1 215.9 296.1 217.2 C 296.1 218 294 219.1 292.3 219.1 C 291.7 219.1 291.8 218.5 292.5 217.7 Z M 331.4 207.3 C 331.4 205.3 333.7 204.8 334.4 206.8 C 335 208.3 334.3 209.1 332.6 209.1 C 332 209.1 331.4 208.3 331.4 207.3 Z M 161.6 199.2 C 161.9 198.7 162.4 198.3 162.6 198.3 C 162.8 198.3 163 198.7 163 199.2 C 163 199.7 162.6 200.1 162 200.1 C 161.5 200.1 161.3 199.7 161.6 199.2 Z M 346.5 194.9 C 344.2 194.3 345 191.8 348 190.1 C 350.3 188.8 350.6 188.9 351.8 190.5 C 353.6 192.9 353.5 193.7 351.3 193.7 C 350.3 193.7 349.5 194.1 349.5 194.6 C 349.5 195.6 349.2 195.6 346.5 194.9 Z M 535 119.5 L 532.9 117.7 L 534.9 117.7 C 538.9 117.6 541.2 119.6 538.4 120.7 C 537.6 121 536.1 120.4 535 119.5 Z M 675.5 92.2 C 673.8 90.8 671.7 89.6 670.9 89.6 C 669.1 89.6 667.8 87 669.1 85.7 C 669.6 85.2 671.5 86 674.4 88.1 C 679.2 91.6 680.8 92.1 682.6 90.4 C 683.8 89.1 685 89.9 684.1 91.4 C 683.8 91.9 682.4 92.9 681.1 93.6 C 678.8 94.8 678.4 94.7 675.5 92.2 Z M 847.1 69.3 C 845.6 67.8 844.8 66.1 844.8 64 L 844.8 60.9 L 856.8 60.3 C 863.4 60 870.3 59.5 872 59.2 C 874.9 58.8 874.7 59 868.9 62.9 C 865.4 65.2 861.5 67.3 860.3 67.6 C 859 67.9 857 68.9 855.8 69.8 C 852.8 72.1 849.7 71.9 847.1 69.3 Z M 723 68.8 C 722.4 67.7 724.1 65.2 725.4 65.2 C 726.7 65.2 726.4 67.6 724.9 68.7 C 724 69.5 723.5 69.5 723 68.8 Z M 727.1 63.6 C 727.2 63.2 728.2 62.2 729.5 61.2 C 731.2 60 732.1 59.8 732.8 60.5 C 733.4 61.2 733.5 61.8 733 62.3 C 731.8 63.4 727.1 64.4 727.1 63.6 Z M 879.4 47.8 C 879.9 46.4 881.9 46.2 882 47.5 C 882 48 881.4 48.6 880.5 48.7 C 879.6 48.9 879.2 48.6 879.4 47.8 Z M 890.6 35.7 C 888.9 35 886.3 34.7 883.9 35 C 879.6 35.6 877.8 34.3 879.3 31.6 C 879.8 30.7 880.2 28.6 880.2 26.9 C 880.2 24.1 880.7 23.4 884.5 21 C 890.5 17.1 893.3 16.5 894.6 18.9 C 895.6 20.8 895.9 33.3 895 35.7 C 894.3 37.4 894.1 37.4 890.6 35.7 Z M 892.3 31.7 C 892.6 31.3 890.8 30.2 888.2 29.4 C 884 28 883.5 28 882.2 29.3 C 880.5 30.9 881.1 31.3 886 32 C 891 32.6 891.8 32.6 892.3 31.7 Z M 930.6 33.1 C 928.5 31.5 928.6 29.4 931.2 23.8 C 932.9 20.3 934.9 18.1 939.3 14.8 C 942.5 12.4 945.9 9.3 946.8 8 C 947.7 6.7 949.6 4.9 951 4.1 C 957.1 0.5 961.8 0 994 0 C 1011.1 0 1025 0.3 1025 0.7 C 1025 2.4 1008.1 16.3 993.2 26.9 C 988 30.6 985.2 31.7 985.2 30 C 985.2 29.5 983.3 27.1 981 24.6 C 976.1 19 971.6 17.3 966.4 18.8 C 964.5 19.3 961.3 20 959.2 20.4 C 957.1 20.7 954.4 21.7 953.3 22.5 C 950.1 25 934 34.4 933 34.4 C 932.6 34.3 931.5 33.8 930.6 33.1 Z";
+
+var mapView = { x: 0, y: 0, w: MAP_W, h: MAP_H };
+var mapSvg = null;
+
+function mapApplyView() {
+  if (!mapSvg) return;
+  mapSvg.setAttribute("viewBox", mapView.x + " " + mapView.y + " " + mapView.w + " " + mapView.h);
+  var s = Math.max(0.32, mapView.w / MAP_W);
+  $all(".zone-dot", mapSvg).forEach(function (g) {
+    var c = g.querySelector("circle.z-dot");
+    if (c) { c.setAttribute("r", 8 * Math.max(s, 0.4)); c.setAttribute("stroke-width", 2 * Math.max(s, 0.5)); }
+    var txt = g.querySelector("text");
+    if (txt) txt.setAttribute("font-size", 13 * Math.max(s, 0.5));
+  });
+  var sea = $("#map-sea-label", mapSvg);
+  if (sea) sea.setAttribute("opacity", mapView.w / MAP_W > 0.85 ? "1" : "0");
+}
+
+function mapZoomTo(cx, cy, w, animate) {
+  var maxW = MAP_W, minW = MAP_W / 6;
+  w = Math.max(minW, Math.min(maxW, w));
+  var h = w * MAP_H / MAP_W;
+  var tx = Math.max(-40, Math.min(MAP_W + 40 - w, cx - w / 2));
+  var ty = Math.max(-40, Math.min(MAP_H + 40 - h, cy - h / 2));
+  if (!animate || REDUCE_MOTION) {
+    mapView = { x: tx, y: ty, w: w, h: h };
+    mapApplyView();
+    return;
+  }
+  var from = { x: mapView.x, y: mapView.y, w: mapView.w, h: mapView.h };
+  var t0 = null;
+  function frame(ts) {
+    if (!t0) t0 = ts;
+    var p = Math.min(1, (ts - t0) / 420);
+    var e = 1 - Math.pow(1 - p, 3);
+    mapView = {
+      x: from.x + (tx - from.x) * e, y: from.y + (ty - from.y) * e,
+      w: from.w + (w - from.w) * e, h: from.h + (h - from.h) * e
+    };
+    mapApplyView();
+    if (p < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
+function mapFlyToZone(id) {
+  var z = zoneById(id);
+  if (!z) return;
+  mapZoomTo(z.x, z.y, MAP_W / 3.2, true);
+  var dot = document.querySelector('.zone-dot[data-zone="' + id + '"] circle.z-dot');
+  if (dot) {
+    dot.classList.remove("z-focus");
+    void dot.getBoundingClientRect();
+    dot.classList.add("z-focus");
+  }
+}
 
 function renderMap() {
   var host = $("#island-map");
@@ -574,23 +630,97 @@ function renderMap() {
   var statusColor = { ok: "var(--ok)", planned: "var(--warn)", out: "var(--danger)" };
   var dots = ZONES.map(function (z) {
     var above = z.lbl === "t";
-    var anchor = z.x > 700 ? "end" : "middle";
-    var lx = z.x > 700 ? z.x + 14 : z.x;
-    var label = '<text x="' + lx + '" y="' + (above ? z.y - 15 : z.y + 25) + '" text-anchor="' + anchor + '" font-size="13" font-weight="600" fill="var(--ink-2)">' + esc(z[LANG]) + "</text>";
-    var ring = z.status === "out" ? '<circle cx="' + z.x + '" cy="' + z.y + '" r="12" fill="none" stroke="var(--danger)" opacity="0.5"><animate attributeName="r" values="8;14;8" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0.1;0.6" dur="2s" repeatCount="indefinite"/></circle>' : "";
+    var anchor = z.x > 900 ? "end" : (z.x < 45 ? "start" : "middle");
+    var lx = anchor === "end" ? z.x + 12 : (anchor === "start" ? z.x - 12 : z.x);
+    var label = '<text x="' + lx + '" y="' + (above ? z.y - 15 : z.y + 25) + '" text-anchor="' + anchor + '" font-size="13" font-weight="600" fill="var(--ink-2)" paint-order="stroke" stroke="var(--card)" stroke-width="3" stroke-linejoin="round">' + esc(z[LANG]) + "</text>";
+    var ring = z.status === "out" ? '<circle cx="' + z.x + '" cy="' + z.y + '" r="12" fill="none" stroke="var(--danger)" opacity="0.5"><animate attributeName="r" values="8;16;8" dur="2s" repeatCount="indefinite"/><animate attributeName="opacity" values="0.6;0.1;0.6" dur="2s" repeatCount="indefinite"/></circle>' : "";
     return '<g class="zone-dot" tabindex="0" role="button" data-zone="' + z.id + '" aria-label="' + esc(z[LANG]) + ": " + esc(t().zoneStatus[z.status]) + '">' +
       ring +
-      '<circle cx="' + z.x + '" cy="' + z.y + '" r="8" fill="' + statusColor[z.status] + '" stroke="var(--card)" stroke-width="2"/>' +
+      '<circle class="z-dot" cx="' + z.x + '" cy="' + z.y + '" r="8" fill="' + statusColor[z.status] + '" stroke="var(--card)" stroke-width="2"/>' +
       label + "</g>";
   }).join("");
 
   host.innerHTML =
-    '<svg viewBox="0 0 800 280">' +
-    '<rect x="0" y="0" width="800" height="280" rx="14" fill="color-mix(in srgb, var(--s-wind) 9%, var(--card))"/>' +
-    '<path d="' + ISLAND_PATH + '" fill="color-mix(in srgb, var(--brand) 16%, var(--card))" stroke="var(--brand)" stroke-opacity="0.35" stroke-width="1.5"/>' +
-    '<path d="' + SANTA_ELENA_PATH + '" fill="color-mix(in srgb, var(--brand) 16%, var(--card))" stroke="var(--brand)" stroke-opacity="0.35" stroke-width="1.5"/>' +
-    '<text x="52" y="42" font-size="12" fill="var(--axis-ink)" letter-spacing="2">MAR CARIBE · CARIBBEAN SEA</text>' +
-    dots + "</svg>";
+    '<svg viewBox="0 0 ' + MAP_W + " " + MAP_H + '" class="roatan-svg" role="application" aria-label="Roatán outage map. Use the plus and minus buttons to zoom.">' +
+    '<path d="' + ISLAND_D + '" fill="color-mix(in srgb, var(--brand) 22%, var(--card))" stroke="var(--brand)" stroke-opacity="0.5" stroke-width="1"/>' +
+    '<text id="map-sea-label" x="620" y="330" font-size="15" fill="var(--axis-ink)" letter-spacing="3" opacity="1">MAR CARIBE · CARIBBEAN SEA</text>' +
+    dots + "</svg>" +
+    '<div class="map-zoom" role="group" aria-label="Zoom">' +
+    '<button type="button" data-mz="in" aria-label="Zoom in">+</button>' +
+    '<button type="button" data-mz="out" aria-label="Zoom out">−</button>' +
+    '<button type="button" data-mz="reset" aria-label="Reset view">⌂</button></div>';
+
+  mapSvg = host.querySelector("svg");
+  mapApplyView();
+
+  /* zoom buttons */
+  $all("[data-mz]", host).forEach(function (b) {
+    b.addEventListener("click", function () {
+      var cx = mapView.x + mapView.w / 2, cy = mapView.y + mapView.h / 2;
+      if (b.dataset.mz === "in") mapZoomTo(cx, cy, mapView.w / 1.6, true);
+      else if (b.dataset.mz === "out") mapZoomTo(cx, cy, mapView.w * 1.6, true);
+      else mapZoomTo(MAP_W / 2, MAP_H / 2, MAP_W, true);
+    });
+  });
+
+  /* wheel zoom centered on cursor */
+  mapSvg.addEventListener("wheel", function (e) {
+    e.preventDefault();
+    var r = mapSvg.getBoundingClientRect();
+    var fx = mapView.x + (e.clientX - r.left) / r.width * mapView.w;
+    var fy = mapView.y + (e.clientY - r.top) / r.height * mapView.h;
+    var k = e.deltaY > 0 ? 1.25 : 0.8;
+    var w = Math.max(MAP_W / 6, Math.min(MAP_W, mapView.w * k));
+    var ratio = w / mapView.w;
+    mapView = { x: fx - (fx - mapView.x) * ratio, y: fy - (fy - mapView.y) * ratio, w: w, h: w * MAP_H / MAP_W };
+    mapApplyView();
+  }, { passive: false });
+
+  /* drag pan + pinch zoom */
+  var pointers = {};
+  var panStart = null, pinchStart = null;
+  mapSvg.addEventListener("pointerdown", function (e) {
+    pointers[e.pointerId] = e;
+    mapSvg.setPointerCapture(e.pointerId);
+    var keys = Object.keys(pointers);
+    if (keys.length === 1) {
+      panStart = { px: e.clientX, py: e.clientY, vx: mapView.x, vy: mapView.y };
+    } else if (keys.length === 2) {
+      var a = pointers[keys[0]], b = pointers[keys[1]];
+      pinchStart = { d: Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), w: mapView.w, cx: mapView.x + mapView.w / 2, cy: mapView.y + mapView.h / 2 };
+      panStart = null;
+    }
+  });
+  mapSvg.addEventListener("pointermove", function (e) {
+    if (!pointers[e.pointerId]) return;
+    pointers[e.pointerId] = e;
+    var keys = Object.keys(pointers);
+    var r = mapSvg.getBoundingClientRect();
+    if (keys.length === 2 && pinchStart) {
+      var a = pointers[keys[0]], b = pointers[keys[1]];
+      var d = Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+      if (d > 0) mapZoomTo(pinchStart.cx, pinchStart.cy, pinchStart.w * pinchStart.d / d, false);
+    } else if (panStart) {
+      var dx = (e.clientX - panStart.px) / r.width * mapView.w;
+      var dy = (e.clientY - panStart.py) / r.height * mapView.h;
+      mapView.x = panStart.vx - dx;
+      mapView.y = panStart.vy - dy;
+      mapApplyView();
+    }
+  });
+  function endPointer(e) {
+    delete pointers[e.pointerId];
+    if (Object.keys(pointers).length < 2) pinchStart = null;
+    if (Object.keys(pointers).length < 1) panStart = null;
+  }
+  mapSvg.addEventListener("pointerup", endPointer);
+  mapSvg.addEventListener("pointercancel", endPointer);
+  mapSvg.addEventListener("dblclick", function (e) {
+    var r = mapSvg.getBoundingClientRect();
+    var fx = mapView.x + (e.clientX - r.left) / r.width * mapView.w;
+    var fy = mapView.y + (e.clientY - r.top) / r.height * mapView.h;
+    mapZoomTo(fx, fy, mapView.w / 2, true);
+  });
 
   $all(".zone-dot", host).forEach(function (dot) {
     var z = zoneById(dot.dataset.zone);
@@ -610,7 +740,8 @@ function renderMap() {
     dot.addEventListener("mouseleave", hideTip);
     dot.addEventListener("focus", tip);
     dot.addEventListener("blur", hideTip);
-    dot.addEventListener("touchstart", tip, { passive: true });
+    dot.addEventListener("click", function () { mapFlyToZone(z.id); });
+    dot.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); mapFlyToZone(z.id); } });
   });
 }
 
@@ -628,14 +759,24 @@ function renderOutageList() {
       crew = '<div class="crew-bar" aria-hidden="true">' + segs + "</div>" +
         '<div class="oe-meta crew-line"><strong>' + esc(t().crewLabel) + esc(t().crew[ev.stage]) + "</strong> (" + (ev.stage + 1) + "/5)</div>";
     }
-    return '<div class="outage-event"><div class="oe-head"><span class="key-dot ' + tag[0] + '"></span>' +
+    return '<div class="outage-event" data-zone="' + ev.zone + '" role="button" tabindex="0"><div class="oe-head"><span class="key-dot ' + tag[0] + '"></span>' +
       esc(z[LANG]) + ' <span class="news-tag">' + esc(tag[1]) + "</span></div>" +
       '<div class="oe-meta">' + esc(ev.cause[LANG]) + "</div>" +
       '<div class="oe-meta">' + esc(ev.meta[LANG]) + "</div>" +
       crew +
       (ev.eta[LANG] ? '<div class="oe-eta">' + esc(ev.eta[LANG]) + "</div>" : "") +
+      '<div class="oe-map-link">' + (LANG === "es" ? "Ver en el mapa →" : "Show on the map →") + "</div>" +
       "</div>";
   }).join("");
+  $all(".outage-event", host).forEach(function (card) {
+    function go() {
+      mapFlyToZone(card.dataset.zone);
+      var mc = document.querySelector(".map-card");
+      if (mc && window.innerWidth < 961) mc.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+    card.addEventListener("click", go);
+    card.addEventListener("keydown", function (e) { if (e.key === "Enter") go(); });
+  });
 }
 
 function fillZoneSelects() {
