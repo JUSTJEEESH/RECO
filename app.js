@@ -71,6 +71,10 @@ var T = {
     burnAria: "Bar chart of daily prepaid spending over the last 14 days",
     perMonth: "/month",
     trackTech: "Technician: Marco A. · Tue Jul 14 · arrives ≈ 10:40 am · you're #3 on the route",
+    nowLabel: "Happening now",
+    nowGo: "Outage center →",
+    simZero: "Flip a switch to see the effect on the bill.",
+    simVerdict: function (mo) { return "You'd save about " + mo + " a month — " + this.simYr + " a year."; },
     coco: {
       tag: "RECO assistant · demo",
       hi: "Hi! I'm Coco 🦎 I can check outages, balances, and payments — or hand you to a human. What do you need?",
@@ -150,6 +154,10 @@ var T = {
     burnAria: "Gráfico de barras del gasto prepago diario de los últimos 14 días",
     perMonth: "/mes",
     trackTech: "Técnico: Marco A. · mar 14 jul · llega ≈ 10:40 am · usted es el #3 de la ruta",
+    nowLabel: "Ahora mismo",
+    nowGo: "Centro de cortes →",
+    simZero: "Active un interruptor para ver el efecto en la factura.",
+    simVerdict: function (mo) { return "Ahorraría cerca de " + mo + " al mes — " + this.simYr + " al año."; },
     coco: {
       tag: "asistente de RECO · demo",
       hi: "¡Hola! Soy Coco 🦎 Puedo revisar cortes, saldos y pagos — o pasarle con una persona. ¿Qué necesita?",
@@ -884,13 +892,46 @@ function newsCard(item) {
     "<time datetime='" + item.date + "'>" + esc(dateStr) + "</time>" +
     "<h3>" + esc(item.title[LANG]) + "</h3><p>" + esc(item.body[LANG]) + "</p></article>";
 }
+function renderNewsNow() {
+  var host = $("#news-now");
+  if (!host) return;
+  var rows = "";
+  EVENTS.forEach(function (ev) {
+    if (ev.type === "restored") return;
+    var z = zoneById(ev.zone);
+    rows += '<a class="now-row ' + (ev.type === "out" ? "out" : "planned") + '" href="#/outages">' +
+      "<strong>" + esc(z[LANG]) + "</strong><span>" + esc(ev.cause[LANG]) +
+      (ev.eta[LANG] ? " · " + esc(ev.eta[LANG]) : "") + '</span><span class="now-go">' + esc(t().nowGo) + "</span></a>";
+  });
+  host.innerHTML = '<div class="news-now"><span class="now-label">' + esc(t().nowLabel) + "</span>" + rows + "</div>";
+}
+
 function renderNews() {
   var home = $("#home-news");
   if (home) home.innerHTML = NEWS.slice(0, 3).map(newsCard).join("");
+  renderNewsNow();
   var list = $("#news-list");
   if (list) {
     var items = NEWS.filter(function (n) { return newsFilter === "all" || n.tag === newsFilter; });
-    list.innerHTML = items.map(newsCard).join("");
+    var tagNames = {
+      notice: { en: "Service notice", es: "Aviso de servicio" },
+      rates: { en: "Rates", es: "Tarifas" },
+      company: { en: "Company", es: "Empresa" }
+    };
+    var html = "", lastMonth = "";
+    items.forEach(function (item) {
+      var d = new Date(item.date + "T12:00:00");
+      var monthKey = d.toLocaleDateString(LANG === "es" ? "es-HN" : "en-US", { year: "numeric", month: "long" });
+      if (monthKey !== lastMonth) {
+        html += '<div class="tl-month">' + esc(monthKey) + "</div>";
+        lastMonth = monthKey;
+      }
+      var dateStr = d.toLocaleDateString(LANG === "es" ? "es-HN" : "en-US", { month: "long", day: "numeric" });
+      html += '<article class="tl-item"><span class="news-tag">' + esc(tagNames[item.tag][LANG]) + "</span>" +
+        "<time datetime='" + item.date + "'>" + esc(dateStr) + "</time>" +
+        "<h3>" + esc(item.title[LANG]) + "</h3><p>" + esc(item.body[LANG]) + "</p></article>";
+    });
+    list.innerHTML = html;
   }
 }
 
@@ -1535,6 +1576,7 @@ function setLang(lang) {
   applyStaticLang();
   renderDynamic();
   cocoReset();
+  if (window.runSim) window.runSim();
 }
 
 /* ---------------- tips rotator ---------------- */
@@ -1662,6 +1704,37 @@ function init() {
   /* pay flow + Coco */
   setupPayFlow();
   buildCoco();
+
+  /* service chooser tabs */
+  $all(".svc-tab").forEach(function (tab) {
+    tab.addEventListener("click", function () {
+      $all(".svc-tab").forEach(function (x) {
+        x.classList.toggle("is-on", x === tab);
+        x.setAttribute("aria-selected", x === tab ? "true" : "false");
+      });
+      $all(".svc-panel").forEach(function (p) { p.hidden = p.id !== "svc-" + tab.dataset.svc; });
+    });
+  });
+
+  /* what-if savings simulator */
+  function runSim() {
+    var base = 8809.49, save = 0;
+    $all(".sim-opt").forEach(function (o) { if (o.checked) save += +o.dataset.save; });
+    var now = base - save;
+    var fill = $("#sim-fill");
+    if (!fill) return;
+    fill.style.width = Math.max(32, now / base * 100) + "%";
+    $("#sim-newbill").textContent = fmtL0(now);
+    var v = $("#sim-verdict");
+    if (!save) { v.textContent = t().simZero; }
+    else {
+      t().simYr = fmtL0(save * 12);
+      v.textContent = t().simVerdict(fmtL0(save));
+    }
+  }
+  $all(".sim-opt").forEach(function (o) { o.addEventListener("change", runSim); });
+  runSim();
+  window.runSim = runSim;
 
   /* PWA */
   if ("serviceWorker" in navigator && location.protocol === "https:" &&
