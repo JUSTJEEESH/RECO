@@ -1466,7 +1466,7 @@ function setupAnimations() {
       $all(".ready-tile .tile-value, .stat-value", el).forEach(runCountUp);
       if (el.classList.contains("ready-tile")) $all(".tile-value", el).forEach(runCountUp);
     });
-  }, { threshold: 0.15 });
+  }, { threshold: 0.05, rootMargin: "0px 0px 25% 0px" });
   targets.forEach(function (el) { revealIO.observe(el); });
 
   // safety: never leave charts invisible
