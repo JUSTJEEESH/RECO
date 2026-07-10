@@ -348,18 +348,6 @@ img, svg { max-width: 100%; }
 .z-area { cursor: pointer; }
 .z-area:hover { stroke-width: 2; }
 .landmark { cursor: help; }
-.trace-panel {
-  position: absolute; left: 10px; bottom: 10px; z-index: 5;
-  display: flex; gap: 8px; align-items: center;
-  background: var(--deep); color: var(--deep-ink);
-  border-radius: 10px; padding: 8px 12px; font-size: .8rem;
-  box-shadow: var(--shadow);
-}
-.trace-panel button {
-  font: inherit; font-weight: 700; cursor: pointer;
-  background: var(--accent); color: var(--accent-ink);
-  border: none; border-radius: 6px; padding: .35em .7em;
-}
 .z-dot.z-focus { animation: z-pop 1s ease; }
 @keyframes z-pop { 0% { stroke-width: 2; } 30% { stroke-width: 10; } 100% { stroke-width: 2; } }
 .oe-map-link { font-size: .8rem; font-weight: 700; color: var(--brand-strong); margin-top: 4px; }

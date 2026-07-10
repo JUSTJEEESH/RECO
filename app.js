@@ -821,62 +821,6 @@ function renderMap() {
     g.addEventListener("mousemove", function (e) { showTip(esc(m[LANG]), e.clientX, e.clientY); });
     g.addEventListener("mouseleave", hideTip);
   });
-
-  setupTraceMode(host);
-}
-
-/* Zone-boundary trace mode — open with ?trace=1 to draw coverage areas
-   on the accurate island and export the coordinates as JSON. */
-function setupTraceMode(host) {
-  if (location.search.indexOf("trace") === -1 || !mapSvg) return;
-  var zones = [], cur = { name: "", points: [] };
-  var layer = document.createElementNS("http://www.w3.org/2000/svg", "g");
-  mapSvg.appendChild(layer);
-  var panel = document.createElement("div");
-  panel.className = "trace-panel";
-  panel.innerHTML = '<strong>TRACE MODE</strong> <span id="tr-n">0 pts</span> ' +
-    '<button type="button" id="tr-new">New zone</button>' +
-    '<button type="button" id="tr-undo">Undo</button>' +
-    '<button type="button" id="tr-copy">Copy JSON</button>';
-  host.appendChild(panel);
-  function redraw() {
-    var svgNS = "";
-    zones.concat([cur]).forEach(function (z) {
-      svgNS += z.points.length > 1 ? '<polygon points="' + z.points.map(function (p) { return p.join(","); }).join(" ") + '" fill="rgba(242,164,19,.3)" stroke="#F2A413" stroke-width="1.5"/>' : "";
-      svgNS += z.points.map(function (p) { return '<circle cx="' + p[0] + '" cy="' + p[1] + '" r="2.5" fill="#F2A413"/>'; }).join("");
-    });
-    layer.innerHTML = svgNS;
-    $("#tr-n").textContent = cur.points.length + " pts (" + (cur.name || "unnamed") + ")";
-  }
-  mapSvg.addEventListener("click", function (e) {
-    if (e.target.closest(".zone-dot") || e.target.closest(".landmark")) return;
-    var r = mapSvg.getBoundingClientRect();
-    var x = Math.round((mapView.x + (e.clientX - r.left) / r.width * mapView.w) * 10) / 10;
-    var y = Math.round((mapView.y + (e.clientY - r.top) / r.height * mapView.h) * 10) / 10;
-    cur.points.push([x, y]);
-    redraw();
-  });
-  $("#tr-new").addEventListener("click", function () {
-    if (cur.points.length > 2) {
-      cur.name = prompt("Name for the zone you just traced:") || "zone-" + (zones.length + 1);
-      zones.push(cur);
-    }
-    cur = { name: "", points: [] };
-    redraw();
-  });
-  $("#tr-undo").addEventListener("click", function () { cur.points.pop(); redraw(); });
-  $("#tr-copy").addEventListener("click", function () {
-    if (cur.points.length > 2) {
-      cur.name = prompt("Name for the zone you just traced:") || "zone-" + (zones.length + 1);
-      zones.push(cur);
-      cur = { name: "", points: [] };
-    }
-    var json = JSON.stringify(zones);
-    (navigator.clipboard ? navigator.clipboard.writeText(json) : Promise.reject()).then(
-      function () { showToast("✓ Zone JSON copied — paste it to Claude"); },
-      function () { console.log(json); showToast("JSON printed to the browser console"); }
-    );
-  });
 }
 
 function renderOutageList() {
