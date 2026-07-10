@@ -48,6 +48,25 @@ var T = {
     donutAria: "Energy mix right now: ",
     usageAria: "Bar chart of monthly electricity use over the last 12 months",
     demandAria: "Line chart of island demand and solar output across today",
+    crew: ["Reported", "Crew assigned", "En route", "On site", "Restored"],
+    crewLabel: "Crew status: ",
+    rel90: function (n, m) { return n + " outages · " + m + " min in the last 90 days"; },
+    projected: "Projected month-end: ",
+    dayOf: function (d) { return "Day " + d + " of 30"; },
+    soFar: " so far",
+    fanStrong: "Strong trade winds at Brass Hill — members are saving right now",
+    fanLight: "Light winds — standard rate applies",
+    fanOn: "−15% now",
+    fanOff: "standard rate",
+    fanUnit: " generating",
+    stripTip: "Today's best window: 10:00 – 15:00 (solar peak). If you can, avoid 6 – 9 pm.",
+    daysSuffix: " days",
+    toastTopup: "✓ Top-up received — balance and days updated. (Demo — no charge was made.)",
+    toastPref: "✓ Preferences saved. (Demo)",
+    toastDue: "✓ Due date updated — your next bill will be due on that day. (Demo)",
+    fuelAria: "Bar chart of the fuel adjustment over the last 12 months",
+    sparkAria: "Trend of monthly outage minutes over the last 12 months",
+    burnAria: "Bar chart of daily prepaid spending over the last 14 days",
     payDoneBalance: "L 0.00"
   },
   es: {
@@ -86,6 +105,25 @@ var T = {
     donutAria: "Mezcla de energía en este momento: ",
     usageAria: "Gráfico de barras del consumo mensual de los últimos 12 meses",
     demandAria: "Gráfico de líneas de la demanda de la isla y la generación solar de hoy",
+    crew: ["Reportado", "Cuadrilla asignada", "En camino", "En el sitio", "Restablecido"],
+    crewLabel: "Estado de la cuadrilla: ",
+    rel90: function (n, m) { return n + " cortes · " + m + " min en los últimos 90 días"; },
+    projected: "Proyección a fin de mes: ",
+    dayOf: function (d) { return "Día " + d + " de 30"; },
+    soFar: " hasta hoy",
+    fanStrong: "Vientos alisios fuertes en Brass Hill — los miembros ahorran ahora mismo",
+    fanLight: "Vientos suaves — aplica la tarifa estándar",
+    fanOn: "−15% ahora",
+    fanOff: "tarifa estándar",
+    fanUnit: " generando",
+    stripTip: "La mejor ventana de hoy: 10:00 – 15:00 (pico solar). Si puede, evite de 6 a 9 pm.",
+    daysSuffix: " días",
+    toastTopup: "✓ Recarga recibida — saldo y días actualizados. (Demo — no se hizo ningún cobro.)",
+    toastPref: "✓ Preferencias guardadas. (Demo)",
+    toastDue: "✓ Fecha de pago actualizada — su próxima factura vencerá ese día. (Demo)",
+    fuelAria: "Gráfico de barras del ajuste por combustible de los últimos 12 meses",
+    sparkAria: "Tendencia de minutos de corte por mes en los últimos 12 meses",
+    burnAria: "Gráfico de barras del gasto prepago diario de los últimos 14 días",
     payDoneBalance: "L 0.00"
   }
 };
@@ -134,9 +172,20 @@ var ZONES = [
   { id: "santa-elena", en: "Santa Elena",     es: "Santa Elena",     x: 762, y: 108, status: "ok",      lbl: "b" }
 ];
 
+/* per-zone reliability, last 90 days: [outage count, total minutes] (demo) */
+var REL90 = {
+  "west-bay": [1, 44], "west-end": [2, 71], "sandy-bay": [3, 126], "flowers-bay": [1, 38],
+  "coxen-hole": [2, 65], "brick-bay": [1, 52], "french-hbr": [2, 58], "parrot-tree": [1, 31],
+  "politilly": [2, 84], "punta-gorda": [5, 216], "jonesville": [3, 102], "oak-ridge": [3, 95],
+  "camp-bay": [2, 77], "santa-elena": [2, 88]
+};
+
+var FUEL_HIST = [1.28, 1.31, 1.27, 1.24, 1.20, 1.23, 1.19, 1.21, 1.18, 1.15, 1.17, 1.12]; // Aug 25 → Jul 26
+var OUTAGE_MIN_HIST = [148, 132, 165, 121, 96, 88, 104, 92, 78, 84, 71, 63]; // monthly outage minutes
+
 var EVENTS = [
   {
-    zone: "punta-gorda", type: "out",
+    zone: "punta-gorda", type: "out", stage: 3,
     cause: { en: "Tree on the line near the main road", es: "Árbol sobre la línea cerca de la carretera principal" },
     meta:  { en: "Started 14:20 · 312 customers affected · crew on site", es: "Inició 14:20 · 312 clientes afectados · cuadrilla en el sitio" },
     eta:   { en: "Estimated restoration: 6:30 pm today", es: "Restablecimiento estimado: 6:30 pm hoy" }
@@ -492,6 +541,8 @@ function renderMap() {
       var ev = null;
       for (var i = 0; i < EVENTS.length; i++) if (EVENTS[i].zone === z.id && EVENTS[i].type !== "restored") ev = EVENTS[i];
       var extra = ev ? "<br>" + esc(ev.cause[LANG]) + (ev.eta[LANG] ? "<br>" + esc(ev.eta[LANG]) : "") : "";
+      var rel = REL90[z.id];
+      if (rel) extra += '<br><span style="opacity:.75">' + esc(t().rel90(rel[0], rel[1])) + "</span>";
       var pt = e.touches ? e.touches[0] : (e.clientX != null ? e : null);
       var rect = dot.getBoundingClientRect();
       var x = pt ? pt.clientX : rect.left + rect.width / 2;
@@ -513,10 +564,18 @@ function renderOutageList() {
   host.innerHTML = EVENTS.map(function (ev) {
     var z = zoneById(ev.zone);
     var tag = tagFor[ev.type];
+    var crew = "";
+    if (ev.type === "out" && ev.stage != null) {
+      var segs = "";
+      for (var s = 0; s < 5; s++) segs += '<span class="crew-seg' + (s <= ev.stage ? " done" : "") + '"></span>';
+      crew = '<div class="crew-bar" aria-hidden="true">' + segs + "</div>" +
+        '<div class="oe-meta crew-line"><strong>' + esc(t().crewLabel) + esc(t().crew[ev.stage]) + "</strong> (" + (ev.stage + 1) + "/5)</div>";
+    }
     return '<div class="outage-event"><div class="oe-head"><span class="key-dot ' + tag[0] + '"></span>' +
       esc(z[LANG]) + ' <span class="news-tag">' + esc(tag[1]) + "</span></div>" +
       '<div class="oe-meta">' + esc(ev.cause[LANG]) + "</div>" +
       '<div class="oe-meta">' + esc(ev.meta[LANG]) + "</div>" +
+      crew +
       (ev.eta[LANG] ? '<div class="oe-eta">' + esc(ev.eta[LANG]) + "</div>" : "") +
       "</div>";
   }).join("");
@@ -645,6 +704,15 @@ function renderPortal() {
   var diff = Math.round((lastK - prevK) / prevK * 100);
   $("#dash-kwh-diff").textContent = diff === 0 ? t().vsPrev[2] : Math.abs(diff) + (diff < 0 ? t().vsPrev[0] : t().vsPrev[1]);
 
+  // this cycle so far (day 14 of 30, trending slightly above last month)
+  var cycleDay = 14, cycleLen = 30;
+  var soFarK = Math.round(lastK * 1.08 * cycleDay / cycleLen);
+  var projK = Math.round(soFarK / cycleDay * cycleLen);
+  $("#dash-sofar").textContent = soFarK + " kWh" + t().soFar;
+  $("#dash-projected").textContent = t().projected + fmtL(billTotalFor(projK, "res"));
+  $("#cycle-fill").style.width = Math.round(cycleDay / cycleLen * 100) + "%";
+  $("#cycle-day").textContent = t().dayOf(cycleDay);
+
   renderUsageChart();
 
   var tbody = $("#bill-table tbody");
@@ -665,9 +733,157 @@ function renderPortal() {
   });
 }
 
+/* ---------------- fuel chart & reliability spark ---------------- */
+
+function renderFuelChart() {
+  var host = $("#fuel-chart");
+  if (!host) return;
+  var W = 520, H = 200, L = 40, R = 8, TOP = 16, B = 28;
+  var iw = W - L - R, ih = H - TOP - B;
+  var yMax = 1.5;
+  var n = FUEL_HIST.length;
+  var slot = iw / n, bw = Math.min(24, slot * 0.6);
+  var startM = 7, startY = 2025; // Aug 2025
+  var out = "";
+  [0, 0.5, 1.0, 1.5].forEach(function (gv) {
+    var gy = TOP + ih - gv / yMax * ih;
+    out += '<line x1="' + L + '" y1="' + gy + '" x2="' + (W - R) + '" y2="' + gy + '" stroke="var(--grid-line)"/>';
+    out += '<text x="' + (L - 6) + '" y="' + (gy + 3.5) + '" text-anchor="end" font-size="10" fill="var(--axis-ink)">' + gv.toFixed(1) + "</text>";
+  });
+  var labels = "";
+  for (var i = 0; i < n; i++) {
+    var v = FUEL_HIST[i];
+    var x = L + slot * i + (slot - bw) / 2;
+    var bh = v / yMax * ih, y = TOP + ih - bh;
+    var last = i === n - 1;
+    out += '<rect x="' + x + '" y="' + y + '" width="' + bw + '" height="' + bh + '" rx="3" fill="var(--s-gas)" opacity="' + (last ? 1 : 0.5) + '" class="f-bar" data-i="' + i + '"/>';
+    if (last) out += '<text x="' + (x + bw / 2) + '" y="' + (y - 6) + '" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">' + v.toFixed(2) + "</text>";
+    var mIdx = (startM + i) % 12, yy = startY + Math.floor((startM + i) / 12);
+    if (i % 2 === 0 || last) labels += '<text x="' + (x + bw / 2) + '" y="' + (H - 8) + '" text-anchor="middle" font-size="10" fill="var(--axis-ink)">' + monthLabel(yy, mIdx) + "</text>";
+  }
+  out += '<line x1="' + L + '" y1="' + (TOP + ih) + '" x2="' + (W - R) + '" y2="' + (TOP + ih) + '" stroke="var(--axis-ink)"/>';
+  host.innerHTML = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(t().fuelAria) + '">' + out + labels + "</svg>";
+  $all(".f-bar", host).forEach(function (bar) {
+    function tip(e) {
+      var i = +bar.dataset.i;
+      var mIdx = (startM + i) % 12, yy = startY + Math.floor((startM + i) / 12);
+      var pt = e.touches ? e.touches[0] : e;
+      showTip("<strong>" + monthLabel(yy, mIdx) + "</strong><br>L " + FUEL_HIST[i].toFixed(2) + "/kWh", pt.clientX, pt.clientY);
+    }
+    bar.addEventListener("mousemove", tip);
+    bar.addEventListener("mouseleave", hideTip);
+    bar.addEventListener("touchstart", tip, { passive: true });
+  });
+}
+
+function renderScoreSpark() {
+  var host = $("#score-spark");
+  if (!host) return;
+  var W = 220, H = 64, P = 6;
+  var max = Math.max.apply(null, OUTAGE_MIN_HIST);
+  var n = OUTAGE_MIN_HIST.length;
+  var pts = OUTAGE_MIN_HIST.map(function (v, i) {
+    var x = P + i / (n - 1) * (W - 2 * P);
+    var y = H - P - v / max * (H - 2 * P);
+    return [x, y];
+  });
+  var line = pts.map(function (p, i) { return (i ? "L " : "M ") + p[0].toFixed(1) + " " + p[1].toFixed(1); }).join(" ");
+  var area = line + " L " + pts[n - 1][0].toFixed(1) + " " + (H - P) + " L " + pts[0][0].toFixed(1) + " " + (H - P) + " Z";
+  var last = pts[n - 1];
+  host.innerHTML = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(t().sparkAria) + '">' +
+    '<path d="' + area + '" fill="var(--brand)" opacity="0.12"/>' +
+    '<path d="' + line + '" fill="none" stroke="var(--brand)" stroke-width="2" stroke-linejoin="round"/>' +
+    '<circle cx="' + last[0] + '" cy="' + last[1] + '" r="3.5" fill="var(--brand)"/>' +
+    '<text x="' + (last[0] - 8) + '" y="' + (last[1] - 6) + '" text-anchor="end" font-size="11" font-weight="700" fill="var(--ink)">' + OUTAGE_MIN_HIST[n - 1] + " min</text></svg>";
+}
+
+/* ---------------- prepaid ---------------- */
+
+var PP_BURN = [38, 42, 35, 44, 47, 39, 36, 40, 45, 52, 43, 38, 37, 41]; // L/day, last 14 days
+var ppBalance = 342.50;
+
+function ppAvgBurn() {
+  var s = 0;
+  for (var i = PP_BURN.length - 7; i < PP_BURN.length; i++) s += PP_BURN[i];
+  return s / 7;
+}
+
+function renderPrepaid() {
+  var bal = $("#pp-balance");
+  if (!bal) return;
+  bal.textContent = fmtL(ppBalance);
+  $("#pp-days").textContent = (ppBalance / ppAvgBurn()).toFixed(1).replace(/\.0$/, "") + t().daysSuffix;
+
+  var host = $("#pp-burn");
+  var W = 480, H = 120, P = 6, B = 18;
+  var max = 60, n = PP_BURN.length;
+  var slot = (W - 2 * P) / n, bw = slot * 0.62;
+  var out = "";
+  for (var i = 0; i < n; i++) {
+    var x = P + slot * i + (slot - bw) / 2;
+    var bh = PP_BURN[i] / max * (H - B - P);
+    var y = H - B - bh;
+    var last = i === n - 1;
+    out += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + bh.toFixed(1) + '" rx="3" fill="var(--brand)" opacity="' + (last ? 1 : 0.45) + '"/>';
+    if (last) out += '<text x="' + (x + bw / 2) + '" y="' + (y - 5) + '" text-anchor="middle" font-size="11" font-weight="700" fill="var(--ink)">L ' + PP_BURN[i] + "</text>";
+  }
+  out += '<line x1="' + P + '" y1="' + (H - B) + '" x2="' + (W - P) + '" y2="' + (H - B) + '" stroke="var(--axis-ink)"/>';
+  host.innerHTML = '<svg viewBox="0 0 ' + W + " " + H + '" role="img" aria-label="' + esc(t().burnAria) + '">' + out + "</svg>";
+
+  var bc = $(".barcode");
+  if (bc && !bc.dataset.done) {
+    var widths = [3,1,2,1,1,3,1,2,2,1,3,1,1,2,3,1,2,1,3,2,1,1,2,3,1,2,1,1,3,2,1,2,1,3,1,1,2,1,3,2];
+    var x2 = 4, bars = "";
+    widths.forEach(function (w, i) {
+      if (i % 2 === 0) bars += '<rect x="' + x2 + '" y="2" width="' + (w * 2.2) + '" height="44" fill="var(--ink)"/>';
+      x2 += w * 2.2 + 2.2;
+    });
+    bc.innerHTML = bars;
+    bc.dataset.done = "1";
+  }
+}
+
+/* ---------------- fan club & green hours ---------------- */
+
+function windOutputNow() {
+  var h = new Date().getHours() + new Date().getMinutes() / 60;
+  return Math.max(0.3, 2.4 + 0.9 * Math.sin(h / 3.1)); // MW, demo
+}
+
+function renderFanClub() {
+  var out = $("#fan-output");
+  if (!out) return;
+  var mw = windOutputNow();
+  var active = mw >= 2.4;
+  out.textContent = mw.toFixed(1) + " MW" + t().fanUnit;
+  $("#fan-status").textContent = active ? t().fanStrong : t().fanLight;
+  var d = $("#fan-discount");
+  d.textContent = active ? t().fanOn : t().fanOff;
+  d.classList.toggle("active", active);
+}
+
+function greenLevel(h) {
+  if (h >= 18 && h < 21) return "peak";
+  if (solarAt(h + 0.5) > 3.5) return "best";
+  if ((h >= 22 || h < 6)) return "good";
+  return "mid";
+}
+
+function renderGreenStrip() {
+  var host = $("#green-strip");
+  if (!host) return;
+  var nowH = new Date().getHours();
+  var cells = "";
+  for (var h = 0; h < 24; h++) {
+    cells += '<span class="cell lv-' + greenLevel(h) + (h === nowH ? " now" : "") + '" title="' + h + ':00"></span>';
+  }
+  host.innerHTML = cells;
+  $("#strip-tip").textContent = t().stripTip;
+}
+
 /* ---------------- router ---------------- */
 
-var ROUTES = ["home", "outages", "billing", "rates", "service", "energy", "news", "contact"];
+var ROUTES = ["home", "outages", "storm", "billing", "prepaid", "rates", "service", "energy", "news", "contact"];
 
 function parseHash() {
   var raw = location.hash || "#/";
@@ -708,6 +924,11 @@ function renderDynamic() {
   renderBillExplainer();
   renderCalc();
   renderPortal();
+  renderFuelChart();
+  renderScoreSpark();
+  renderPrepaid();
+  renderFanClub();
+  renderGreenStrip();
   rotateTip(true);
 }
 
@@ -805,6 +1026,28 @@ function init() {
   /* calculator */
   $("#calc-kwh").addEventListener("input", renderCalc);
   $all("input[name='calc-class']").forEach(function (r) { r.addEventListener("change", renderCalc); });
+
+  /* prepaid top-up */
+  $all(".pp-amt").forEach(function (b) {
+    b.addEventListener("click", function () {
+      ppBalance += +b.dataset.amt;
+      renderPrepaid();
+      showToast(t().toastTopup);
+    });
+  });
+
+  /* guest pay */
+  var gf = $("#guest-form");
+  if (gf) gf.addEventListener("submit", function (e) {
+    e.preventDefault();
+    gf.querySelector(".form-done").hidden = false;
+  });
+
+  /* preference center + due date */
+  var ps = $("#pref-save");
+  if (ps) ps.addEventListener("click", function () { showToast(t().toastPref); });
+  var dd = $("#opt-duedate");
+  if (dd) dd.addEventListener("change", function () { showToast(t().toastDue); });
 
   /* dynamic content */
   renderDynamic();

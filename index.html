@@ -38,11 +38,11 @@
 
     <nav class="main-nav" id="main-nav" aria-label="Main">
       <a href="#/outages" data-route="outages" data-en="Outages" data-es="Cortes">Outages</a>
+      <a href="#/storm" data-route="storm" data-en="Storm center" data-es="Tormentas">Storm center</a>
       <a href="#/billing" data-route="billing" data-en="Billing" data-es="Facturación">Billing</a>
+      <a href="#/prepaid" data-route="prepaid" data-en="Prepaid" data-es="Prepago">Prepaid</a>
       <a href="#/rates" data-route="rates" data-en="Rates" data-es="Tarifas">Rates</a>
-      <a href="#/service" data-route="service" data-en="Start service" data-es="Nuevo servicio">Start service</a>
       <a href="#/energy" data-route="energy" data-en="Our energy" data-es="Nuestra energía">Our energy</a>
-      <a href="#/news" data-route="news" data-en="News" data-es="Noticias">News</a>
       <a href="#/contact" data-route="contact" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
 
@@ -87,9 +87,9 @@
             <span class="qa-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 20V9M10 20V4M16 20v-8M22 20H2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
             <span class="qa-label" data-en="Estimate my bill" data-es="Estimar mi factura">Estimate my bill</span>
           </a>
-          <a class="qa-card" href="#/service">
-            <span class="qa-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 21v-8l9-7 9 7v8h-6v-6h-6v6z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></span>
-            <span class="qa-label" data-en="Start new service" data-es="Solicitar servicio">Start new service</span>
+          <a class="qa-card" href="#/prepaid">
+            <span class="qa-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 7v6M9 10h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+            <span class="qa-label" data-en="Top up prepaid" data-es="Recargar prepago">Top up prepaid</span>
           </a>
         </div>
       </div>
@@ -142,14 +142,31 @@
         <h3 data-en="Outage alerts" data-es="Alertas de cortes">Outage alerts</h3>
         <p data-en="Get a WhatsApp or SMS the moment your zone is affected — and another when power is restored. Free." data-es="Reciba un WhatsApp o SMS en el momento en que su zona sea afectada — y otro cuando se restablezca. Gratis.">Get a WhatsApp or SMS the moment your zone is affected — and another when power is restored. Free.</p>
       </a>
-      <a class="feature card" href="#/service">
-        <h3 data-en="Start service online" data-es="Servicio nuevo en línea">Start service online</h3>
-        <p data-en="New connection, transfer, or disconnection — see the requirements, upload your documents, track the request." data-es="Conexión nueva, traspaso o desconexión — vea los requisitos, suba sus documentos, dé seguimiento a su solicitud.">New connection, transfer, or disconnection — see the requirements, upload your documents, track the request.</p>
+      <a class="feature card" href="#/prepaid">
+        <h3 data-en="RECO Prepaid" data-es="RECO Prepago">RECO Prepaid</h3>
+        <p data-en="Electricity like phone credit: top up at any pulpería, by Tigo Money, or from anywhere in the world. See your days of power left." data-es="Electricidad como saldo de celular: recargue en cualquier pulpería, con Tigo Money o desde cualquier parte del mundo. Vea sus días de energía restantes.">Electricity like phone credit: top up at any pulpería, by Tigo Money, or from anywhere in the world. See your days of power left.</p>
       </a>
-      <a class="feature card" href="#/energy">
-        <h3 data-en="Cleaner energy" data-es="Energía más limpia">Cleaner energy</h3>
-        <p data-en="LPG, wind, solar and batteries — see today's generation mix and the roadmap to a greener island." data-es="GLP, viento, solar y baterías — vea la mezcla de generación de hoy y la ruta hacia una isla más verde.">LPG, wind, solar and batteries — see today's generation mix and the roadmap to a greener island.</p>
+      <a class="feature card" href="#/storm">
+        <h3 data-en="Storm center" data-es="Centro de tormentas">Storm center</h3>
+        <p data-en="Hurricane prep, our restoration promise with real timelines, and who gets power back first — published before the storm, not after." data-es="Preparación para huracanes, nuestra promesa de restablecimiento con plazos reales, y quién recupera la energía primero — publicado antes de la tormenta, no después.">Hurricane prep, our restoration promise with real timelines, and who gets power back first — published before the storm, not after.</p>
       </a>
+    </div>
+  </div>
+
+  <div class="promise-band">
+    <div class="promise-inner">
+      <div class="promise-copy">
+        <span class="eyebrow" data-en="Our public promise" data-es="Nuestra promesa pública">Our public promise</span>
+        <h2 data-en="Roatán 50×30" data-es="Roatán 50×30">Roatán 50×30</h2>
+        <p data-en="Half of the island's electricity from sun, wind and batteries by 2030 — tracked right here, every month." data-es="La mitad de la electricidad de la isla del sol, el viento y las baterías para 2030 — con seguimiento aquí mismo, cada mes.">Half of the island's electricity from sun, wind and batteries by 2030 — tracked right here, every month.</p>
+      </div>
+      <div class="promise-meter">
+        <div class="promise-bar" role="img" aria-label="Renewable progress: 18 percent of 50 percent goal">
+          <div class="promise-fill" style="width:36%"><span>18%</span></div>
+          <span class="promise-goal" aria-hidden="true">50%</span>
+        </div>
+        <a href="#/energy" class="text-link promise-link" data-en="Follow the progress →" data-es="Siga el avance →">Follow the progress →</a>
+      </div>
     </div>
   </div>
 
@@ -269,6 +286,95 @@
 </section>
 
 <!-- ================================================================ -->
+<!-- PAGE: STORM CENTER                                               -->
+<!-- ================================================================ -->
+<section class="page" id="page-storm" data-page="storm" hidden>
+  <div class="page-head">
+    <h1 data-en="Storm center" data-es="Centro de tormentas">Storm center</h1>
+    <p data-en="Hurricane season runs June 1 – November 30. This page is our contract with the island: what we do before, what we promise after, and how you prepare. (Demo data.)" data-es="La temporada de huracanes va del 1 de junio al 30 de noviembre. Esta página es nuestro contrato con la isla: qué hacemos antes, qué prometemos después y cómo prepararse. (Datos demo.)">Hurricane season runs June 1 – November 30. This page is our contract with the island: what we do before, what we promise after, and how you prepare. (Demo data.)</p>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title" data-en="Ready for the 2026 season" data-es="Listos para la temporada 2026">Ready for the 2026 season</h2>
+    <p class="section-lede" data-en="Published every June 1 — what we did this year to keep your lights on." data-es="Publicado cada 1 de junio — lo que hicimos este año para mantener su energía.">Published every June 1 — what we did this year to keep your lights on.</p>
+    <div class="ready-grid">
+      <div class="card ready-tile"><span class="tile-value mono">42 km</span><span class="tile-label" data-en="of line cleared of vegetation" data-es="de línea despejada de vegetación">of line cleared of vegetation</span></div>
+      <div class="card ready-tile"><span class="tile-value mono">118</span><span class="tile-label" data-en="poles replaced or reinforced" data-es="postes reemplazados o reforzados">poles replaced or reinforced</span></div>
+      <div class="card ready-tile"><span class="tile-value mono">21</span><span class="tile-label" data-en="days of fuel reserve on-island" data-es="días de reserva de combustible en la isla">days of fuel reserve on-island</span></div>
+      <div class="card ready-tile"><span class="tile-value mono">4</span><span class="tile-label" data-en="full restoration drills completed" data-es="simulacros completos de restablecimiento">full restoration drills completed</span></div>
+    </div>
+  </div>
+
+  <div class="section section-alt">
+    <h2 class="section-title" data-en="Our restoration promise" data-es="Nuestra promesa de restablecimiento">Our restoration promise</h2>
+    <p class="section-lede" data-en="After any major storm, we publish estimates on a fixed schedule — and if we don't know yet, the map says 'under assessment', never a made-up time." data-es="Después de cualquier tormenta mayor, publicamos estimados en un calendario fijo — y si aún no sabemos, el mapa dice 'en evaluación', nunca una hora inventada.">After any major storm, we publish estimates on a fixed schedule — and if we don't know yet, the map says 'under assessment', never a made-up time.</p>
+    <div class="phase-grid">
+      <div class="card phase-card">
+        <span class="phase-when mono" data-en="Within 24 hours" data-es="En 24 horas">Within 24 hours</span>
+        <h3 data-en="Island-wide estimate" data-es="Estimado para toda la isla">Island-wide estimate</h3>
+        <p data-en="A first honest estimate of total restoration time for the whole island, after aerial and ground assessment." data-es="Un primer estimado honesto del tiempo total de restablecimiento para toda la isla, tras evaluación aérea y terrestre.">A first honest estimate of total restoration time for the whole island, after aerial and ground assessment.</p>
+      </div>
+      <div class="card phase-card">
+        <span class="phase-when mono" data-en="Within 48 hours" data-es="En 48 horas">Within 48 hours</span>
+        <h3 data-en="Zone-by-zone estimates" data-es="Estimados por zona">Zone-by-zone estimates</h3>
+        <p data-en="Estimated restoration for each of the 14 service zones, updated twice daily on the outage map." data-es="Restablecimiento estimado para cada una de las 14 zonas, actualizado dos veces al día en el mapa de cortes.">Estimated restoration for each of the 14 service zones, updated twice daily on the outage map.</p>
+      </div>
+      <div class="card phase-card">
+        <span class="phase-when mono" data-en="Within 96 hours" data-es="En 96 horas">Within 96 hours</span>
+        <h3 data-en="Neighborhood estimates" data-es="Estimados por vecindario">Neighborhood estimates</h3>
+        <p data-en="Street-level estimates, plus crew status for every remaining outage until the last lamp is back on." data-es="Estimados a nivel de calle, más el estado de la cuadrilla para cada corte restante hasta que vuelva la última lámpara.">Street-level estimates, plus crew status for every remaining outage until the last lamp is back on.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title" data-en="Who gets power back first — and why" data-es="Quién recupera la energía primero — y por qué">Who gets power back first — and why</h2>
+    <p class="section-lede" data-en="Restoration order is published policy, not favoritism. We repair in the sequence that restores the most people, fastest." data-es="El orden de restablecimiento es política publicada, no favoritismo. Reparamos en la secuencia que restablece a la mayor cantidad de personas, más rápido.">Restoration order is published policy, not favoritism. We repair in the sequence that restores the most people, fastest.</p>
+    <ol class="priority-list">
+      <li><strong data-en="The plant, then critical services" data-es="La planta, luego servicios críticos">The plant, then critical services</strong><span data-en="Generation, the hospital, water pumping, clinics, and emergency communications." data-es="Generación, el hospital, el bombeo de agua, clínicas y comunicaciones de emergencia.">Generation, the hospital, water pumping, clinics, and emergency communications.</span></li>
+      <li><strong data-en="Main feeders" data-es="Alimentadores principales">Main feeders</strong><span data-en="The east–west backbone lines that each bring back thousands of customers at once." data-es="Las líneas troncales este–oeste que devuelven la energía a miles de clientes a la vez.">The east–west backbone lines that each bring back thousands of customers at once.</span></li>
+      <li><strong data-en="Neighborhood lines" data-es="Líneas de vecindario">Neighborhood lines</strong><span data-en="Branch lines serving communities, largest groups first." data-es="Ramales que sirven a las comunidades, primero los grupos más grandes.">Branch lines serving communities, largest groups first.</span></li>
+      <li><strong data-en="Individual services" data-es="Servicios individuales">Individual services</strong><span data-en="Single homes with damaged connections — a crew comes to every single one." data-es="Casas con acometidas dañadas — una cuadrilla llega a cada una, sin excepción.">Single homes with damaged connections — a crew comes to every single one.</span></li>
+    </ol>
+  </div>
+
+  <div class="section section-alt">
+    <h2 class="section-title" data-en="Prepare your home" data-es="Prepare su hogar">Prepare your home</h2>
+    <div class="prep-grid">
+      <div class="card">
+        <h3 data-en="Before the storm" data-es="Antes de la tormenta">Before the storm</h3>
+        <ul class="check-list">
+          <li data-en="Charge phones, power banks, and lamps; freeze bottles of water" data-es="Cargue teléfonos, baterías y lámparas; congele botellas de agua">Charge phones, power banks, and lamps; freeze bottles of water</li>
+          <li data-en="Update your phone number with us to receive alerts" data-es="Actualice su número de teléfono con nosotros para recibir alertas">Update your phone number with us to receive alerts</li>
+          <li data-en="Photograph your meter and breaker panel" data-es="Fotografíe su medidor y panel de breakers">Photograph your meter and breaker panel</li>
+          <li data-en="Prepaid customers: top up — reloading may be harder after" data-es="Clientes prepago: recargue — recargar puede ser más difícil después">Prepaid customers: top up — reloading may be harder after</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 data-en="During" data-es="Durante">During</h3>
+        <ul class="check-list">
+          <li data-en="Stay away from windows; unplug sensitive appliances" data-es="Aléjese de las ventanas; desconecte aparatos sensibles">Stay away from windows; unplug sensitive appliances</li>
+          <li data-en="Never touch downed lines — report them by WhatsApp if safe" data-es="Nunca toque líneas caídas — repórtelas por WhatsApp si es seguro">Never touch downed lines — report them by WhatsApp if safe</li>
+          <li data-en="Run generators OUTSIDE only — carbon monoxide kills silently" data-es="Use generadores SOLO AFUERA — el monóxido de carbono mata en silencio">Run generators OUTSIDE only — carbon monoxide kills silently</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 data-en="After" data-es="Después">After</h3>
+        <ul class="check-list">
+          <li data-en="Treat every line on the ground as live; keep children away" data-es="Trate toda línea en el suelo como energizada; aleje a los niños">Treat every line on the ground as live; keep children away</li>
+          <li data-en="Check the outage map before calling — your zone's status is live" data-es="Consulte el mapa de cortes antes de llamar — el estado de su zona está en vivo">Check the outage map before calling — your zone's status is live</li>
+          <li data-en="Food keeps ~4 h in a closed fridge, ~48 h in a full freezer" data-es="La comida dura ~4 h en un refrigerador cerrado, ~48 h en un congelador lleno">Food keeps ~4 h in a closed fridge, ~48 h in a full freezer</li>
+        </ul>
+      </div>
+    </div>
+    <p class="storm-cta">
+      <a class="btn btn-primary" href="#/outages#alerts" data-en="Sign up for storm alerts" data-es="Suscribirse a alertas de tormenta">Sign up for storm alerts</a>
+      <span class="mono storm-phone">☎ 2455-7381 · WhatsApp +504 9448-8542</span>
+    </p>
+  </div>
+</section>
+
+<!-- ================================================================ -->
 <!-- PAGE: BILLING                                                    -->
 <!-- ================================================================ -->
 <section class="page" id="page-billing" data-page="billing" hidden>
@@ -298,6 +404,11 @@
           <button class="btn btn-ghost" id="portal-logout" type="button" data-en="Sign out" data-es="Cerrar sesión">Sign out</button>
         </div>
 
+        <div class="health-row" role="group" aria-label="Account health">
+          <span class="health-chip ok"><span class="key-dot ok"></span><span data-en="Payments: up to date" data-es="Pagos: al día">Payments: up to date</span></span>
+          <span class="health-chip ok"><span class="key-dot ok"></span><span data-en="Meter: read Jul 2" data-es="Medidor: leído 2 jul">Meter: read Jul 2</span></span>
+          <span class="health-chip warn"><span class="key-dot planned"></span><span data-en="Usage: trending 8% high" data-es="Consumo: 8% por arriba">Usage: trending 8% high</span></span>
+        </div>
         <div class="dash-grid">
           <div class="dash-tile balance">
             <span class="tile-label" data-en="Current balance" data-es="Saldo actual">Current balance</span>
@@ -305,6 +416,13 @@
             <span class="tile-sub" id="dash-due">—</span>
             <button class="btn btn-accent" type="button" id="dash-pay" data-en="Pay now" data-es="Pagar ahora">Pay now</button>
             <p class="form-done" id="pay-done" hidden data-en="✓ Payment received — receipt sent by email. (Demo.)" data-es="✓ Pago recibido — recibo enviado por correo. (Demo.)">✓ Payment received — receipt sent by email. (Demo.)</p>
+          </div>
+          <div class="dash-tile">
+            <span class="tile-label" data-en="This cycle so far" data-es="Este ciclo hasta hoy">This cycle so far</span>
+            <span class="tile-value mono" id="dash-sofar">—</span>
+            <span class="tile-sub" id="dash-projected">—</span>
+            <div class="cycle-bar" aria-hidden="true"><div class="cycle-fill" id="cycle-fill"></div></div>
+            <span class="tile-sub" id="cycle-day">—</span>
           </div>
           <div class="dash-tile">
             <span class="tile-label" data-en="Last month's use" data-es="Consumo del mes pasado">Last month's use</span>
@@ -323,6 +441,12 @@
             <label class="switch-row">
               <span data-en="High-use alert" data-es="Alerta de consumo alto">High-use alert</span>
               <input type="checkbox" id="opt-usealert" class="switch">
+            </label>
+            <label class="switch-row due-row">
+              <span data-en="Bill due on the" data-es="Factura vence el">Bill due on the</span>
+              <select id="opt-duedate" class="due-select">
+                <option>1</option><option>5</option><option>10</option><option>15</option><option>20</option><option selected>24</option><option>28</option>
+              </select>
             </label>
           </div>
         </div>
@@ -376,12 +500,136 @@
         <a href="#/contact" class="text-link" data-en="Offices &amp; hours →" data-es="Oficinas y horarios →">Offices &amp; hours →</a>
       </div>
     </div>
+
+    <div class="card guest-pay" id="guest-pay">
+      <div class="guest-copy">
+        <h3 data-en="Pay for someone else — no login needed" data-es="Pague por otra persona — sin iniciar sesión">Pay for someone else — no login needed</h3>
+        <p data-en="Living abroad and paying for family on the island? Any account can be paid with just its number. A receipt goes to you both." data-es="¿Vive afuera y paga por su familia en la isla? Cualquier cuenta se paga solo con su número. El recibo les llega a ambos.">Living abroad and paying for family on the island? Any account can be paid with just its number. A receipt goes to you both.</p>
+      </div>
+      <form class="form form-inline" id="guest-form">
+        <label class="visually-hidden" for="guest-acct" data-en="Account number" data-es="Número de cuenta">Account number</label>
+        <input id="guest-acct" type="text" inputmode="numeric" placeholder="104-2213">
+        <button class="btn btn-primary" type="submit" data-en="Pay their bill" data-es="Pagar su factura">Pay their bill</button>
+        <p class="form-done" hidden data-en="✓ L 4,581.25 paid for account 104-2213 — receipts sent to both of you. (Demo.)" data-es="✓ L 4,581.25 pagados para la cuenta 104-2213 — recibos enviados a ambos. (Demo.)">✓ L 4,581.25 paid for account 104-2213 — receipts sent to both of you. (Demo.)</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 class="section-title" data-en="Flexible when life happens" data-es="Flexibles cuando la vida se complica">Flexible when life happens</h2>
+    <p class="section-lede" data-en="Tight month? Handle it here in two minutes — private, self-service, no phone call, no explaining yourself at a counter." data-es="¿Mes apretado? Resuélvalo aquí en dos minutos — privado, autoservicio, sin llamadas, sin dar explicaciones en una ventanilla.">Tight month? Handle it here in two minutes — private, self-service, no phone call, no explaining yourself at a counter.</p>
+    <div class="ladder-grid">
+      <div class="card ladder-card">
+        <span class="ladder-step mono">1</span>
+        <h3 data-en="More time" data-es="Más tiempo">More time</h3>
+        <p data-en="Extend your due date up to 10 extra days, twice a year, instantly and free." data-es="Extienda su fecha de pago hasta 10 días más, dos veces al año, al instante y gratis.">Extend your due date up to 10 extra days, twice a year, instantly and free.</p>
+        <button class="btn btn-ghost" type="button" data-demo-alert data-en="Extend my due date" data-es="Extender mi fecha">Extend my due date</button>
+      </div>
+      <div class="card ladder-card">
+        <span class="ladder-step mono">2</span>
+        <h3 data-en="Split it up" data-es="Divídalo">Split it up</h3>
+        <p data-en="Spread a past-due balance over 3–12 equal monthly payments. No down payment, no interest." data-es="Divida un saldo vencido en 3–12 pagos mensuales iguales. Sin prima, sin intereses.">Spread a past-due balance over 3–12 equal monthly payments. No down payment, no interest.</p>
+        <button class="btn btn-ghost" type="button" data-demo-alert data-en="Set up a plan" data-es="Crear un plan">Set up a plan</button>
+      </div>
+      <div class="card ladder-card">
+        <span class="ladder-step mono">3</span>
+        <h3 data-en="Find help" data-es="Encontrar ayuda">Find help</h3>
+        <p data-en="Answer 5 questions and we'll match you to the right option — installments, prepaid, or assistance programs — before any disconnection." data-es="Responda 5 preguntas y le indicamos la mejor opción — cuotas, prepago o programas de apoyo — antes de cualquier desconexión.">Answer 5 questions and we'll match you to the right option — installments, prepaid, or assistance programs — before any disconnection.</p>
+        <button class="btn btn-ghost" type="button" data-demo-alert data-en="Start the 5 questions" data-es="Responder las 5 preguntas">Start the 5 questions</button>
+      </div>
+    </div>
   </div>
 
   <div class="section" id="understand-bill">
     <h2 class="section-title" data-en="Understand your bill" data-es="Entienda su factura">Understand your bill</h2>
     <p class="section-lede" data-en="Tap each line to see what it means and how it's calculated. No fine print." data-es="Toque cada línea para ver qué significa y cómo se calcula. Sin letra pequeña.">Tap each line to see what it means and how it's calculated. No fine print.</p>
     <div class="bill-explainer card" id="bill-explainer"></div>
+  </div>
+</section>
+
+<!-- ================================================================ -->
+<!-- PAGE: PREPAID                                                    -->
+<!-- ================================================================ -->
+<section class="page" id="page-prepaid" data-page="prepaid" hidden>
+  <div class="page-head">
+    <h1 data-en="RECO Prepaid — electricity like phone credit" data-es="RECO Prepago — electricidad como saldo de celular">RECO Prepaid — electricity like phone credit</h1>
+    <p data-en="No deposit, no monthly bill, no surprises. Top up when you want, watch your balance like minutes on your phone. Same price per kWh as postpaid — being prepaid never costs more. (Demo.)" data-es="Sin depósito, sin factura mensual, sin sorpresas. Recargue cuando quiera y vea su saldo como los minutos del celular. Mismo precio por kWh que pospago — ser prepago nunca cuesta más. (Demo.)">No deposit, no monthly bill, no surprises. Top up when you want, watch your balance like minutes on your phone. Same price per kWh as postpaid — being prepaid never costs more. (Demo.)</p>
+  </div>
+
+  <div class="section">
+    <div class="prepaid-layout">
+      <div class="card prepaid-widget">
+        <div class="panel-head">
+          <h2 data-en="Your meter, right now" data-es="Su medidor, ahora mismo">Your meter, right now</h2>
+          <span class="live-chip"><span class="pulse" aria-hidden="true"></span><span data-en="Live · demo" data-es="En vivo · demo">Live · demo</span></span>
+        </div>
+        <div class="prepaid-balance">
+          <div>
+            <span class="tile-label" data-en="Balance" data-es="Saldo">Balance</span>
+            <span class="tile-value mono" id="pp-balance">L 342.50</span>
+          </div>
+          <div class="pp-days">
+            <span class="tile-label" data-en="Estimated days left" data-es="Días restantes estimados">Estimated days left</span>
+            <span class="pp-days-num mono" id="pp-days">—</span>
+          </div>
+        </div>
+        <div id="pp-burn" class="pp-burn"></div>
+        <p class="muted small" data-en="Your last 14 days of use, in lempiras per day. Yesterday: L 41 — mostly the AC after 7 pm." data-es="Sus últimos 14 días de consumo, en lempiras por día. Ayer: L 41 — sobre todo el aire después de las 7 pm.">Your last 14 days of use, in lempiras per day. Yesterday: L 41 — mostly the AC after 7 pm.</p>
+        <div class="pp-topup">
+          <span data-en="Top up:" data-es="Recargar:">Top up:</span>
+          <div class="choices">
+            <button class="chip pp-amt" data-amt="100">L 100</button>
+            <button class="chip pp-amt" data-amt="200">L 200</button>
+            <button class="chip pp-amt" data-amt="500">L 500</button>
+            <button class="chip pp-amt" data-amt="1000">L 1,000</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="pp-alert" data-en="Warn me by WhatsApp when balance falls below" data-es="Avisarme por WhatsApp cuando el saldo baje de">Warn me by WhatsApp when balance falls below</label>
+          <select id="pp-alert">
+            <option>L 50</option>
+            <option selected>L 100</option>
+            <option>L 200</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="stack">
+        <div class="card">
+          <h2 data-en="Top up anywhere" data-es="Recargue donde sea">Top up anywhere</h2>
+          <ul class="topup-list">
+            <li><strong data-en="At any pulpería" data-es="En cualquier pulpería">At any pulpería</strong> <span data-en="— show your personal code, pay cash, power credited in seconds. In L100 / L200 / L500 like phone credit." data-es="— muestre su código personal, pague en efectivo, saldo acreditado en segundos. En L100 / L200 / L500 como recarga de celular.">— show your personal code, pay cash, power credited in seconds. In L100 / L200 / L500 like phone credit.</span></li>
+            <li><strong data-en="Tigo Money" data-es="Tigo Money">Tigo Money</strong> <span data-en="— top up from your phone wallet, no bank account needed." data-es="— recargue desde su billetera móvil, sin cuenta bancaria.">— top up from your phone wallet, no bank account needed.</span></li>
+            <li><strong data-en="From anywhere in the world" data-es="Desde cualquier parte del mundo">From anywhere in the world</strong> <span data-en="— family in Houston or La Ceiba can load your meter online with just the meter number." data-es="— su familia en Houston o La Ceiba puede recargar su medidor en línea solo con el número de medidor.">— family in Houston or La Ceiba can load your meter online with just the meter number.</span></li>
+            <li><strong data-en="Lost your token?" data-es="¿Perdió su token?">Lost your token?</strong> <span data-en="— text TOKEN to +504 9448-8542 and get your last 3 codes again, free." data-es="— envíe TOKEN al +504 9448-8542 y reciba sus últimos 3 códigos de nuevo, gratis.">— text TOKEN to +504 9448-8542 and get your last 3 codes again, free.</span></li>
+          </ul>
+          <div class="barcode-card">
+            <span class="tile-label" data-en="Your personal top-up code" data-es="Su código personal de recarga">Your personal top-up code</span>
+            <svg class="barcode" viewBox="0 0 220 48" aria-hidden="true" preserveAspectRatio="none"></svg>
+            <span class="mono small">RECO-104-2213-7</span>
+          </div>
+        </div>
+        <div class="card rules-card">
+          <h2 data-en="The humane rules" data-es="Las reglas humanas">The humane rules</h2>
+          <ul class="check-list">
+            <li data-en="Friendly Credit: power is never cut at night, on weekends, or on holidays — even at L 0" data-es="Crédito Amigo: la energía nunca se corta de noche, en fin de semana ni feriados — incluso con L 0">Friendly Credit: power is never cut at night, on weekends, or on holidays — even at L 0</li>
+            <li data-en="Reload after running out and power returns automatically within 15 minutes — no fee, no office visit" data-es="Recargue después de agotarse y la energía vuelve automáticamente en 15 minutos — sin cargo, sin ir a la oficina">Reload after running out and power returns automatically within 15 minutes — no fee, no office visit</li>
+            <li data-en="Emergency credit: at L 0 you can borrow L 100 of power instantly, repaid from your next top-up" data-es="Crédito de emergencia: con L 0 puede tomar prestados L 100 de energía al instante, pagados con su próxima recarga">Emergency credit: at L 0 you can borrow L 100 of power instantly, repaid from your next top-up</li>
+            <li data-en="Old debt? Switch to prepaid and 10% of each top-up pays it down — zero interest, no deadline" data-es="¿Deuda vieja? Cámbiese a prepago y el 10% de cada recarga la abona — cero intereses, sin fecha límite">Old debt? Switch to prepaid and 10% of each top-up pays it down — zero interest, no deadline</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section section-alt">
+    <h2 class="section-title" data-en="How to switch" data-es="Cómo cambiarse">How to switch</h2>
+    <ol class="steps steps-row">
+      <li><strong data-en="Ask for the swap" data-es="Solicite el cambio">Ask for the swap</strong><span data-en="Online, by WhatsApp, or at any office. The prepaid meter is free, on loan." data-es="En línea, por WhatsApp o en cualquier oficina. El medidor prepago es gratis, en préstamo.">Online, by WhatsApp, or at any office. The prepaid meter is free, on loan.</span></li>
+      <li><strong data-en="We install it" data-es="Lo instalamos">We install it</strong><span data-en="Within 5 business days, no installation charge, your deposit (if any) becomes credit." data-es="En 5 días hábiles, sin costo de instalación; su depósito (si existe) se vuelve saldo.">Within 5 business days, no installation charge, your deposit (if any) becomes credit.</span></li>
+      <li><strong data-en="Top up and go" data-es="Recargue y listo">Top up and go</strong><span data-en="First L 200 of credit is on us. Daily balance by WhatsApp if you want it." data-es="Los primeros L 200 de saldo van por nuestra cuenta. Saldo diario por WhatsApp si lo desea.">Top up and go. First L 200 of credit is on us. Daily balance by WhatsApp if you want it.</span></li>
+    </ol>
+    <p class="muted small" data-en="Prepaid customers worldwide use 8–12% less energy simply by seeing their balance — that's money in your pocket and less fuel burned for the island." data-es="Los clientes prepago en el mundo consumen 8–12% menos con solo ver su saldo — dinero en su bolsillo y menos combustible quemado para la isla.">Prepaid customers worldwide use 8–12% less energy simply by seeing their balance — that's money in your pocket and less fuel burned for the island.</p>
   </div>
 </section>
 
@@ -442,6 +690,48 @@
         <div id="calc-breakdown" class="calc-breakdown" aria-live="polite"></div>
       </div>
     </div>
+  </div>
+
+  <div class="section section-alt" id="fuel">
+    <h2 class="section-title" data-en="The fuel adjustment, opened up" data-es="El ajuste por combustible, al descubierto">The fuel adjustment, opened up</h2>
+    <p class="section-lede" data-en="RECO makes no profit on fuel. It is a pass-through cost: what the ship charges is what you pay, split across every kWh. Here is the actual math, published every month." data-es="RECO no gana nada con el combustible. Es un costo trasladado: lo que cobra el barco es lo que usted paga, repartido entre cada kWh. Aquí está el cálculo real, publicado cada mes.">RECO makes no profit on fuel. It is a pass-through cost: what the ship charges is what you pay, split across every kWh. Here is the actual math, published every month.</p>
+    <div class="fuel-layout">
+      <div class="card">
+        <h3 data-en="Last 12 months — fuel adjustment (L/kWh)" data-es="Últimos 12 meses — ajuste por combustible (L/kWh)">Last 12 months — fuel adjustment (L/kWh)</h3>
+        <div id="fuel-chart" class="fuel-chart"></div>
+        <p class="muted small" data-en="Down 15% from the September peak as LPG prices eased and solar output grew." data-es="15% menos que el pico de septiembre, gracias a menores precios del GLP y más generación solar.">Down 15% from the September peak as LPG prices eased and solar output grew.</p>
+      </div>
+      <div class="card">
+        <h3 data-en="July 2026 — the actual math (sample)" data-es="Julio 2026 — el cálculo real (muestra)">July 2026 — the actual math (sample)</h3>
+        <div class="table-wrap">
+          <table class="data-table fuel-math">
+            <tbody>
+              <tr><td data-en="LPG delivered (2 shipments)" data-es="GLP entregado (2 embarques)">LPG delivered (2 shipments)</td><td class="num mono">1,420 t</td></tr>
+              <tr><td data-en="Landed cost incl. shipping" data-es="Costo puesto en isla, con flete">Landed cost incl. shipping</td><td class="num mono">L 21.4 M</td></tr>
+              <tr><td data-en="kWh generated from LPG" data-es="kWh generados con GLP">kWh generated from LPG</td><td class="num mono">14.9 M</td></tr>
+              <tr><td data-en="Renewable kWh (no fuel cost)" data-es="kWh renovables (sin costo de combustible)">Renewable kWh (no fuel cost)</td><td class="num mono">3.2 M</td></tr>
+              <tr class="fuel-total"><td data-en="Fuel adjustment = cost ÷ all kWh sold" data-es="Ajuste = costo ÷ todos los kWh vendidos">Fuel adjustment = cost ÷ all kWh sold</td><td class="num mono">L 1.12/kWh</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="muted small" data-en="Every renewable kWh removes fuel from this equation — that's why the solar park and wind farm lower this line for everyone. Rates are overseen by the CREE, Honduras's energy regulator." data-es="Cada kWh renovable saca combustible de esta ecuación — por eso el parque solar y el eólico bajan esta línea para todos. Las tarifas son supervisadas por la CREE, el regulador de energía de Honduras.">Every renewable kWh removes fuel from this equation — that's why the solar park and wind farm lower this line for everyone. Rates are overseen by the CREE, Honduras's energy regulator.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="scorecard">
+    <h2 class="section-title" data-en="Reliability, on the record" data-es="Confiabilidad, con cifras públicas">Reliability, on the record</h2>
+    <p class="section-lede" data-en="No utility in the Caribbean publishes this. We do — every month, the same numbers our engineers see. (Sample data.)" data-es="Ninguna empresa eléctrica del Caribe publica esto. Nosotros sí — cada mes, las mismas cifras que ven nuestros ingenieros. (Datos de muestra.)">No utility in the Caribbean publishes this. We do — every month, the same numbers our engineers see. (Sample data.)</p>
+    <div class="score-grid">
+      <div class="card ready-tile"><span class="tile-value mono">96 min</span><span class="tile-label" data-en="avg. outage time per customer, past 12 months (target: under 90)" data-es="tiempo promedio sin luz por cliente, últimos 12 meses (meta: menos de 90)">avg. outage time per customer, past 12 months (target: under 90)</span></div>
+      <div class="card ready-tile"><span class="tile-value mono">2.4</span><span class="tile-label" data-en="outages per customer per year — down from 3.1 in 2024" data-es="cortes por cliente al año — desde 3.1 en 2024">outages per customer per year — down from 3.1 in 2024</span></div>
+      <div class="card ready-tile"><span class="tile-value mono">38 min</span><span class="tile-label" data-en="median restoration time this month" data-es="tiempo mediano de restablecimiento este mes">median restoration time this month</span></div>
+      <div class="card ready-tile">
+        <span class="tile-label" data-en="Monthly outage minutes, past 12 months" data-es="Minutos de corte por mes, últimos 12 meses">Monthly outage minutes, past 12 months</span>
+        <div id="score-spark" class="score-spark"></div>
+      </div>
+    </div>
+    <p class="muted small" data-en="Worst-performing feeder: Punta Gorda line (salt exposure) — insulator replacement scheduled for August. That is what this page is for: you see what we see, and what we're doing about it." data-es="El alimentador con peor desempeño: la línea de Punta Gorda (exposición a sal) — reemplazo de aisladores programado para agosto. Para eso existe esta página: usted ve lo que nosotros vemos, y qué estamos haciendo al respecto.">Worst-performing feeder: Punta Gorda line (salt exposure) — insulator replacement scheduled for August. That is what this page is for: you see what we see, and what we're doing about it.</p>
   </div>
 
   <div class="section section-alt">
@@ -569,6 +859,55 @@
   </div>
 
   <div class="section section-alt">
+    <div class="split">
+      <div class="card fanclub" id="fanclub">
+        <div class="panel-head">
+          <h2 data-en="Trade Winds Fan Club" data-es="Club del Viento Trade Winds">Trade Winds Fan Club</h2>
+          <span class="live-chip" id="fanclub-chip"><span class="pulse" aria-hidden="true"></span><span data-en="Demo" data-es="Demo">Demo</span></span>
+        </div>
+        <p data-en="You can see the turbines at Brass Hill from half the island. When they spin hard, members' electricity gets cheaper — matched to the turbines' real output, hour by hour." data-es="Las turbinas de Brass Hill se ven desde media isla. Cuando giran con fuerza, la electricidad de los miembros baja de precio — ligada a la generación real de las turbinas, hora por hora.">You can see the turbines at Brass Hill from half the island. When they spin hard, members' electricity gets cheaper — matched to the turbines' real output, hour by hour.</p>
+        <div class="fanclub-now">
+          <div class="fan-anim" aria-hidden="true"><svg viewBox="0 0 60 60"><g class="fan-blades"><path d="M30 30 L30 8 A22 22 0 0 1 41 12 Z" fill="var(--s-wind)"/><path d="M30 30 L49 41 A22 22 0 0 1 38 49 Z" fill="var(--s-wind)"/><path d="M30 30 L11 41 A22 22 0 0 1 11 22 Z" fill="var(--s-wind)"/></g><circle cx="30" cy="30" r="4" fill="var(--ink)"/><rect x="28.6" y="30" width="2.8" height="26" fill="var(--ink-3)"/></svg></div>
+          <div>
+            <span class="tile-label" data-en="Right now" data-es="Ahora mismo">Right now</span>
+            <span class="tile-value" id="fan-output">—</span>
+            <span class="tile-sub" id="fan-status">—</span>
+          </div>
+          <div class="fan-discount" id="fan-discount">—</div>
+        </div>
+        <button class="btn btn-primary" type="button" data-demo-alert data-en="Join the Fan Club (demo)" data-es="Unirme al Club del Viento (demo)">Join the Fan Club (demo)</button>
+      </div>
+      <div class="card">
+        <h2 data-en="Best hours to use power today" data-es="Mejores horas para usar energía hoy">Best hours to use power today</h2>
+        <p data-en="Midday sun is the island's cheapest, cleanest power. The evening peak runs on imported LPG. Run the washer, pump, and water heater when the strip is deep teal — it saves you money and saves the island fuel." data-es="El sol del mediodía es la energía más barata y limpia de la isla. El pico de la noche corre con GLP importado. Use lavadora, bomba y calentador cuando la franja esté en verde azulado — ahorra dinero y ahorra combustible para la isla.">Midday sun is the island's cheapest, cleanest power. The evening peak runs on imported LPG. Run the washer, pump, and water heater when the strip is deep teal — it saves you money and saves the island fuel.</p>
+        <div id="green-strip" class="green-strip"></div>
+        <div class="strip-legend">
+          <span class="key-item"><span class="strip-key best"></span><span data-en="Best (solar)" data-es="Óptimo (solar)">Best (solar)</span></span>
+          <span class="key-item"><span class="strip-key good"></span><span data-en="Good" data-es="Bueno">Good</span></span>
+          <span class="key-item"><span class="strip-key mid"></span><span data-en="Normal" data-es="Normal">Normal</span></span>
+          <span class="key-item"><span class="strip-key peak"></span><span data-en="Peak (LPG)" data-es="Pico (GLP)">Peak (LPG)</span></span>
+        </div>
+        <p class="tip-line" id="strip-tip"></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="promise5030">
+    <h2 class="section-title" data-en="Roatán 50×30 — the promise, tracked" data-es="Roatán 50×30 — la promesa, con seguimiento">Roatán 50×30 — the promise, tracked</h2>
+    <p class="section-lede" data-en="Half the island's electricity from renewables by 2030. A public, dated commitment — updated monthly, in the open, whether the news is good or bad." data-es="La mitad de la electricidad de la isla de fuentes renovables para 2030. Un compromiso público con fecha — actualizado cada mes, a la vista, sea buena o mala la noticia.">Half the island's electricity from renewables by 2030. A public, dated commitment — updated monthly, in the open, whether the news is good or bad.</p>
+    <div class="promise-bar big" role="img" aria-label="Renewable progress: 18 percent of 50 percent goal">
+      <div class="promise-fill" style="width:36%"><span data-en="18% today" data-es="18% hoy">18% today</span></div>
+      <span class="promise-goal" aria-hidden="true" data-en="50% by 2030" data-es="50% en 2030">50% by 2030</span>
+    </div>
+    <div class="ready-grid promise-stats">
+      <div class="card ready-tile"><span class="tile-value mono">3.1 M</span><span class="tile-label" data-en="renewable kWh generated last month" data-es="kWh renovables generados el mes pasado">renewable kWh generated last month</span></div>
+      <div class="card ready-tile"><span class="tile-value mono">214</span><span class="tile-label" data-en="hours where renewables carried over 40% of the island" data-es="horas en que las renovables cubrieron más del 40% de la isla">hours where renewables carried over 40% of the island</span></div>
+      <div class="card ready-tile"><span class="tile-value mono">L 4.2 M</span><span class="tile-label" data-en="of fuel not burned last month thanks to sun and wind" data-es="de combustible no quemado el mes pasado gracias al sol y al viento">of fuel not burned last month thanks to sun and wind</span></div>
+      <div class="card ready-tile"><span class="tile-value mono">+5 MW</span><span class="tile-label" data-en="solar phase 2 — in permitting, target 2027" data-es="solar fase 2 — en permisos, meta 2027">solar phase 2 — in permitting, target 2027</span></div>
+    </div>
+  </div>
+
+  <div class="section section-alt">
     <h2 class="section-title" data-en="Milestones" data-es="Hitos">Milestones</h2>
     <ol class="timeline">
       <li><span class="tl-year mono">1992</span><div><strong data-en="RECO founded" data-es="Fundación de RECO">RECO founded</strong><p data-en="Community-managed electric service begins for the island of Roatán." data-es="Inicia el servicio eléctrico administrado por la comunidad para la isla de Roatán.">Community-managed electric service begins for the island of Roatán.</p></div></li>
@@ -625,6 +964,55 @@
         <p><span class="mono">2455-6725 · 2455-7070</span></p>
         <p><a class="text-link" href="mailto:cs@recoroatan.com">cs@recoroatan.com</a></p>
         <p data-en="Written requests get a ticket number and a committed response time." data-es="Las solicitudes escritas reciben un número de ticket y un tiempo de respuesta comprometido.">Written requests get a ticket number and a committed response time.</p>
+      </div>
+    </div>
+
+    <div class="split wa-split">
+      <div class="card wa-card">
+        <h2 data-en="Do everything on WhatsApp" data-es="Haga todo por WhatsApp">Do everything on WhatsApp</h2>
+        <p data-en="Balance, bills, outage reports, top-ups — the whole company in the app you already use. Try the demo conversation:" data-es="Saldo, facturas, reportes de cortes, recargas — toda la empresa en la app que ya usa. Vea la conversación de demostración:">Balance, bills, outage reports, top-ups — the whole company in the app you already use. Try the demo conversation:</p>
+        <div class="wa-chat" role="img" aria-label="Example WhatsApp conversation with RECO">
+          <div class="wa-msg out"><span class="mono">SALDO</span></div>
+          <div class="wa-msg in"><span data-en="⚡ Hi Marta! Your prepaid balance is L 342.50 — about 8 days of power. Reply RECARGA to top up." data-es="⚡ ¡Hola Marta! Su saldo prepago es L 342.50 — unos 8 días de energía. Responda RECARGA para recargar.">⚡ Hi Marta! Your prepaid balance is L 342.50 — about 8 days of power. Reply RECARGA to top up.</span></div>
+          <div class="wa-msg out"><span data-en="No power near the Punta Gorda dock" data-es="No hay luz cerca del muelle de Punta Gorda">No power near the Punta Gorda dock</span></div>
+          <div class="wa-msg in"><span data-en="📍 Thanks — that matches an outage we're tracking (tree on the line, 312 customers). Crew is on site. Estimated back: 6:30 pm. I'll message you when it's restored." data-es="📍 Gracias — coincide con un corte que estamos atendiendo (árbol sobre la línea, 312 clientes). La cuadrilla está en el sitio. Estimado: 6:30 pm. Le aviso cuando se restablezca.">📍 Thanks — that matches an outage we're tracking (tree on the line, 312 customers). Crew is on site. Estimated back: 6:30 pm. I'll message you when it's restored.</span></div>
+          <div class="wa-msg in"><span data-en="✅ 6:12 pm — Power restored in Punta Gorda (18 min early). Cause: tree on the line. Thanks for your patience!" data-es="✅ 6:12 pm — Energía restablecida en Punta Gorda (18 min antes). Causa: árbol sobre la línea. ¡Gracias por su paciencia!">✅ 6:12 pm — Power restored in Punta Gorda (18 min early). Cause: tree on the line. Thanks for your patience!</span></div>
+        </div>
+        <p class="form-note danger" data-en="⚠ Our ONLY WhatsApp number is +504 9448-8542. We never ask for card numbers or PINs in chat." data-es="⚠ Nuestro ÚNICO número de WhatsApp es +504 9448-8542. Nunca pedimos números de tarjeta ni PIN por chat.">⚠ Our ONLY WhatsApp number is +504 9448-8542. We never ask for card numbers or PINs in chat.</p>
+      </div>
+      <div class="stack">
+        <div class="card team-card">
+          <h2 data-en="A small team you'll know by name" data-es="Un equipo pequeño que conocerá por nombre">A small team you'll know by name</h2>
+          <p data-en="No phone trees, no ticket roulette. Your neighborhood is assigned one service team — the same five people, every time, empowered to solve your issue start to finish." data-es="Sin menús telefónicos, sin lotería de tickets. Su vecindario tiene asignado un equipo — las mismas cinco personas, siempre, con autoridad para resolver su caso de principio a fin.">No phone trees, no ticket roulette. Your neighborhood is assigned one service team — the same five people, every time, empowered to solve your issue start to finish.</p>
+          <div class="team-row" aria-hidden="true">
+            <span class="team-avatar">KM</span><span class="team-avatar">JR</span><span class="team-avatar">DW</span><span class="team-avatar">SP</span><span class="team-avatar">LB</span>
+            <span class="team-name" data-en="Team Coral — West side" data-es="Equipo Coral — zona oeste">Team Coral — West side</span>
+          </div>
+        </div>
+        <div class="card" id="preferences">
+          <h2 data-en="Notification preferences" data-es="Preferencias de notificación">Notification preferences</h2>
+          <div class="table-wrap">
+            <table class="data-table pref-table">
+              <thead><tr>
+                <th data-en="Tell me about" data-es="Avísenme sobre">Tell me about</th>
+                <th>WhatsApp</th><th>SMS</th><th data-en="Email" data-es="Correo">Email</th>
+              </tr></thead>
+              <tbody>
+                <tr><td data-en="Outages in my zone" data-es="Cortes en mi zona">Outages in my zone</td><td><input type="checkbox" checked aria-label="Outages via WhatsApp"></td><td><input type="checkbox" checked aria-label="Outages via SMS"></td><td><input type="checkbox" aria-label="Outages via email"></td></tr>
+                <tr><td data-en="Planned maintenance" data-es="Mantenimiento programado">Planned maintenance</td><td><input type="checkbox" checked aria-label="Planned work via WhatsApp"></td><td><input type="checkbox" aria-label="Planned work via SMS"></td><td><input type="checkbox" aria-label="Planned work via email"></td></tr>
+                <tr><td data-en="Storm warnings" data-es="Avisos de tormenta">Storm warnings</td><td><input type="checkbox" checked aria-label="Storm warnings via WhatsApp"></td><td><input type="checkbox" checked aria-label="Storm warnings via SMS"></td><td><input type="checkbox" aria-label="Storm warnings via email"></td></tr>
+                <tr><td data-en="Bill ready / due soon" data-es="Factura lista / por vencer">Bill ready / due soon</td><td><input type="checkbox" checked aria-label="Bills via WhatsApp"></td><td><input type="checkbox" aria-label="Bills via SMS"></td><td><input type="checkbox" checked aria-label="Bills via email"></td></tr>
+                <tr><td data-en="Low prepaid balance" data-es="Saldo prepago bajo">Low prepaid balance</td><td><input type="checkbox" checked aria-label="Low balance via WhatsApp"></td><td><input type="checkbox" checked aria-label="Low balance via SMS"></td><td><input type="checkbox" aria-label="Low balance via email"></td></tr>
+                <tr><td data-en="High-usage warning" data-es="Alerta de consumo alto">High-usage warning</td><td><input type="checkbox" checked aria-label="High usage via WhatsApp"></td><td><input type="checkbox" aria-label="High usage via SMS"></td><td><input type="checkbox" aria-label="High usage via email"></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pref-foot">
+            <label class="small" for="pref-quiet"><span data-en="Quiet hours:" data-es="Horas de silencio:">Quiet hours:</span></label>
+            <select id="pref-quiet"><option data-en="10 pm – 7 am (storms always come through)" data-es="10 pm – 7 am (las tormentas siempre pasan)">10 pm – 7 am (storms always come through)</option><option data-en="No quiet hours" data-es="Sin horas de silencio">No quiet hours</option></select>
+            <button class="btn btn-primary" type="button" id="pref-save" data-en="Save preferences" data-es="Guardar preferencias">Save preferences</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -694,10 +1082,13 @@
     </div>
     <nav class="footer-nav" aria-label="Footer">
       <a href="#/outages" data-en="Outage center" data-es="Centro de cortes">Outage center</a>
+      <a href="#/storm" data-en="Storm center" data-es="Centro de tormentas">Storm center</a>
       <a href="#/billing" data-en="Pay a bill" data-es="Pagar factura">Pay a bill</a>
+      <a href="#/prepaid" data-en="RECO Prepaid" data-es="RECO Prepago">RECO Prepaid</a>
       <a href="#/rates" data-en="Rates &amp; calculator" data-es="Tarifas y calculadora">Rates &amp; calculator</a>
       <a href="#/service" data-en="Start service" data-es="Nuevo servicio">Start service</a>
       <a href="#/energy" data-en="Our energy" data-es="Nuestra energía">Our energy</a>
+      <a href="#/news" data-en="News" data-es="Noticias">News</a>
       <a href="#/contact" data-en="Contact" data-es="Contacto">Contact</a>
     </nav>
     <div class="footer-meta">

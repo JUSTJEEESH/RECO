@@ -238,6 +238,64 @@ Everything below turns simulated data into real data. Gather over the coming wee
 
 ---
 
+## World-class addendum — what the best on Earth do (Europe, Asia, Africa, LatAm)
+
+The US industry scores just 616/1000 with its own customers. The world's only *loved*
+utilities are elsewhere. Second research wave: Octopus Energy (UK — 4.8★ Trustpilot at
+7M customers), Tibber (Norway), OVO/E.ON Next/EDF (UK), Iberdrola & Octopus España
+(Spanish-language excellence), SP Group (Singapore), Meralco (Philippines), Kenya
+Power × M-PESA, EPM Medellín, JPS Jamaica, DOMLEC Dominica, TEPCO (Japan), CLP
+(Hong Kong), Tata Power (India), Powershop (NZ).
+
+**Additions to Phase 1 (building now):**
+
+- [ ] **W1. "Fan Club" wind discount** *(Octopus Energy — their most beloved product)* —
+  when the Trade Winds turbines at Brass Hill spin hard, nearby customers see a live
+  discount. The turbine you can see becomes *your* discount machine. `M · P1`
+- [ ] **W2. Fuel-mix disclosure widget** *(EU law → brand asset)* — today's island mix
+  (% solar/wind/battery/LPG) + CO₂ per kWh, owned proudly, not hidden. `S · P1`
+- [ ] **W3. Green hours / cheapest-hours strip** *(Octopus Greener Days, Tibber, Spain's
+  tarifaluzhora culture)* — a green→red colored day-strip: "best time to run laundry:
+  10:00–14:00 (solar peak)". Shifts load off the evening diesel peak. `S · P1`
+- [ ] **W4. Prepaid as a first-class product** *(Meralco kLoad + Kenya Power M-PESA +
+  DOMLEC JUICE + EPM Medellín)* — top up at any pulpería in L100/200/500 like phone
+  credit, Tigo Money wallet top-up, SMS token recovery, **diaspora top-up from anywhere
+  in the world**, auto-reconnect minutes after reload with no fee, emergency credit at
+  zero balance, and EPM's humane debt path (10% of each recharge pays old debt, 0%
+  interest). `L · P1`
+- [ ] **W5. Named-human service promise** *(Octopus — the #1 driver of their 4.8★)* —
+  "you talk to the same small team every time"; no phone trees. A small utility's
+  scale is its advantage. `S · P1`
+- [ ] **W6. Transparent tariff formula** *(Octopus Tracker)* — the published math anyone
+  can verify, updated monthly. Pairs with the fuel transparency dashboard. `S · P1`
+- [ ] **W7. Account health traffic light** *(EDF)* — payments ✅ meter ✅ usage ⚠️ at the
+  top of the portal. `S · P1`
+- [ ] **W8. Drop-a-pin outage reporting** *(JPS Jamaica)* — report by landmark/pin, no
+  account number needed; addresses are informal on the island. `S · P1`
+- [ ] **W9. Hyperlocal storm alerts** *(TEPCO Mihariban)* — outage + weather warning +
+  shelter info keyed to your zone, one channel. `M · P2`
+- [ ] **W10. Peak reward events** *(Octopus Saving Sessions / Free Electricity Sessions)* —
+  "Power Hour: use less 6–9pm, earn credit" and "Sunny Sunday: midday solar surplus is
+  free above your baseline." `M · P2`
+- [ ] **W11. Rewards + spin-the-wheel** *(Octoplus, SP Group GreenUP)* — points for on-time
+  payment/off-peak use → bill credit or local perks (coffee, ferry, dive shops); grow a
+  virtual **coral reef** instead of SP's plant. `M · P3`
+- [ ] **W12. Elder care via meter data** *(CLP Hong Kong "Community Watch & Care")* — flag
+  abnormal usage in a registered senior's home to family. Brand-defining on a tight-knit
+  island. `M · P3`
+- [ ] **W13. Interest on credit balances** *(OVO 3%)* — prepay balances earn a visible
+  monthly credit line. `S · P3`
+- [ ] **W14. Open data page** *(Octopus API / Spain ESIOS)* — publish tariffs, fuel mix, and
+  reliability stats as CSV/JSON; invite the island's schools and devs to build. `S · P2`
+- [ ] **W15. Usage by activity** *(OVO)* — "your AC is ~55% of your bill · L 38/day". Folds
+  into 4.4. `M · P2`
+
+**Strategic context:** Honduras's mainland utility (ENEE/EEH) offers essentially nothing
+digital — bill lookup on a legacy portal, and a Facebook post explaining "ENEE Pay is not
+an app." Tigo Money already pays ENEE bills, so the mobile-money rail for prepaid tokens
+exists in Honduras today. A RECO that ships this roadmap isn't just better than the
+mainland — it's the best utility experience in the Caribbean basin.
+
 ## Build phases
 
 | Phase | Theme | Headline features |
