@@ -344,7 +344,9 @@ img, svg { max-width: 100%; }
   box-shadow: var(--shadow);
 }
 .map-zoom button:hover { border-color: var(--brand); color: var(--brand-strong); }
-#lm-layer, .zone-dot.z-minor { transition: opacity .35s ease; }
+#lm-layer, .zone-dot.z-minor, .z-area-ok { transition: opacity .35s ease; }
+.z-area { cursor: pointer; }
+.z-area:hover { stroke-width: 2; }
 .landmark { cursor: help; }
 .trace-panel {
   position: absolute; left: 10px; bottom: 10px; z-index: 5;
